@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Missy Swearingen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #F7F2EA; --parchment: #EDE5D6; --warm-tan: #C9AA82;
+    --bark: #8B6C4A; --earth: #5C4230; --deep: #2E1F12;
+    --moss: #7A8C6A; --rust: #A65C3A; --fog: #D4C9B8;
+  }
+  body {
+    background-color: var(--cream); color: var(--deep);
+    font-family: 'Lora', Georgia, serif;
+    min-height: 100vh; overflow-x: hidden;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0;
+  }
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(247,242,234,0.88);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--fog);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.1rem; font-weight: 400;
+    color: var(--earth); letter-spacing: 0.02em; text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 0.25rem; list-style: none; }
+  .nav-links li a {
+    display: inline-block; font-family: 'Lora', serif; font-size: 0.85rem;
+    color: var(--bark); text-decoration: none;
+    padding: 6px 14px; border-radius: 20px; letter-spacing: 0.04em;
+    transition: background 0.2s, color 0.2s;
+  }
+  .nav-links li a:hover { background: var(--parchment); color: var(--earth); }
+  .nav-links li a.active { background: var(--parchment); color: var(--earth); }
+  .nav-logout {
+    background: none; border: none; font-family: 'Lora', serif;
+    font-size: 0.8rem; color: var(--warm-tan); cursor: pointer;
+    padding: 6px 10px; border-radius: 20px; letter-spacing: 0.04em;
+    transition: color 0.2s, background 0.2s;
+  }
+  .nav-logout:hover { color: var(--bark); background: var(--parchment); }
+  main {
+    position: relative; z-index: 1;
+    min-height: calc(100vh - 60px);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; padding: 4rem 2rem;
+  }
+  .decor { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+  .decor span { position: absolute; border-radius: 50%; }
+  .decor span:nth-child(1) {
+    width: 420px; height: 420px;
+    background: radial-gradient(circle, var(--warm-tan), transparent 70%);
+    top: -100px; right: -80px; opacity: 0.18;
+  }
+  .decor span:nth-child(2) {
+    width: 320px; height: 320px;
+    background: radial-gradient(circle, var(--moss), transparent 70%);
+    bottom: -60px; left: -60px; opacity: 0.12;
+  }
+  .decor span:nth-child(3) {
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, var(--rust), transparent 70%);
+    top: 40%; left: 10%; opacity: 0.09;
+  }
+  .eyebrow {
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--bark); margin-bottom: 1.5rem;
+    opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+  h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(3.5rem, 10vw, 7rem); font-weight: 400;
+    line-height: 1.05; color: var(--earth); letter-spacing: -0.01em;
+    opacity: 0; animation: fadeUp 0.9s ease 0.4s forwards;
+  }
+  h1 em { font-style: italic; color: var(--bark); }
+  .divider {
+    width: 60px; height: 1px; background: var(--warm-tan);
+    margin: 2rem auto;
+    opacity: 0; animation: fadeUp 0.8s ease 0.6s forwards;
+  }
+  .tagline {
+    font-size: 0.9rem; color: var(--bark); letter-spacing: 0.08em; font-style: italic;
+    opacity: 0; animation: fadeUp 0.8s ease 0.75s forwards;
+  }
+  .cta {
+    margin-top: 3rem;
+    opacity: 0; animation: fadeUp 0.8s ease 0.9s forwards;
+  }
+  .cta a {
+    display: inline-block; background: var(--earth); color: var(--cream);
+    text-decoration: none; font-family: 'Lora', serif;
+    font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 12px 28px; border-radius: 30px;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .cta a:hover { background: var(--deep); transform: translateY(-2px); }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @media (max-width: 540px) { nav { padding: 0 1rem; } }
+</style>
+</head>
+<body>
+<script>
+  if(sessionStorage.getItem('ms_auth') !== 'yes') {
+    window.location.replace('index.html');
+  }
+</script>
+
+<nav>
+  <a class="nav-logo" href="home.html">ms.</a>
+  <ul class="nav-links">
+    <li><a href="home.html" class="active">Home</a></li>
+    <li><a href="wishlist.html">Wishlist</a></li>
+  </ul>
+  <button class="nav-logout" onclick="logout()">Sign out</button>
+</nav>
+
+<main>
+  <div class="decor"><span></span><span></span><span></span></div>
+  <p class="eyebrow">Welcome</p>
+  <h1>Missy<br><em>Swearingen</em></h1>
+  <div class="divider"></div>
+  <p class="tagline">new homeowner · maryland</p>
+  <div class="cta"><a href="wishlist.html">View My Wishlist →</a></div>
+</main>
+
+<script>
+  function logout() {
+    sessionStorage.removeItem('ms_auth');
+    window.location.replace('index.html');
+  }
+</script>
+</body>
+</html>
