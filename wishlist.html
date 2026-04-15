@@ -12,17 +12,15 @@
     --cream: #F7F2EA; --parchment: #EDE5D6; --warm-tan: #C9AA82;
     --bark: #8B6C4A; --earth: #5C4230; --deep: #2E1F12;
     --moss: #7A8C6A; --rust: #A65C3A; --fog: #D4C9B8;
+    --gift-bg: #F0EDE5; --gift-border: #C9AA82; --gift-text: #7A5C38;
   }
   body {
-    background-color: var(--cream);
-    color: var(--deep);
+    background-color: var(--cream); color: var(--deep);
     font-family: 'Lora', Georgia, serif;
-    min-height: 100vh;
-    overflow-x: hidden;
+    min-height: 100vh; overflow-x: hidden;
   }
   body::before {
-    content: '';
-    position: fixed; inset: 0;
+    content: ''; position: fixed; inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
     pointer-events: none; z-index: 0;
   }
@@ -44,57 +42,77 @@
   }
   .nav-links { display: flex; gap: 0.25rem; list-style: none; }
   .nav-links li a {
-    display: inline-block;
-    font-family: 'Lora', serif; font-size: 0.85rem;
+    display: inline-block; font-family: 'Lora', serif; font-size: 0.85rem;
     color: var(--bark); text-decoration: none;
     padding: 6px 14px; border-radius: 20px; letter-spacing: 0.04em;
     transition: background 0.2s, color 0.2s;
   }
   .nav-links li a:hover { background: var(--parchment); color: var(--earth); }
   .nav-links li a.active { background: var(--parchment); color: var(--earth); }
+  .nav-logout {
+    background: none; border: none; font-family: 'Lora', serif;
+    font-size: 0.8rem; color: var(--warm-tan); cursor: pointer;
+    padding: 6px 10px; border-radius: 20px; letter-spacing: 0.04em;
+    transition: color 0.2s, background 0.2s;
+  }
+  .nav-logout:hover { color: var(--bark); background: var(--parchment); }
 
-  /* ── Page content ── */
+  /* ── Main layout ── */
   main {
     position: relative; z-index: 1;
-    max-width: 860px;
-    margin: 0 auto;
+    max-width: 900px; margin: 0 auto;
     padding: 3rem 2rem 5rem;
     animation: fadeUp 0.5s ease both;
   }
 
+  /* ── View toggle (Missy vs Guest) ── */
+  .view-toggle {
+    display: inline-flex;
+    background: var(--parchment);
+    border-radius: 30px; padding: 4px;
+    margin-bottom: 2rem;
+    border: 1px solid var(--fog);
+  }
+  .view-toggle button {
+    background: none; border: none; cursor: pointer;
+    font-family: 'Lora', serif; font-size: 0.82rem;
+    color: var(--bark); padding: 7px 18px; border-radius: 26px;
+    letter-spacing: 0.04em; transition: background 0.2s, color 0.2s;
+  }
+  .view-toggle button.active {
+    background: var(--earth); color: var(--cream);
+  }
+
+  /* ── Page header ── */
   .page-header {
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
     padding-bottom: 1.5rem;
     border-bottom: 1px solid var(--fog);
+    display: flex; align-items: flex-end; justify-content: space-between;
+    flex-wrap: wrap; gap: 1rem;
   }
   .page-header h1 {
     font-family: 'Playfair Display', Georgia, serif;
     font-size: clamp(2rem, 5vw, 3rem); font-weight: 400;
-    color: var(--earth); margin-bottom: 0.5rem;
+    color: var(--earth); margin-bottom: 0.4rem;
   }
   .page-header p { font-size: 0.9rem; color: var(--bark); font-style: italic; }
 
-  /* Progress */
+  /* ── Progress ── */
   .progress-wrap {
-    background: var(--parchment);
-    border-radius: 12px; padding: 1.25rem 1.5rem;
-    margin-bottom: 2rem;
+    background: var(--parchment); border-radius: 12px;
+    padding: 1.25rem 1.5rem; margin-bottom: 2rem;
     display: flex; align-items: center; gap: 1.25rem;
   }
-  .progress-track {
-    flex: 1; height: 6px;
-    background: var(--fog); border-radius: 99px; overflow: hidden;
-  }
+  .progress-track { flex: 1; height: 6px; background: var(--fog); border-radius: 99px; overflow: hidden; }
   .progress-fill {
     height: 100%;
     background: linear-gradient(90deg, var(--bark), var(--rust));
-    border-radius: 99px;
-    transition: width 0.4s ease;
-    width: 0%;
+    border-radius: 99px; transition: width 0.4s ease; width: 0%;
   }
   .progress-label { font-size: 0.8rem; color: var(--bark); white-space: nowrap; font-style: italic; }
 
-  /* Search */
+  /* ── Search row ── */
   .search-row { display: flex; gap: 0.75rem; margin-bottom: 1.75rem; align-items: center; }
   .search-input {
     flex: 1; padding: 10px 16px;
@@ -105,106 +123,222 @@
   .search-input:focus { border-color: var(--warm-tan); }
   .search-input::placeholder { color: var(--warm-tan); font-style: italic; }
   .reset-btn {
-    padding: 10px 18px;
-    border: 1px solid var(--fog); border-radius: 8px;
+    padding: 10px 18px; border: 1px solid var(--fog); border-radius: 8px;
     background: transparent; font-family: 'Lora', serif;
     font-size: 0.8rem; color: var(--bark); cursor: pointer;
     transition: background 0.2s; white-space: nowrap;
   }
   .reset-btn:hover { background: var(--parchment); }
 
-  /* Room sections */
+  /* ── Room sections ── */
   .room {
-    margin-bottom: 1rem;
-    border: 1px solid var(--fog); border-radius: 12px;
-    overflow: hidden; background: #fff;
-    transition: box-shadow 0.2s;
+    margin-bottom: 1rem; border: 1px solid var(--fog); border-radius: 12px;
+    overflow: hidden; background: #fff; transition: box-shadow 0.2s;
   }
   .room:hover { box-shadow: 0 2px 12px rgba(90,60,30,0.07); }
   .room-header {
     display: flex; align-items: center; justify-content: space-between;
     padding: 14px 18px; cursor: pointer;
-    background: var(--parchment); user-select: none;
-    transition: background 0.15s;
+    background: var(--parchment); user-select: none; transition: background 0.15s;
   }
   .room-header:hover { background: var(--fog); }
   .room-left { display: flex; align-items: center; gap: 10px; }
   .room-icon { font-size: 1.1rem; }
-  .room-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem; font-weight: 500; color: var(--earth);
-  }
+  .room-name { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 500; color: var(--earth); }
   .room-count { font-size: 0.75rem; color: var(--bark); font-style: italic; font-family: 'Lora', serif; }
   .room-chevron { font-size: 0.7rem; color: var(--bark); transition: transform 0.25s; }
   .room-chevron.open { transform: rotate(180deg); }
-  .room-body { display: none; padding: 6px 0 10px; }
+  .room-body { display: none; }
   .room-body.open { display: block; }
+
+  /* ── Item rows ── */
   .item-row {
-    display: flex; align-items: center; gap: 10px;
-    padding: 6px 18px; cursor: pointer;
-    transition: background 0.12s;
+    display: flex; align-items: center;
+    padding: 7px 18px; transition: background 0.12s;
+    border-bottom: 1px solid rgba(212,201,184,0.3);
+    gap: 10px;
   }
+  .item-row:last-child { border-bottom: none; }
   .item-row:hover { background: #FBF8F3; }
-  .item-row input[type="checkbox"] {
+
+  /* Missy's checkbox */
+  .my-checkbox {
     appearance: none; -webkit-appearance: none;
-    width: 16px; height: 16px;
+    width: 16px; height: 16px; flex-shrink: 0;
     border: 1.5px solid var(--warm-tan); border-radius: 4px;
-    background: #fff; cursor: pointer; flex-shrink: 0;
-    position: relative; transition: background 0.15s, border-color 0.15s;
+    background: #fff; cursor: pointer; position: relative;
+    transition: background 0.15s, border-color 0.15s;
   }
-  .item-row input[type="checkbox"]:checked { background: var(--bark); border-color: var(--bark); }
-  .item-row input[type="checkbox"]:checked::after {
+  .my-checkbox:checked { background: var(--bark); border-color: var(--bark); }
+  .my-checkbox:checked::after {
     content: ''; position: absolute;
     left: 3px; top: 1px; width: 5px; height: 8px;
     border: 2px solid #fff; border-top: none; border-left: none;
     transform: rotate(40deg);
   }
-  .item-label { font-size: 0.88rem; color: var(--deep); font-family: 'Lora', serif; transition: color 0.15s; }
-  .item-label.done { text-decoration: line-through; color: var(--warm-tan); }
+
+  .item-label {
+    flex: 1; font-size: 0.88rem; color: var(--deep);
+    font-family: 'Lora', serif; transition: color 0.15s;
+    line-height: 1.4;
+  }
+  .item-label.my-done { text-decoration: line-through; color: var(--warm-tan); }
+
+  /* Purchased badge + button */
+  .purchased-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: #EDF5ED; border: 1px solid #A8C8A8;
+    color: #3E6B3E; border-radius: 20px;
+    font-size: 0.72rem; font-family: 'Lora', serif;
+    padding: 3px 10px; white-space: nowrap; flex-shrink: 0;
+    font-style: italic;
+  }
+  .purchased-badge .by { font-weight: 500; font-style: normal; }
+
+  .purchase-btn {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: none; border: 1px solid var(--fog);
+    color: var(--bark); border-radius: 20px;
+    font-size: 0.72rem; font-family: 'Lora', serif;
+    padding: 3px 10px; cursor: pointer; white-space: nowrap; flex-shrink: 0;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+  }
+  .purchase-btn:hover { background: var(--parchment); border-color: var(--warm-tan); color: var(--earth); }
+
+  /* Undo button (tiny, ghost) */
+  .undo-btn {
+    background: none; border: none; cursor: pointer;
+    font-size: 0.68rem; color: #7aaa7a; font-family: 'Lora', serif;
+    text-decoration: underline; padding: 0 2px; flex-shrink: 0;
+    transition: color 0.15s;
+  }
+  .undo-btn:hover { color: #3E6B3E; }
+
+  /* Guest mode — hide Missy's checkbox */
+  body.guest-mode .my-checkbox { display: none; }
+  body.guest-mode .item-label.my-done { text-decoration: none; color: var(--deep); }
+
+  /* Missy mode — hide purchase button (she can still see badges) */
+  body.missy-mode .purchase-btn { display: none; }
+
   .no-results { text-align: center; padding: 3rem 1rem; color: var(--warm-tan); font-style: italic; font-size: 0.9rem; }
+
+  /* ── Name modal ── */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 500;
+    background: rgba(46,31,18,0.35); backdrop-filter: blur(4px);
+    align-items: center; justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--cream); border: 1px solid var(--fog);
+    border-radius: 16px; padding: 2rem 2rem 1.75rem;
+    width: 100%; max-width: 360px;
+    box-shadow: 0 8px 40px rgba(46,31,18,0.15);
+    animation: fadeUp 0.25s ease both;
+    text-align: center;
+  }
+  .modal h2 {
+    font-family: 'Playfair Display', serif; font-size: 1.3rem;
+    font-weight: 400; color: var(--earth); margin-bottom: 0.5rem;
+  }
+  .modal p { font-size: 0.82rem; color: var(--bark); font-style: italic; margin-bottom: 1.25rem; }
+  .modal input {
+    width: 100%; padding: 10px 14px;
+    border: 1px solid var(--fog); border-radius: 8px;
+    background: #fff; font-family: 'Lora', serif; font-size: 0.9rem;
+    color: var(--deep); outline: none; transition: border-color 0.2s;
+    margin-bottom: 1rem;
+  }
+  .modal input:focus { border-color: var(--warm-tan); }
+  .modal input::placeholder { color: var(--warm-tan); font-style: italic; }
+  .modal-btns { display: flex; gap: 0.6rem; justify-content: center; }
+  .modal-confirm {
+    background: var(--earth); color: var(--cream); border: none;
+    font-family: 'Lora', serif; font-size: 0.82rem; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 9px 22px; border-radius: 8px;
+    cursor: pointer; transition: background 0.2s;
+  }
+  .modal-confirm:hover { background: var(--deep); }
+  .modal-cancel {
+    background: none; border: 1px solid var(--fog); color: var(--bark);
+    font-family: 'Lora', serif; font-size: 0.82rem;
+    padding: 9px 16px; border-radius: 8px; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .modal-cancel:hover { background: var(--parchment); }
 
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(16px); }
     to   { opacity: 1; transform: translateY(0); }
   }
-  @media (max-width: 540px) {
+  @media (max-width: 600px) {
     nav { padding: 0 1rem; }
     main { padding: 2rem 1rem 4rem; }
     .progress-wrap { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    .page-header { flex-direction: column; align-items: flex-start; }
   }
 </style>
 </head>
-<body>
+<body class="guest-mode">
+<script>
+  if(sessionStorage.getItem('ms_auth') !== 'yes') {
+    window.location.replace('login.html');
+  }
+</script>
+
+<!-- Name modal -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <h2>Mark as purchased</h2>
+    <p>Let Missy know who got it for her!</p>
+    <input type="text" id="modal-name" placeholder="Your name (e.g. Aunt Carol)" maxlength="60"
+           onkeydown="if(event.key==='Enter')confirmPurchase()" />
+    <div class="modal-btns">
+      <button class="modal-cancel" onclick="closeModal()">Cancel</button>
+      <button class="modal-confirm" onclick="confirmPurchase()">Confirm</button>
+    </div>
+  </div>
+</div>
 
 <nav>
-  <a class="nav-logo" href="index.html">m|b</a>
+  <a class="nav-logo" href="index.html">ms.</a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="wishlist.html" class="active">Wishlist</a></li>
   </ul>
+  <button class="nav-logout" onclick="logout()">Sign out</button>
 </nav>
 
 <main>
+  <!-- View toggle -->
+  <div class="view-toggle">
+    <button id="btn-guest" class="active" onclick="setView('guest')">🎁 I'm a guest</button>
+    <button id="btn-missy" onclick="setView('missy')">🏠 I'm Missy</button>
+  </div>
+
   <div class="page-header">
-    <h1>New Home Wishlist</h1>
-    <p>A few things I need and a few things I want.</p>
+    <div>
+      <h1>New Home Wishlist</h1>
+      <p id="header-sub">See something you'd like to gift? Click "I got this!" on any item.</p>
+    </div>
   </div>
 
   <div class="progress-wrap">
     <div class="progress-track"><div class="progress-fill" id="prog"></div></div>
-    <div class="progress-label" id="prog-label">0 of 0 checked</div>
+    <div class="progress-label" id="prog-label">0 of 0 purchased</div>
   </div>
 
   <div class="search-row">
-    <input class="search-input" type="text" placeholder="Search items..." oninput="filterItems(this.value)" />
-    <button class="reset-btn" onclick="resetAll()">Reset all</button>
+    <input class="search-input" type="text" placeholder="Search items…" oninput="buildRooms(this.value)" />
+    <button class="reset-btn" id="reset-btn" onclick="resetMyChecks()" style="display:none">Reset my checks</button>
   </div>
 
   <div id="rooms"></div>
 </main>
 
 <script>
-const rooms = [
+const ROOMS = [
   { name: "Kitchen", icon: "🍳", items: ["Chef's knife","Paring knife","Serrated bread knife","Knife sharpener","Cutting boards (at least 2)","Can opener","Vegetable peeler","Box grater","Colander/strainer","Mixing bowls (set)","Measuring cups (dry)","Measuring cups (liquid)","Measuring spoons","Wooden spoons","Silicone spatulas","Ladle","Tongs","Whisk","Slotted spoon","Potato masher","Rolling pin","Kitchen shears","Bottle opener/corkscrew","Instant-read thermometer","Kitchen timer","10-inch skillet (non-stick)","12-inch skillet (stainless)","Saucepan (2 qt)","Saucepan (4 qt)","Stockpot (8 qt)","Cast iron skillet","Dutch oven","Sheet pans (2)","Roasting pan","9x13 baking dish","Muffin tin","Loaf pan","Oven mitts (2 pairs)","Trivets","Dish rack","Dish soap and sponges","Dish towels (6+)","Paper towels","Trash can","Recycling bin","Compost bin","Plastic wrap","Aluminum foil","Zip-lock bags (multiple sizes)","Parchment paper","Storage containers (set)","Spice rack and basic spices","Cooking oil","Salt and pepper","Plate set (service for 4-6)","Bowl set","Mugs (4-6)","Glasses (drinking, 6+)","Wine glasses","Coffee maker or kettle","Toaster or toaster oven","Blender","Microwave","Dish soap dispenser","Cleaning spray","Reusable grocery bags","Pot lids (matching)","Soap dish or dispenser at sink"] },
   { name: "Living Room", icon: "🛋️", items: ["Sofa","Coffee table","TV stand or console","End tables (1-2)","Floor lamp","Table lamps","Area rug","Throw pillows","Throw blanket","Bookshelf","Curtains or blinds","Curtain rods","TV + wall mount or stand","HDMI cables","Surge protector / power strip","Remote control organizer","Coasters","Wall art","Clock","Floating shelves","Storage ottoman","Charging cables / cable management","Wi-Fi router","Smoke detector","Carbon monoxide detector","Fire extinguisher"] },
   { name: "Bedroom", icon: "🛏️", items: ["Bed frame","Mattress","Mattress protector","Bed slats or box spring","Pillows (2 per person)","Pillowcases","Flat sheet","Fitted sheet","Duvet or comforter","Duvet cover","Extra blanket","Nightstand (1-2)","Nightstand lamp","Dresser or chest of drawers","Full-length mirror","Hangers (20+)","Closet organizer / shelf dividers","Hamper","Alarm clock","Blackout curtains","Under-bed storage bins","Small trash can","Reading light or clip lamp","Extension cord with USB ports","Air purifier (optional)","Humidifier or dehumidifier (optional)"] },
@@ -218,79 +352,187 @@ const rooms = [
   { name: "Home Maintenance", icon: "🏠", items: ["Plunger (kitchen + bathroom)","Drain snake / hair clog tool","Pipe tape (Teflon tape)","Caulk + caulk gun","Weather stripping","Window insulation film","Door draft stoppers","Furnace filters (stock up, change quarterly)","Pest control supplies","Mouse traps","Ant bait stations","Gutter scoop + cleaning brush","Touch-up paint (keep your wall color handy)","Spackle and putty knife","Drywall patch kit","Grout pen","Wood filler","Garage door lubricant","Lock lubricant","Chimney cleaning brush (if applicable)","Appliance manuals (keep in a binder)"] }
 ];
 
-const STORAGE_KEY = 'missy_checklist';
-let checked = {};
-try { const s = localStorage.getItem(STORAGE_KEY); if(s) checked = JSON.parse(s); } catch(e){}
+// Storage keys
+const KEY_MY   = 'missy_my_checks';    // Missy's personal checklist
+const KEY_GIFT = 'missy_gifts';        // {itemName: "Giver Name"}
 
-function save() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(checked)); } catch(e){} }
+let myChecked  = {};
+let gifts      = {};
+let currentView = 'guest';
+let pendingItem = null;
 
-function updateProgress() {
-  let total = 0, done = 0;
-  rooms.forEach(r => r.items.forEach(it => { total++; if(checked[it]) done++; }));
-  const pct = total ? Math.round(done/total*100) : 0;
-  document.getElementById('prog').style.width = pct + '%';
-  document.getElementById('prog-label').textContent = done + ' of ' + total + ' checked';
+function loadState() {
+  try { const s = localStorage.getItem(KEY_MY);   if(s) myChecked = JSON.parse(s); } catch(e){}
+  try { const s = localStorage.getItem(KEY_GIFT); if(s) gifts     = JSON.parse(s); } catch(e){}
+}
+function saveMyChecks() { try { localStorage.setItem(KEY_MY,   JSON.stringify(myChecked));  } catch(e){} }
+function saveGifts()    { try { localStorage.setItem(KEY_GIFT, JSON.stringify(gifts));      } catch(e){} }
+
+// ── View toggle ──────────────────────────────────────────────
+function setView(view) {
+  currentView = view;
+  document.body.className = view === 'missy' ? 'missy-mode' : 'guest-mode';
+  document.getElementById('btn-missy').classList.toggle('active', view === 'missy');
+  document.getElementById('btn-guest').classList.toggle('active', view === 'guest');
+  document.getElementById('reset-btn').style.display = view === 'missy' ? 'inline-block' : 'none';
+  document.getElementById('header-sub').textContent = view === 'missy'
+    ? 'Check off items as you get them, and see what friends have already purchased for you.'
+    : 'See something you\'d like to gift? Click "I got this!" on any item.';
+  updateProgress();
+  buildRooms(document.querySelector('.search-input').value);
 }
 
+// ── Progress bar ─────────────────────────────────────────────
+function updateProgress() {
+  let total = 0, done = 0;
+  ROOMS.forEach(r => r.items.forEach(it => {
+    total++;
+    if(currentView === 'missy' ? myChecked[it] : gifts[it]) done++;
+  }));
+  const pct = total ? Math.round(done/total*100) : 0;
+  document.getElementById('prog').style.width = pct + '%';
+  document.getElementById('prog-label').textContent = currentView === 'missy'
+    ? done + ' of ' + total + ' checked off'
+    : done + ' of ' + total + ' purchased';
+}
+
+// ── Build room list ──────────────────────────────────────────
 function buildRooms(filter) {
   const container = document.getElementById('rooms');
   container.innerHTML = '';
   const q = (filter||'').toLowerCase().trim();
   let any = false;
-  rooms.forEach((room, ri) => {
+
+  ROOMS.forEach((room, ri) => {
     const items = q ? room.items.filter(it => it.toLowerCase().includes(q)) : room.items;
     if(!items.length) return;
     any = true;
-    const done = items.filter(it => checked[it]).length;
+
+    const myDone   = items.filter(it => myChecked[it]).length;
+    const gifted   = items.filter(it => gifts[it]).length;
+    const countTxt = currentView === 'missy'
+      ? myDone + '/' + items.length
+      : gifted + '/' + items.length + ' purchased';
+
     const open = q || ri === 0;
     const sec = document.createElement('div');
     sec.className = 'room';
+
+    const rowsHtml = items.map(it => {
+      const isMine   = !!myChecked[it];
+      const giftedBy = gifts[it] || null;
+      return `
+        <div class="item-row" id="row-${CSS.escape(it)}">
+          <input type="checkbox" class="my-checkbox" ${isMine?'checked':''}
+            onchange="toggleMyCheck(this, ${JSON.stringify(it)})" />
+          <span class="item-label ${isMine?'my-done':''}">${it}</span>
+          ${giftedBy
+            ? `<span class="purchased-badge">🎁 Purchased by <span class="by">${escHtml(giftedBy)}</span></span>
+               <button class="undo-btn" onclick="undoPurchase(${JSON.stringify(it)})">undo</button>`
+            : `<button class="purchase-btn" onclick="openModal(${JSON.stringify(it)})">🎁 I got this!</button>`
+          }
+        </div>`;
+    }).join('');
+
     sec.innerHTML = `
       <div class="room-header" onclick="toggleRoom(this)">
         <div class="room-left">
           <span class="room-icon">${room.icon}</span>
           <span class="room-name">${room.name}</span>
-          <span class="room-count">${done}/${items.length}</span>
+          <span class="room-count">${countTxt}</span>
         </div>
         <span class="room-chevron ${open?'open'}">▼</span>
       </div>
-      <div class="room-body ${open?'open'}">
-        ${items.map(it => `
-          <div class="item-row" onclick="toggle(this,${JSON.stringify(it)})">
-            <input type="checkbox" ${checked[it]?'checked':''} onclick="event.stopPropagation();toggle(this.parentElement,${JSON.stringify(it)})">
-            <span class="item-label ${checked[it]?'done':''}">${it}</span>
-          </div>`).join('')}
-      </div>`;
+      <div class="room-body ${open?'open'}">${rowsHtml}</div>`;
     container.appendChild(sec);
   });
+
   if(!any) container.innerHTML = '<div class="no-results">No items match your search.</div>';
 }
 
-function toggle(row, item) {
-  checked[item] = !checked[item];
-  save();
-  row.querySelector('input').checked = checked[item];
-  row.querySelector('.item-label').classList.toggle('done', checked[item]);
+function escHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── Missy checkbox ───────────────────────────────────────────
+function toggleMyCheck(cb, item) {
+  myChecked[item] = cb.checked;
+  saveMyChecks();
+  const label = cb.nextElementSibling;
+  if(label) label.classList.toggle('my-done', cb.checked);
   refreshCounts();
   updateProgress();
 }
 
-function refreshCounts() {
-  document.querySelectorAll('.room').forEach(sec => {
-    const labels = sec.querySelectorAll('.item-label');
-    const done = [...labels].filter(l => l.classList.contains('done')).length;
-    sec.querySelector('.room-count').textContent = done + '/' + labels.length;
-  });
+function resetMyChecks() {
+  if(!confirm('Reset all your personal checkmarks?')) return;
+  myChecked = {}; saveMyChecks();
+  buildRooms(document.querySelector('.search-input').value);
+  updateProgress();
 }
 
+// ── Gift modal ───────────────────────────────────────────────
+function openModal(item) {
+  pendingItem = item;
+  document.getElementById('modal-name').value = '';
+  document.getElementById('modal').classList.add('open');
+  setTimeout(() => document.getElementById('modal-name').focus(), 50);
+}
+
+function closeModal() {
+  pendingItem = null;
+  document.getElementById('modal').classList.remove('open');
+}
+
+function confirmPurchase() {
+  const name = document.getElementById('modal-name').value.trim();
+  if(!name) { document.getElementById('modal-name').focus(); return; }
+  gifts[pendingItem] = name;
+  saveGifts();
+  closeModal();
+  buildRooms(document.querySelector('.search-input').value);
+  updateProgress();
+}
+
+function undoPurchase(item) {
+  if(!confirm('Remove the "purchased" mark for "' + item + '"?')) return;
+  delete gifts[item];
+  saveGifts();
+  buildRooms(document.querySelector('.search-input').value);
+  updateProgress();
+}
+
+// ── Helpers ──────────────────────────────────────────────────
 function toggleRoom(header) {
   header.querySelector('.room-chevron').classList.toggle('open');
   header.nextElementSibling.classList.toggle('open');
 }
 
-function filterItems(q) { buildRooms(q); updateProgress(); }
-function resetAll() { checked = {}; save(); buildRooms(''); updateProgress(); }
+function refreshCounts() {
+  document.querySelectorAll('.room').forEach(sec => {
+    const rows   = sec.querySelectorAll('.item-row');
+    const total  = rows.length;
+    const myDone = [...sec.querySelectorAll('.my-checkbox:checked')].length;
+    const gifted = [...sec.querySelectorAll('.purchased-badge')].length;
+    const count  = sec.querySelector('.room-count');
+    if(count) count.textContent = currentView === 'missy'
+      ? myDone + '/' + total
+      : gifted + '/' + total + ' purchased';
+  });
+}
 
+// Close modal on overlay click
+document.getElementById('modal').addEventListener('click', function(e) {
+  if(e.target === this) closeModal();
+});
+
+function logout() {
+  sessionStorage.removeItem('ms_auth');
+  window.location.replace('login.html');
+}
+
+// ── Init ─────────────────────────────────────────────────────
+loadState();
 buildRooms('');
 updateProgress();
 </script>

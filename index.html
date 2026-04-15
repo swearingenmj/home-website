@@ -3,596 +3,150 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Missy & Barley</title>
+<title>Missy Swearingen</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --cream: #F7F2EA;
-    --parchment: #EDE5D6;
-    --warm-tan: #C9AA82;
-    --bark: #8B6C4A;
-    --earth: #5C4230;
-    --deep: #2E1F12;
-    --moss: #7A8C6A;
-    --rust: #A65C3A;
-    --fog: #D4C9B8;
+    --cream: #F7F2EA; --parchment: #EDE5D6; --warm-tan: #C9AA82;
+    --bark: #8B6C4A; --earth: #5C4230; --deep: #2E1F12;
+    --moss: #7A8C6A; --rust: #A65C3A; --fog: #D4C9B8;
   }
-
-  html { scroll-behavior: smooth; }
-
   body {
-    background-color: var(--cream);
-    color: var(--deep);
+    background-color: var(--cream); color: var(--deep);
     font-family: 'Lora', Georgia, serif;
-    min-height: 100vh;
-    overflow-x: hidden;
+    min-height: 100vh; overflow-x: hidden;
   }
-
-  /* ── Texture overlay ── */
   body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
+    content: ''; position: fixed; inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 0;
+    pointer-events: none; z-index: 0;
   }
-
-  /* ── Nav ── */
   nav {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: rgba(247, 242, 234, 0.88);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(247,242,234,0.88);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--fog);
     padding: 0 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    display: flex; align-items: center; justify-content: space-between;
     height: 60px;
   }
-
   .nav-logo {
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: 1.1rem;
-    font-weight: 400;
-    color: var(--earth);
-    letter-spacing: 0.02em;
-    text-decoration: none;
-    cursor: pointer;
+    font-size: 1.1rem; font-weight: 400;
+    color: var(--earth); letter-spacing: 0.02em; text-decoration: none;
   }
-
-  .nav-links {
-    display: flex;
-    gap: 0.25rem;
-    list-style: none;
-  }
-
-  .nav-links li button {
-    background: none;
-    border: none;
-    font-family: 'Lora', serif;
-    font-size: 0.85rem;
-    color: var(--bark);
-    cursor: pointer;
-    padding: 6px 14px;
-    border-radius: 20px;
-    letter-spacing: 0.04em;
+  .nav-links { display: flex; gap: 0.25rem; list-style: none; }
+  .nav-links li a {
+    display: inline-block; font-family: 'Lora', serif; font-size: 0.85rem;
+    color: var(--bark); text-decoration: none;
+    padding: 6px 14px; border-radius: 20px; letter-spacing: 0.04em;
     transition: background 0.2s, color 0.2s;
   }
-
-  .nav-links li button:hover,
-  .nav-links li button.active {
-    background: var(--parchment);
-    color: var(--earth);
+  .nav-links li a:hover { background: var(--parchment); color: var(--earth); }
+  .nav-links li a.active { background: var(--parchment); color: var(--earth); }
+  .nav-logout {
+    background: none; border: none; font-family: 'Lora', serif;
+    font-size: 0.8rem; color: var(--warm-tan); cursor: pointer;
+    padding: 6px 10px; border-radius: 20px; letter-spacing: 0.04em;
+    transition: color 0.2s, background 0.2s;
   }
-
-  /* ── Pages ── */
-  .page { display: none; position: relative; z-index: 1; }
-  .page.active { display: block; }
-
-  /* ── Home Page ── */
-  #home {
+  .nav-logout:hover { color: var(--bark); background: var(--parchment); }
+  main {
+    position: relative; z-index: 1;
     min-height: calc(100vh - 60px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 4rem 2rem;
-    position: relative;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center; padding: 4rem 2rem;
   }
-
-  .home-decor {
-    position: absolute;
-    inset: 0;
-    overflow: hidden;
-    pointer-events: none;
-  }
-
-  .home-decor span {
-    position: absolute;
-    border-radius: 50%;
-    opacity: 0.18;
-  }
-
-  .home-decor span:nth-child(1) {
+  .decor { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+  .decor span { position: absolute; border-radius: 50%; }
+  .decor span:nth-child(1) {
     width: 420px; height: 420px;
     background: radial-gradient(circle, var(--warm-tan), transparent 70%);
-    top: -100px; right: -80px;
+    top: -100px; right: -80px; opacity: 0.18;
   }
-  .home-decor span:nth-child(2) {
+  .decor span:nth-child(2) {
     width: 320px; height: 320px;
     background: radial-gradient(circle, var(--moss), transparent 70%);
-    bottom: -60px; left: -60px;
-    opacity: 0.12;
+    bottom: -60px; left: -60px; opacity: 0.12;
   }
-  .home-decor span:nth-child(3) {
+  .decor span:nth-child(3) {
     width: 200px; height: 200px;
     background: radial-gradient(circle, var(--rust), transparent 70%);
-    top: 40%; left: 10%;
-    opacity: 0.09;
+    top: 40%; left: 10%; opacity: 0.09;
   }
-
-  .home-eyebrow {
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--bark);
-    margin-bottom: 1.5rem;
-    opacity: 0;
-    animation: fadeUp 0.8s ease 0.2s forwards;
+  .eyebrow {
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--bark); margin-bottom: 1.5rem;
+    opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards;
   }
-
-  .home-name {
+  h1 {
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(3.5rem, 10vw, 7rem);
-    font-weight: 400;
-    line-height: 1.05;
-    color: var(--earth);
-    letter-spacing: -0.01em;
-    opacity: 0;
-    animation: fadeUp 0.9s ease 0.4s forwards;
+    font-size: clamp(3.5rem, 10vw, 7rem); font-weight: 400;
+    line-height: 1.05; color: var(--earth); letter-spacing: -0.01em;
+    opacity: 0; animation: fadeUp 0.9s ease 0.4s forwards;
   }
-
-  .home-name em {
-    font-style: italic;
-    color: var(--bark);
-  }
-
-  .home-divider {
-    width: 60px;
-    height: 1px;
-    background: var(--warm-tan);
+  h1 em { font-style: italic; color: var(--bark); }
+  .divider {
+    width: 60px; height: 1px; background: var(--warm-tan);
     margin: 2rem auto;
-    opacity: 0;
-    animation: fadeUp 0.8s ease 0.6s forwards;
+    opacity: 0; animation: fadeUp 0.8s ease 0.6s forwards;
   }
-
-  .home-tagline {
-    font-size: 0.9rem;
-    color: var(--bark);
-    letter-spacing: 0.08em;
-    font-style: italic;
-    opacity: 0;
-    animation: fadeUp 0.8s ease 0.75s forwards;
+  .tagline {
+    font-size: 0.9rem; color: var(--bark); letter-spacing: 0.08em; font-style: italic;
+    opacity: 0; animation: fadeUp 0.8s ease 0.75s forwards;
   }
-
-  .home-cta {
+  .cta {
     margin-top: 3rem;
-    opacity: 0;
-    animation: fadeUp 0.8s ease 0.9s forwards;
+    opacity: 0; animation: fadeUp 0.8s ease 0.9s forwards;
   }
-
-  .home-cta button {
-    background: var(--earth);
-    color: var(--cream);
-    border: none;
-    font-family: 'Lora', serif;
-    font-size: 0.8rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 12px 28px;
-    border-radius: 30px;
-    cursor: pointer;
+  .cta a {
+    display: inline-block; background: var(--earth); color: var(--cream);
+    text-decoration: none; font-family: 'Lora', serif;
+    font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 12px 28px; border-radius: 30px;
     transition: background 0.2s, transform 0.15s;
   }
-
-  .home-cta button:hover {
-    background: var(--deep);
-    transform: translateY(-2px);
-  }
-
-  /* ── Checklist Page ── */
-  #checklist {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 3rem 2rem 5rem;
-  }
-
-  .page-header {
-    margin-bottom: 2.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--fog);
-  }
-
-  .page-header h1 {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 400;
-    color: var(--earth);
-    margin-bottom: 0.5rem;
-  }
-
-  .page-header p {
-    font-size: 0.9rem;
-    color: var(--bark);
-    font-style: italic;
-  }
-
-  /* Progress */
-  .progress-wrap {
-    background: var(--parchment);
-    border-radius: 12px;
-    padding: 1.25rem 1.5rem;
-    margin-bottom: 2rem;
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-  }
-
-  .progress-track {
-    flex: 1;
-    height: 6px;
-    background: var(--fog);
-    border-radius: 99px;
-    overflow: hidden;
-  }
-
-  .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--bark), var(--rust));
-    border-radius: 99px;
-    transition: width 0.4s ease;
-    width: 0%;
-  }
-
-  .progress-label {
-    font-size: 0.8rem;
-    color: var(--bark);
-    white-space: nowrap;
-    font-style: italic;
-  }
-
-  /* Search */
-  .search-row {
-    display: flex;
-    gap: 0.75rem;
-    margin-bottom: 1.75rem;
-    align-items: center;
-  }
-
-  .search-input {
-    flex: 1;
-    padding: 10px 16px;
-    border: 1px solid var(--fog);
-    border-radius: 8px;
-    background: #fff;
-    font-family: 'Lora', serif;
-    font-size: 0.88rem;
-    color: var(--deep);
-    outline: none;
-    transition: border-color 0.2s;
-  }
-
-  .search-input:focus { border-color: var(--warm-tan); }
-  .search-input::placeholder { color: var(--warm-tan); font-style: italic; }
-
-  .reset-btn {
-    padding: 10px 18px;
-    border: 1px solid var(--fog);
-    border-radius: 8px;
-    background: transparent;
-    font-family: 'Lora', serif;
-    font-size: 0.8rem;
-    color: var(--bark);
-    cursor: pointer;
-    transition: background 0.2s;
-    white-space: nowrap;
-  }
-
-  .reset-btn:hover { background: var(--parchment); }
-
-  /* Room sections */
-  .room {
-    margin-bottom: 1rem;
-    border: 1px solid var(--fog);
-    border-radius: 12px;
-    overflow: hidden;
-    background: #fff;
-    transition: box-shadow 0.2s;
-  }
-
-  .room:hover { box-shadow: 0 2px 12px rgba(90,60,30,0.07); }
-
-  .room-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 18px;
-    cursor: pointer;
-    background: var(--parchment);
-    user-select: none;
-    transition: background 0.15s;
-  }
-
-  .room-header:hover { background: var(--fog); }
-
-  .room-left {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .room-icon { font-size: 1.1rem; }
-
-  .room-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--earth);
-  }
-
-  .room-count {
-    font-size: 0.75rem;
-    color: var(--bark);
-    font-style: italic;
-    font-family: 'Lora', serif;
-  }
-
-  .room-chevron {
-    font-size: 0.7rem;
-    color: var(--bark);
-    transition: transform 0.25s;
-  }
-
-  .room-chevron.open { transform: rotate(180deg); }
-
-  .room-body {
-    display: none;
-    padding: 6px 0 10px;
-  }
-
-  .room-body.open { display: block; }
-
-  .item-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 6px 18px;
-    cursor: pointer;
-    transition: background 0.12s;
-    border-radius: 0;
-  }
-
-  .item-row:hover { background: #FBF8F3; }
-
-  .item-row input[type="checkbox"] {
-    appearance: none;
-    -webkit-appearance: none;
-    width: 16px;
-    height: 16px;
-    border: 1.5px solid var(--warm-tan);
-    border-radius: 4px;
-    background: #fff;
-    cursor: pointer;
-    flex-shrink: 0;
-    position: relative;
-    transition: background 0.15s, border-color 0.15s;
-  }
-
-  .item-row input[type="checkbox"]:checked {
-    background: var(--bark);
-    border-color: var(--bark);
-  }
-
-  .item-row input[type="checkbox"]:checked::after {
-    content: '';
-    position: absolute;
-    left: 3px; top: 1px;
-    width: 5px; height: 8px;
-    border: 2px solid #fff;
-    border-top: none;
-    border-left: none;
-    transform: rotate(40deg);
-  }
-
-  .item-label {
-    font-size: 0.88rem;
-    color: var(--deep);
-    font-family: 'Lora', serif;
-    transition: color 0.15s;
-  }
-
-  .item-label.done {
-    text-decoration: line-through;
-    color: var(--warm-tan);
-  }
-
-  .no-results {
-    text-align: center;
-    padding: 3rem 1rem;
-    color: var(--warm-tan);
-    font-style: italic;
-    font-size: 0.9rem;
-  }
-
-  /* Animations */
+  .cta a:hover { background: var(--deep); transform: translateY(-2px); }
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(18px); }
     to   { opacity: 1; transform: translateY(0); }
   }
-
-  .page.active #checklist > * {
-    animation: fadeUp 0.5s ease both;
-  }
-
-  /* Responsive */
-  @media (max-width: 540px) {
-    nav { padding: 0 1rem; }
-    #checklist { padding: 2rem 1rem 4rem; }
-    .progress-wrap { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
-  }
+  @media (max-width: 540px) { nav { padding: 0 1rem; } }
 </style>
 </head>
 <body>
+<script>
+  if(sessionStorage.getItem('ms_auth') !== 'yes') {
+    window.location.replace('login.html');
+  }
+</script>
 
 <nav>
-  <a class="nav-logo" onclick="showPage('home')">m|b</a>
+  <a class="nav-logo" href="index.html">ms.</a>
   <ul class="nav-links">
-    <li><button id="btn-home" class="active" onclick="showPage('home')">Home</button></li>
-    <li><button id="btn-checklist" onclick="showPage('checklist')">Wishlist</button></li>
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="wishlist.html">Wishlist</a></li>
   </ul>
+  <button class="nav-logout" onclick="logout()">Sign out</button>
 </nav>
 
-<!-- HOME -->
-<div id="home" class="page active">
-  <div class="home-decor">
-    <span></span><span></span><span></span>
-  </div>
-  <p class="home-eyebrow">Welcome</p>
-  <h1 class="home-name">Missy<br><em>& Barley</em></h1>
-  <div class="home-divider"></div>
-  <p class="home-tagline">a collection of thoughts</p>
-  <div class="home-cta">
-    <button onclick="showPage('checklist')">View My Wishlist →</button>
-  </div>
-</div>
-
-<!-- CHECKLIST -->
-<div id="checklist" class="page">
-  <div class="page-header">
-    <h1>New Home Wishlist</h1>
-    <p>Everything I need to make this house a home — checked off as I go.</p>
-  </div>
-
-  <div class="progress-wrap">
-    <div class="progress-track"><div class="progress-fill" id="prog"></div></div>
-    <div class="progress-label" id="prog-label">0 of 0 checked</div>
-  </div>
-
-  <div class="search-row">
-    <input class="search-input" type="text" placeholder="Search items..." oninput="filterItems(this.value)" />
-    <button class="reset-btn" onclick="resetAll()">Reset all</button>
-  </div>
-
-  <div id="rooms"></div>
-</div>
+<main>
+  <div class="decor"><span></span><span></span><span></span></div>
+  <p class="eyebrow">Welcome</p>
+  <h1>Missy<br><em>Swearingen</em></h1>
+  <div class="divider"></div>
+  <p class="tagline">new homeowner · maryland</p>
+  <div class="cta"><a href="wishlist.html">View My Wishlist →</a></div>
+</main>
 
 <script>
-const rooms = [
-  { name: "Kitchen", icon: "🍳", items: ["Chef's knife","Paring knife","Serrated bread knife","Knife sharpener","Cutting boards (at least 2)","Can opener","Vegetable peeler","Box grater","Colander/strainer","Mixing bowls (set)","Measuring cups (dry)","Measuring cups (liquid)","Measuring spoons","Wooden spoons","Silicone spatulas","Ladle","Tongs","Whisk","Slotted spoon","Potato masher","Rolling pin","Kitchen shears","Bottle opener/corkscrew","Instant-read thermometer","Kitchen timer","10-inch skillet (non-stick)","12-inch skillet (stainless)","Saucepan (2 qt)","Saucepan (4 qt)","Stockpot (8 qt)","Cast iron skillet","Dutch oven","Sheet pans (2)","Roasting pan","9x13 baking dish","Muffin tin","Loaf pan","Oven mitts (2 pairs)","Trivets","Dish rack","Dish soap and sponges","Dish towels (6+)","Paper towels","Trash can","Recycling bin","Compost bin","Plastic wrap","Aluminum foil","Zip-lock bags (multiple sizes)","Parchment paper","Storage containers (set)","Spice rack and basic spices","Cooking oil","Salt and pepper","Plate set (service for 4-6)","Bowl set","Mugs (4-6)","Glasses (drinking, 6+)","Wine glasses","Coffee maker or kettle","Toaster or toaster oven","Blender","Microwave","Dish soap dispenser","Cleaning spray","Reusable grocery bags","Pot lids (matching)","Soap dish or dispenser at sink"] },
-  { name: "Living Room", icon: "🛋️", items: ["Sofa","Coffee table","TV stand or console","End tables (1-2)","Floor lamp","Table lamps","Area rug","Throw pillows","Throw blanket","Bookshelf","Curtains or blinds","Curtain rods","TV + wall mount or stand","HDMI cables","Surge protector / power strip","Remote control organizer","Coasters","Wall art","Clock","Floating shelves","Storage ottoman","Charging cables / cable management","Wi-Fi router","Smoke detector","Carbon monoxide detector","Fire extinguisher"] },
-  { name: "Bedroom", icon: "🛏️", items: ["Bed frame","Mattress","Mattress protector","Bed slats or box spring","Pillows (2 per person)","Pillowcases","Flat sheet","Fitted sheet","Duvet or comforter","Duvet cover","Extra blanket","Nightstand (1-2)","Nightstand lamp","Dresser or chest of drawers","Full-length mirror","Hangers (20+)","Closet organizer / shelf dividers","Hamper","Alarm clock","Blackout curtains","Under-bed storage bins","Small trash can","Reading light or clip lamp","Extension cord with USB ports","Air purifier (optional)","Humidifier or dehumidifier (optional)"] },
-  { name: "Bathroom", icon: "🚿", items: ["Bath towels (2-3 per person)","Hand towels (2-3)","Washcloths (4+)","Bath mat","Toilet brush and holder","Toilet paper holder","Toilet paper (stock up)","Shower curtain and rings (if no glass door)","Shower curtain liner","Shower caddy or shelving","Soap dish or dispenser","Shampoo and conditioner","Body wash or bar soap","Hand soap","Toothbrush holder","Cotton swab holder","Plunger","Small trash can","Mirror (if not built-in)","Medicine cabinet or storage","First aid kit","Ibuprofen/acetaminophen","Bandages and antiseptic","Tweezers","Nail clippers","Scissors","Scale","Night light","Hair dryer","Towel hooks or rack","Cleaning supplies (toilet, tub, tile)","Grout cleaner","Mildew spray","Drain hair catcher","Toilet seat (replace old ones)"] },
-  { name: "Home Office / Guest Room", icon: "💻", items: ["Desk","Desk chair (ergonomic)","Monitor (if needed)","Keyboard and mouse","Desk lamp","Monitor riser or stand","Cable management clips","Printer","Printer paper","Ink cartridges","Filing cabinet or document box","Folders and labels","Binders","Pens, pencils, highlighters","Scissors","Tape and dispenser","Stapler","Sticky notes","Notepad","Paper clips and binder clips","Power strip with USB","Surge protector","Shredder","Whiteboard or corkboard","Calendar","Bookends","Storage bins","Headset or speakers"] },
-  { name: "Garage / Storage", icon: "🔧", items: ["Hammer","Tape measure (25 ft)","Screwdriver set (flathead + Phillips)","Power drill + bit set","Level","Stud finder","Utility knife","Adjustable wrench","Pliers (needle-nose + regular)","Hex key / Allen wrench set","Rubber mallet","Hand saw","Hacksaw","Pry bar","Caulking gun","Putty knife","Staple gun","Wire stripper","Voltage tester","Extension cord (heavy duty)","Ladder (6 ft step + extension)","Wheelbarrow (if yard)","Shovel","Rake","Broom (outdoor)","Snow shovel (if applicable)","Ice scraper","Garden hose + nozzle","Lawn mower","Weed trimmer","Leaf blower","Shop vacuum (wet/dry vac)","Workbench or table","Pegboard for tool storage","Shelving units","Moving blankets","Bungee cords","Zip ties","Duct tape","Painter's tape","Sandpaper (assorted)","Paint roller + tray","Paintbrushes (assorted)","Drop cloth","WD-40","Wood glue","Super glue","Nails, screws, anchors (assorted)","Picture hanging hardware","Toolbox","Storage bins with lids","Label maker","Spare light bulbs (LED)","Spare batteries (AA, AAA, 9V)","Fire extinguisher","First aid kit"] },
-  { name: "Laundry Room / Utility", icon: "🧺", items: ["Laundry detergent","Fabric softener or dryer sheets","Stain remover stick/spray","Laundry baskets (2+)","Mesh laundry bags (delicates)","Drying rack","Iron","Ironing board","Lint roller","Clothespins","Clothes hangers (extra)","Washer and dryer","Washer cleaner tablets","Dryer vent brush","Broom and dustpan","Mop and bucket","Swiffer or dry mop","Vacuum cleaner","Vacuum bags/filters","Steam mop (optional)","All-purpose cleaner","Glass cleaner","Disinfecting wipes","Bleach","Baking soda","White vinegar","Rubber gloves","Scrub brushes","Microfiber cloths","Garbage bags (multiple sizes)","Bucket","Flashlight","Spare fuses","Step stool"] },
-  { name: "Outdoor / Yard", icon: "🌿", items: ["Welcome mat (front and back)","Outdoor furniture (table + chairs)","Outdoor umbrella","Grill (gas or charcoal)","Grill tools (tongs, brush, spatula)","Grill cover","Charcoal or propane","Lighter/fire starter","Outdoor lighting","String lights","Hose reel","Garden gloves","Kneeling pad","Fertilizer","Mulch","Seeds or plants","Planters / pots","Mailbox (if needed)","House numbers","Doorbell","Security camera or light","Motion-sensor lights","Trash and recycling bins","Compost bin","Weatherproof storage box","Snow blower (if applicable)","Rock salt / ice melt","Outdoor rug","Extension cord (outdoor-rated)"] },
-  { name: "Entryway / Mudroom", icon: "🚪", items: ["Key hooks or key bowl","Shoe rack or mat","Coat hooks or rack","Umbrella stand","Small bench or ottoman","Mirror","Reusable bag hooks","Mail organizer","Basket for odds and ends","Doorstop","Change all locks when moving in","Spare key copies","Doormat (interior)","Luggage rack or hooks","Charging station for phones/devices"] },
-  { name: "Safety & Emergency", icon: "🛡️", items: ["Smoke detectors (one per floor + bedrooms)","Carbon monoxide detectors","Fire extinguisher (kitchen + garage)","First aid kit (comprehensive)","Emergency flashlight","Battery-powered weather radio","Spare batteries","Emergency contact list (posted visible)","Home fire escape plan","Fire escape ladder (multi-story homes)","Circuit breaker map (label all breakers)","Water shut-off valve location marked","Gas shut-off tool","Emergency food and water supply (72-hour kit)","Backup power bank","Duct tape","Emergency blankets","Candles and matches / lighters","Generator (optional)"] },
-  { name: "Home Maintenance", icon: "🏠", items: ["Plunger (kitchen + bathroom)","Drain snake / hair clog tool","Pipe tape (Teflon tape)","Caulk + caulk gun","Weather stripping","Window insulation film","Door draft stoppers","Furnace filters (stock up, change quarterly)","Pest control supplies","Mouse traps","Ant bait stations","Gutter scoop + cleaning brush","Touch-up paint (keep your wall color handy)","Spackle and putty knife","Drywall patch kit","Grout pen","Wood filler","Garage door lubricant","Lock lubricant","Chimney cleaning brush (if applicable)","Appliance manuals (keep in a binder)"] }
-];
-
-let checked = {};
-try { const s = localStorage.getItem('missy_checklist'); if(s) checked = JSON.parse(s); } catch(e){}
-
-function save() { try { localStorage.setItem('missy_checklist', JSON.stringify(checked)); } catch(e){} }
-
-function updateProgress() {
-  let total = 0, done = 0;
-  rooms.forEach(r => r.items.forEach(it => { total++; if(checked[it]) done++; }));
-  const pct = total ? Math.round(done/total*100) : 0;
-  document.getElementById('prog').style.width = pct + '%';
-  document.getElementById('prog-label').textContent = done + ' of ' + total + ' checked';
-}
-
-function buildRooms(filter) {
-  const container = document.getElementById('rooms');
-  container.innerHTML = '';
-  const q = (filter||'').toLowerCase().trim();
-  let any = false;
-  rooms.forEach((room, ri) => {
-    const items = q ? room.items.filter(it => it.toLowerCase().includes(q)) : room.items;
-    if(!items.length) return;
-    any = true;
-    const done = items.filter(it => checked[it]).length;
-    const open = q || ri === 0;
-    const sec = document.createElement('div');
-    sec.className = 'room';
-    sec.innerHTML = `
-      <div class="room-header" onclick="toggleRoom(this)">
-        <div class="room-left">
-          <span class="room-icon">${room.icon}</span>
-          <span class="room-name">${room.name}</span>
-          <span class="room-count">${done}/${items.length}</span>
-        </div>
-        <span class="room-chevron ${open?'open'}">▼</span>
-      </div>
-      <div class="room-body ${open?'open'}">
-        ${items.map(it => `
-          <div class="item-row" onclick="toggle(this,'${it.replace(/'/g,"\\'").replace(/"/g,'&quot;')}')">
-            <input type="checkbox" ${checked[it]?'checked':''} onclick="event.stopPropagation();toggle(this.parentElement,'${it.replace(/'/g,"\\'").replace(/"/g,'&quot;')}')">
-            <span class="item-label ${checked[it]?'done':''}">${it}</span>
-          </div>`).join('')}
-      </div>`;
-    container.appendChild(sec);
-  });
-  if(!any) container.innerHTML = '<div class="no-results">No items match your search.</div>';
-}
-
-function toggle(row, item) {
-  checked[item] = !checked[item];
-  save();
-  row.querySelector('input').checked = checked[item];
-  row.querySelector('.item-label').classList.toggle('done', checked[item]);
-  refreshCounts();
-  updateProgress();
-}
-
-function refreshCounts() {
-  document.querySelectorAll('.room').forEach(sec => {
-    const labels = sec.querySelectorAll('.item-label');
-    const done = [...labels].filter(l => l.classList.contains('done')).length;
-    sec.querySelector('.room-count').textContent = done + '/' + labels.length;
-  });
-}
-
-function toggleRoom(header) {
-  header.querySelector('.room-chevron').classList.toggle('open');
-  header.nextElementSibling.classList.toggle('open');
-}
-
-function filterItems(q) { buildRooms(q); updateProgress(); }
-function resetAll() { checked = {}; save(); buildRooms(''); updateProgress(); }
-
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  document.getElementById('btn-' + id).classList.add('active');
-  if(id === 'checklist') { buildRooms(''); updateProgress(); }
-  window.scrollTo(0,0);
-}
-
-// Init
-buildRooms('');
-updateProgress();
+  function logout() {
+    sessionStorage.removeItem('ms_auth');
+    window.location.replace('login.html');
+  }
 </script>
 </body>
 </html>
