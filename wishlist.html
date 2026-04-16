@@ -283,7 +283,7 @@
 <body class="guest-mode">
 <script>
   if(sessionStorage.getItem('ms_auth') !== 'yes') {
-    window.location.replace('login.html');
+    window.location.replace('index.html');
   }
 </script>
 
@@ -302,7 +302,7 @@
 </div>
 
 <nav>
-  <a class="nav-logo" href="home.html">ms.</a>
+  <a class="nav-logo" href="home.html">m|b</a>
   <ul class="nav-links">
     <li><a href="home.html">Home</a></li>
     <li><a href="wishlist.html" class="active">Wishlist</a></li>
@@ -339,17 +339,138 @@
 
 <script>
 const ROOMS = [
-  { name: "Kitchen", icon: "🍳", items: ["Chef's knife","Paring knife","Serrated bread knife","Knife sharpener","Cutting boards (at least 2)","Can opener","Vegetable peeler","Box grater","Colander/strainer","Mixing bowls (set)","Measuring cups (dry)","Measuring cups (liquid)","Measuring spoons","Wooden spoons","Silicone spatulas","Ladle","Tongs","Whisk","Slotted spoon","Potato masher","Rolling pin","Kitchen shears","Bottle opener/corkscrew","Instant-read thermometer","Kitchen timer","10-inch skillet (non-stick)","12-inch skillet (stainless)","Saucepan (2 qt)","Saucepan (4 qt)","Stockpot (8 qt)","Cast iron skillet","Dutch oven","Sheet pans (2)","Roasting pan","9x13 baking dish","Muffin tin","Loaf pan","Oven mitts (2 pairs)","Trivets","Dish rack","Dish soap and sponges","Dish towels (6+)","Paper towels","Trash can","Recycling bin","Compost bin","Plastic wrap","Aluminum foil","Zip-lock bags (multiple sizes)","Parchment paper","Storage containers (set)","Spice rack and basic spices","Cooking oil","Salt and pepper","Plate set (service for 4-6)","Bowl set","Mugs (4-6)","Glasses (drinking, 6+)","Wine glasses","Coffee maker or kettle","Toaster or toaster oven","Blender","Microwave","Dish soap dispenser","Cleaning spray","Reusable grocery bags","Pot lids (matching)","Soap dish or dispenser at sink"] },
-  { name: "Living Room", icon: "🛋️", items: ["Sofa","Coffee table","TV stand or console","End tables (1-2)","Floor lamp","Table lamps","Area rug","Throw pillows","Throw blanket","Bookshelf","Curtains or blinds","Curtain rods","TV + wall mount or stand","HDMI cables","Surge protector / power strip","Remote control organizer","Coasters","Wall art","Clock","Floating shelves","Storage ottoman","Charging cables / cable management","Wi-Fi router","Smoke detector","Carbon monoxide detector","Fire extinguisher"] },
-  { name: "Bedroom", icon: "🛏️", items: ["Bed frame","Mattress","Mattress protector","Bed slats or box spring","Pillows (2 per person)","Pillowcases","Flat sheet","Fitted sheet","Duvet or comforter","Duvet cover","Extra blanket","Nightstand (1-2)","Nightstand lamp","Dresser or chest of drawers","Full-length mirror","Hangers (20+)","Closet organizer / shelf dividers","Hamper","Alarm clock","Blackout curtains","Under-bed storage bins","Small trash can","Reading light or clip lamp","Extension cord with USB ports","Air purifier (optional)","Humidifier or dehumidifier (optional)"] },
-  { name: "Bathroom", icon: "🚿", items: ["Bath towels (2-3 per person)","Hand towels (2-3)","Washcloths (4+)","Bath mat","Toilet brush and holder","Toilet paper holder","Toilet paper (stock up)","Shower curtain and rings (if no glass door)","Shower curtain liner","Shower caddy or shelving","Soap dish or dispenser","Shampoo and conditioner","Body wash or bar soap","Hand soap","Toothbrush holder","Cotton swab holder","Plunger","Small trash can","Mirror (if not built-in)","Medicine cabinet or storage","First aid kit","Ibuprofen/acetaminophen","Bandages and antiseptic","Tweezers","Nail clippers","Scissors","Scale","Night light","Hair dryer","Towel hooks or rack","Cleaning supplies (toilet, tub, tile)","Grout cleaner","Mildew spray","Drain hair catcher","Toilet seat (replace old ones)"] },
-  { name: "Home Office / Guest Room", icon: "💻", items: ["Desk","Desk chair (ergonomic)","Monitor (if needed)","Keyboard and mouse","Desk lamp","Monitor riser or stand","Cable management clips","Printer","Printer paper","Ink cartridges","Filing cabinet or document box","Folders and labels","Binders","Pens, pencils, highlighters","Scissors","Tape and dispenser","Stapler","Sticky notes","Notepad","Paper clips and binder clips","Power strip with USB","Surge protector","Shredder","Whiteboard or corkboard","Calendar","Bookends","Storage bins","Headset or speakers"] },
-  { name: "Garage / Storage", icon: "🔧", items: ["Hammer","Tape measure (25 ft)","Screwdriver set (flathead + Phillips)","Power drill + bit set","Level","Stud finder","Utility knife","Adjustable wrench","Pliers (needle-nose + regular)","Hex key / Allen wrench set","Rubber mallet","Hand saw","Hacksaw","Pry bar","Caulking gun","Putty knife","Staple gun","Wire stripper","Voltage tester","Extension cord (heavy duty)","Ladder (6 ft step + extension)","Wheelbarrow (if yard)","Shovel","Rake","Broom (outdoor)","Snow shovel (if applicable)","Ice scraper","Garden hose + nozzle","Lawn mower","Weed trimmer","Leaf blower","Shop vacuum (wet/dry vac)","Workbench or table","Pegboard for tool storage","Shelving units","Moving blankets","Bungee cords","Zip ties","Duct tape","Painter's tape","Sandpaper (assorted)","Paint roller + tray","Paintbrushes (assorted)","Drop cloth","WD-40","Wood glue","Super glue","Nails, screws, anchors (assorted)","Picture hanging hardware","Toolbox","Storage bins with lids","Label maker","Spare light bulbs (LED)","Spare batteries (AA, AAA, 9V)","Fire extinguisher","First aid kit"] },
-  { name: "Laundry Room / Utility", icon: "🧺", items: ["Laundry detergent","Fabric softener or dryer sheets","Stain remover stick/spray","Laundry baskets (2+)","Mesh laundry bags (delicates)","Drying rack","Iron","Ironing board","Lint roller","Clothespins","Clothes hangers (extra)","Washer and dryer","Washer cleaner tablets","Dryer vent brush","Broom and dustpan","Mop and bucket","Swiffer or dry mop","Vacuum cleaner","Vacuum bags/filters","Steam mop (optional)","All-purpose cleaner","Glass cleaner","Disinfecting wipes","Bleach","Baking soda","White vinegar","Rubber gloves","Scrub brushes","Microfiber cloths","Garbage bags (multiple sizes)","Bucket","Flashlight","Spare fuses","Step stool"] },
-  { name: "Outdoor / Yard", icon: "🌿", items: ["Welcome mat (front and back)","Outdoor furniture (table + chairs)","Outdoor umbrella","Grill (gas or charcoal)","Grill tools (tongs, brush, spatula)","Grill cover","Charcoal or propane","Lighter/fire starter","Outdoor lighting","String lights","Hose reel","Garden gloves","Kneeling pad","Fertilizer","Mulch","Seeds or plants","Planters / pots","Mailbox (if needed)","House numbers","Doorbell","Security camera or light","Motion-sensor lights","Trash and recycling bins","Compost bin","Weatherproof storage box","Snow blower (if applicable)","Rock salt / ice melt","Outdoor rug","Extension cord (outdoor-rated)"] },
-  { name: "Entryway / Mudroom", icon: "🚪", items: ["Key hooks or key bowl","Shoe rack or mat","Coat hooks or rack","Umbrella stand","Small bench or ottoman","Mirror","Reusable bag hooks","Mail organizer","Basket for odds and ends","Doorstop","Change all locks when moving in","Spare key copies","Doormat (interior)","Luggage rack or hooks","Charging station for phones/devices"] },
-  { name: "Safety & Emergency", icon: "🛡️", items: ["Smoke detectors (one per floor + bedrooms)","Carbon monoxide detectors","Fire extinguisher (kitchen + garage)","First aid kit (comprehensive)","Emergency flashlight","Battery-powered weather radio","Spare batteries","Emergency contact list (posted visible)","Home fire escape plan","Fire escape ladder (multi-story homes)","Circuit breaker map (label all breakers)","Water shut-off valve location marked","Gas shut-off tool","Emergency food and water supply (72-hour kit)","Backup power bank","Duct tape","Emergency blankets","Candles and matches / lighters","Generator (optional)"] },
-  { name: "Home Maintenance", icon: "🏠", items: ["Plunger (kitchen + bathroom)","Drain snake / hair clog tool","Pipe tape (Teflon tape)","Caulk + caulk gun","Weather stripping","Window insulation film","Door draft stoppers","Furnace filters (stock up, change quarterly)","Pest control supplies","Mouse traps","Ant bait stations","Gutter scoop + cleaning brush","Touch-up paint (keep your wall color handy)","Spackle and putty knife","Drywall patch kit","Grout pen","Wood filler","Garage door lubricant","Lock lubricant","Chimney cleaning brush (if applicable)","Appliance manuals (keep in a binder)"] }
+  { name: "Kitchen", icon: "🍳", items: [
+    "Chef's knife",
+    "Cutting boards (at least 2)",
+    "10-inch skillet (non-stick)",
+    "Saucepan (2 qt)",
+    "Stockpot (8 qt)",
+    "Mixing bowls (set)",
+    "Measuring cups & spoons",
+    "Dish towels (6+)",
+    "Storage containers (set)",
+    "Coffee maker or kettle"
+  ]},
+  { name: "Living Room", icon: "🛋️", items: [
+    "Sofa",
+    "Coffee table",
+    "Area rug",
+    "Floor lamp",
+    "Throw pillows & blanket",
+    "Curtains or blinds",
+    "Bookshelf",
+    "Wall art",
+    "Surge protector / power strip",
+    "Coasters"
+  ]},
+  { name: "Bedroom", icon: "🛏️", items: [
+    "Bed frame",
+    "Mattress",
+    "Mattress protector",
+    "Duvet or comforter",
+    "Pillows (2+)",
+    "Fitted & flat sheets",
+    "Nightstand",
+    "Dresser or chest of drawers",
+    "Blackout curtains",
+    "Hamper"
+  ]},
+  { name: "Bathroom", icon: "🚿", items: [
+    "Bath towels (2-3)",
+    "Hand towels (2-3)",
+    "Bath mat",
+    "Shower caddy or shelving",
+    "Toilet brush and holder",
+    "Plunger",
+    "First aid kit",
+    "Hair dryer",
+    "Towel hooks or rack",
+    "Drain hair catcher"
+  ]},
+  { name: "Home Office / Guest Room", icon: "💻", items: [
+    "Desk",
+    "Desk chair (ergonomic)",
+    "Desk lamp",
+    "Printer",
+    "Filing cabinet or document box",
+    "Power strip with USB",
+    "Surge protector",
+    "Whiteboard or corkboard",
+    "Storage bins",
+    "Headset or speakers"
+  ]},
+  { name: "Garage / Storage", icon: "🔧", items: [
+    "Hammer",
+    "Tape measure (25 ft)",
+    "Screwdriver set (flathead + Phillips)",
+    "Power drill + bit set",
+    "Level",
+    "Stud finder",
+    "Ladder (6 ft step)",
+    "Shop vacuum (wet/dry vac)",
+    "Toolbox",
+    "Spare light bulbs (LED)"
+  ]},
+  { name: "Laundry Room / Utility", icon: "🧺", items: [
+    "Laundry detergent",
+    "Laundry baskets (2+)",
+    "Drying rack",
+    "Iron & ironing board",
+    "Vacuum cleaner",
+    "Mop and bucket",
+    "All-purpose cleaner",
+    "Microfiber cloths",
+    "Garbage bags (multiple sizes)",
+    "Step stool"
+  ]},
+  { name: "Outdoor / Yard", icon: "🌿", items: [
+    "Welcome mat (front and back)",
+    "Outdoor furniture (table + chairs)",
+    "Grill (gas or charcoal)",
+    "Garden hose + nozzle",
+    "Shovel",
+    "Rake",
+    "Garden gloves",
+    "Outdoor lighting",
+    "Trash and recycling bins",
+    "Rock salt / ice melt"
+  ]},
+  { name: "Entryway / Mudroom", icon: "🚪", items: [
+    "Key hooks or key bowl",
+    "Shoe rack or mat",
+    "Coat hooks or rack",
+    "Umbrella stand",
+    "Small bench or ottoman",
+    "Mirror",
+    "Mail organizer",
+    "Doorstop",
+    "Spare key copies",
+    "Charging station for phones/devices"
+  ]},
+  { name: "Safety & Emergency", icon: "🛡️", items: [
+    "Smoke detectors (one per floor + bedrooms)",
+    "Carbon monoxide detectors",
+    "Fire extinguisher (kitchen + garage)",
+    "First aid kit (comprehensive)",
+    "Emergency flashlight",
+    "Spare batteries",
+    "Emergency contact list (posted visible)",
+    "Home fire escape plan",
+    "Water shut-off valve location marked",
+    "Backup power bank"
+  ]},
+  { name: "Home Maintenance", icon: "🏠", items: [
+    "Plunger (kitchen + bathroom)",
+    "Drain snake / hair clog tool",
+    "Caulk + caulk gun",
+    "Weather stripping",
+    "Furnace filters (stock up, change quarterly)",
+    "Touch-up paint (keep your wall color handy)",
+    "Spackle and putty knife",
+    "WD-40",
+    "Duct tape",
+    "Appliance manuals (keep in a binder)"
+  ]}
 ];
 
 // Storage keys
@@ -528,7 +649,7 @@ document.getElementById('modal').addEventListener('click', function(e) {
 
 function logout() {
   sessionStorage.removeItem('ms_auth');
-  window.location.replace('login.html');
+  window.location.replace('index.html');
 }
 
 // ── Init ─────────────────────────────────────────────────────
