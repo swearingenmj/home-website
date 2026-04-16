@@ -346,7 +346,7 @@ const ROOMS = [
     "Saucepan (2 qt)",
     "Stockpot (8 qt)",
     "Mixing bowls (set)",
-    "Measuring cups & spoons",
+    "Measuring cups and spoons",
     "Dish towels (6+)",
     "Storage containers (set)",
     "Coffee maker or kettle"
@@ -356,7 +356,7 @@ const ROOMS = [
     "Coffee table",
     "Area rug",
     "Floor lamp",
-    "Throw pillows & blanket",
+    "Throw pillows and blanket",
     "Curtains or blinds",
     "Bookshelf",
     "Wall art",
@@ -369,7 +369,7 @@ const ROOMS = [
     "Mattress protector",
     "Duvet or comforter",
     "Pillows (2+)",
-    "Fitted & flat sheets",
+    "Fitted and flat sheets",
     "Nightstand",
     "Dresser or chest of drawers",
     "Blackout curtains",
@@ -415,7 +415,7 @@ const ROOMS = [
     "Laundry detergent",
     "Laundry baskets (2+)",
     "Drying rack",
-    "Iron & ironing board",
+    "Iron and ironing board",
     "Vacuum cleaner",
     "Mop and bucket",
     "All-purpose cleaner",
@@ -447,7 +447,7 @@ const ROOMS = [
     "Spare key copies",
     "Charging station for phones/devices"
   ]},
-  { name: "Safety & Emergency", icon: "🛡️", items: [
+  { name: "Safety and Emergency", icon: "🛡️", items: [
     "Smoke detectors (one per floor + bedrooms)",
     "Carbon monoxide detectors",
     "Fire extinguisher (kitchen + garage)",
@@ -562,9 +562,9 @@ function buildRooms(filter) {
           <span class="room-name">${room.name}</span>
           <span class="room-count">${countTxt}</span>
         </div>
-        <span class="room-chevron ${open?'open'}">▼</span>
+        <span class="room-chevron ${open?'open':''}">▼</span>
       </div>
-      <div class="room-body ${open?'open'}">${rowsHtml}</div>`;
+      <div class="room-body ${open?'open':''}">${rowsHtml}</div>`;
     container.appendChild(sec);
   });
 
