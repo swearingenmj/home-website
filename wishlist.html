@@ -287,6 +287,7 @@
   <ul class="nav-links">
     <li><a href="home.html">Home</a></li>
     <li><a href="wishlist.html" class="active">Wishlist</a></li>
+    <li><a href="recipes.html">Recipes</a></li>
   </ul>
   <button class="nav-logout" onclick="logout()">Sign out</button>
 </nav>
@@ -333,6 +334,7 @@ function loadState() {
 }
 function saveMyChecks() { try { localStorage.setItem(KEY_MY,   JSON.stringify(myChecked));  } catch(e){} }
 function saveGifts()    { try { localStorage.setItem(KEY_GIFT, JSON.stringify(gifts));      } catch(e){} }
+
 
 // ── Build room list ──────────────────────────────────────────
 function buildRooms(filter) {

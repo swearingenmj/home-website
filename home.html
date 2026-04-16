@@ -58,7 +58,7 @@
     min-height: calc(100vh - 60px);
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
-    text-align: center; padding: 4rem 2rem;
+    text-align: center; padding: 4rem 2rem 6rem;
   }
   .decor { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
   .decor span { position: absolute; border-radius: 50%; }
@@ -84,8 +84,8 @@
   }
   h1 {
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(3.5rem, 10vw, 7rem); font-weight: 400;
-    line-height: 1.05; color: var(--earth); letter-spacing: -0.01em;
+    font-size: clamp(3rem, 9vw, 6rem); font-weight: 400;
+    line-height: 1.08; color: var(--earth); letter-spacing: -0.01em;
     opacity: 0; animation: fadeUp 0.9s ease 0.4s forwards;
   }
   h1 em { font-style: italic; color: var(--bark); }
@@ -95,26 +95,73 @@
     opacity: 0; animation: fadeUp 0.8s ease 0.6s forwards;
   }
   .tagline {
-    font-size: 0.9rem; color: var(--bark); letter-spacing: 0.08em; font-style: italic;
+    font-size: 0.9rem; color: var(--bark); letter-spacing: 0.04em;
+    font-style: italic; max-width: 380px; line-height: 1.7;
     opacity: 0; animation: fadeUp 0.8s ease 0.75s forwards;
   }
   .cta {
-    margin-top: 3rem;
+    margin-top: 3rem; display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center;
     opacity: 0; animation: fadeUp 0.8s ease 0.9s forwards;
   }
   .cta a {
-    display: inline-block; background: var(--earth); color: var(--cream);
+    display: inline-block; color: var(--cream);
     text-decoration: none; font-family: 'Lora', serif;
     font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
     padding: 12px 28px; border-radius: 30px;
     transition: background 0.2s, transform 0.15s;
   }
-  .cta a:hover { background: var(--deep); transform: translateY(-2px); }
+  .cta a.primary { background: var(--earth); }
+  .cta a.primary:hover { background: var(--deep); transform: translateY(-2px); }
+  .cta a.secondary { background: none; border: 1px solid var(--bark); color: var(--bark); }
+  .cta a.secondary:hover { background: var(--parchment); transform: translateY(-2px); }
+
+  /* ── Event card ── */
+  .event-card {
+    margin-top: 4rem; width: 100%; max-width: 480px;
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--fog); border-radius: 16px;
+    padding: 1.75rem 2rem; text-align: left;
+    opacity: 0; animation: fadeUp 0.8s ease 1.05s forwards;
+  }
+  .event-eyebrow {
+    font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--warm-tan); margin-bottom: 0.6rem;
+  }
+  .event-title {
+    font-family: 'Playfair Display', serif; font-size: 1.4rem;
+    font-weight: 400; color: var(--earth); margin-bottom: 1.25rem;
+  }
+  .event-title em { font-style: italic; color: var(--bark); }
+  .event-details { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.25rem; }
+  .event-row {
+    display: flex; gap: 0.75rem; align-items: flex-start;
+    font-size: 0.83rem; color: var(--deep); line-height: 1.5;
+  }
+  .event-row-label {
+    font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--warm-tan); min-width: 52px; padding-top: 1px; flex-shrink: 0;
+  }
+  .event-divider { height: 1px; background: var(--fog); margin: 1.1rem 0; }
+  .event-note {
+    font-size: 0.8rem; color: var(--bark); font-style: italic; line-height: 1.6;
+  }
+  .event-rsvp {
+    display: inline-block; margin-top: 1.25rem;
+    font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--bark); font-family: 'Lora', serif;
+    border-bottom: 1px solid var(--warm-tan); padding-bottom: 1px;
+    text-decoration: none;
+  }
+
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(18px); }
     to   { opacity: 1; transform: translateY(0); }
   }
-  @media (max-width: 540px) { nav { padding: 0 1rem; } }
+  @media (max-width: 540px) {
+    nav { padding: 0 1rem; }
+    .event-card { padding: 1.25rem 1.25rem; }
+  }
 </style>
 </head>
 <body>
@@ -130,17 +177,72 @@
   <ul class="nav-links">
     <li><a href="home.html" class="active">Home</a></li>
     <li><a href="wishlist.html">Wishlist</a></li>
+    <li><a href="recipes.html">Recipes</a></li>
   </ul>
   <button class="nav-logout" onclick="logout()">Sign out</button>
 </nav>
 
 <main>
   <div class="decor"><span></span><span></span><span></span></div>
-  <p class="eyebrow">Welcome</p>
-  <h1>Missy<br><em>& Barley</em></h1>
+  <p class="eyebrow">Adventures of</p>
+  <h1>Missy &amp; <em>Barley</em><br>&amp; their big house!</h1>
   <div class="divider"></div>
-  <p class="tagline">recipes, wishlists, and personal notes</p>
-  <div class="cta"><a href="wishlist.html">View My Wishlist →</a></div>
+  <p class="tagline">Welcome to Missy &amp; Barley's personal page. Stay for recipes, wishlists, and more!</p>
+  <div class="cta">
+    <a href="wishlist.html" class="primary">View the Wishlist</a>
+    <a href="recipes.html" class="secondary">View the Recipes</a>
+  </div>
+
+  <div class="event-card">
+    <p class="event-eyebrow">Upcoming Event</p>
+    <h2 class="event-title">Missy's <em>Birthday Party</em></h2>
+    <div class="event-details">
+      <div class="event-row">
+        <span class="event-row-label">Date</span>
+        <span>Friday, May 2nd, 2025</span>
+      </div>
+      <div class="event-row">
+        <span class="event-row-label">Time</span>
+        <span>3:00 pm – 7:00 pm</span>
+      </div>
+      <div class="event-row">
+        <span class="event-row-label">Where</span>
+        <span>2550 Pickwick Rd, Baltimore MD 21207</span>
+      </div>
+    </div>
+    <div class="event-divider"></div>
+    <p class="event-note">
+      Food is covered — Dave's Hot Chicken, cauliflower, and fries will be catered.
+      Soft drinks provided. Bring an alcoholic beverage of your choice to share!
+    </p>
+    <p class="event-note" style="margin-top: 0.5rem;">
+      There will also be a <strong style="font-style:normal;font-weight:500;color:var(--earth);">build your own mini arid terrarium station</strong> and a very special surprise magical guest!
+    </p>
+    <p class="event-note" style="margin-top: 0.5rem;">
+      Please RSVP via the Partiful invitation so we know to expect you.
+    </p>
+    <p class="event-note" style="margin-top: 0.5rem;">
+      Gifts are absolutely not expected — your presence is plenty! But if you'd like to get me something, my <a href="wishlist.html" style="color:var(--bark);text-underline-offset:3px;">house wishlist</a> is linked at the top of this page.
+    </p>
+    <div class="event-divider"></div>
+    <p class="event-eyebrow" style="margin-bottom:0.6rem;">After Party</p>
+    <h3 style="font-family:'Playfair Display',serif;font-weight:400;font-size:1.1rem;color:var(--earth);margin-bottom:1rem;">Magic: The Gathering<em style="color:var(--bark);"> Sealed Draft</em></h3>
+    <div class="event-details" style="margin-bottom:0.75rem;">
+      <div class="event-row">
+        <span class="event-row-label">Set</span>
+        <span>Secrets of Strixhaven</span>
+      </div>
+      <div class="event-row">
+        <span class="event-row-label">Starts</span>
+        <span>Around 7:00 pm</span>
+      </div>
+      <div class="event-row">
+        <span class="event-row-label">Buy-in</span>
+        <span>$40 per person</span>
+      </div>
+    </div>
+    <p class="event-note">Stick around after the party for a sealed draft! Packs provided — just bring $40 and your competitive spirit.</p>
+  </div>
 </main>
 
 <script>
