@@ -131,11 +131,13 @@
 </div>
 
 <script>
-  // ── Paste your generated hash here (run generate-hash.html to get it) ──
-  const PASSWORD_HASH = 'ed695063a6e36fcbbc8859cee42ac631202aac3e5c1027d8082e2ac13d0a239f';
+  // ── Hashes for the two passwords ──
+  // Run generate-hash.html locally to produce these
+  const HASH_GUEST = 'ed695063a6e36fcbbc8859cee42ac631202aac3e5c1027d8082e2ac13d0a239f';
+  const HASH_MISSY = 'c63a266f583d3d049cbcd1269ba53a61340d1c9869853cabbfa64cefcf75ef9c';
 
   // Already logged in? Skip straight through
-  if (sessionStorage.getItem('ms_auth') === 'yes') {
+  if (sessionStorage.getItem('ms_auth') === 'missy' || sessionStorage.getItem('ms_auth') === 'guest') {
     window.location.replace('home.html');
   }
 
@@ -143,15 +145,17 @@
     const val = document.getElementById('pw').value;
     if (!val) return;
 
-    // Disable button while hashing so it can't be double-clicked
     const btn = document.getElementById('login-btn');
     btn.disabled = true;
     btn.textContent = '...';
 
     const hash = await sha256(val);
 
-    if (hash === PASSWORD_HASH) {
-      sessionStorage.setItem('ms_auth', 'yes');
+    if (hash === HASH_MISSY) {
+      sessionStorage.setItem('ms_auth', 'missy');
+      window.location.replace('home.html');
+    } else if (hash === HASH_GUEST) {
+      sessionStorage.setItem('ms_auth', 'guest');
       window.location.replace('home.html');
     } else {
       btn.disabled = false;
