@@ -65,24 +65,6 @@
     animation: fadeUp 0.5s ease both;
   }
 
-  /* ── View toggle (Missy vs Guest) ── */
-  .view-toggle {
-    display: inline-flex;
-    background: var(--parchment);
-    border-radius: 30px; padding: 4px;
-    margin-bottom: 2rem;
-    border: 1px solid var(--fog);
-  }
-  .view-toggle button {
-    background: none; border: none; cursor: pointer;
-    font-family: 'Lora', serif; font-size: 0.82rem;
-    color: var(--bark); padding: 7px 18px; border-radius: 26px;
-    letter-spacing: 0.04em; transition: background 0.2s, color 0.2s;
-  }
-  .view-toggle button.active {
-    background: var(--earth); color: var(--cream);
-  }
-
   /* ── Page header ── */
   .page-header {
     margin-bottom: 2rem;
@@ -312,12 +294,6 @@
 </nav>
 
 <main>
-  <!-- View toggle -->
-  <div class="view-toggle">
-    <button id="btn-guest" class="active" onclick="setView('guest')">🎁 I'm a guest</button>
-    <button id="btn-missy" onclick="setView('missy')">🏠 I'm Missy</button>
-  </div>
-
   <div class="page-header">
     <div>
       <h1>New Home Wishlist</h1>
@@ -348,7 +324,6 @@ const KEY_GIFT = 'missy_gifts';        // {itemName: "Giver Name"}
 
 let myChecked  = {};
 let gifts      = {};
-let currentView = 'guest';
 let pendingItem = null;
 
 function loadState() {
@@ -358,19 +333,12 @@ function loadState() {
 function saveMyChecks() { try { localStorage.setItem(KEY_MY,   JSON.stringify(myChecked));  } catch(e){} }
 function saveGifts()    { try { localStorage.setItem(KEY_GIFT, JSON.stringify(gifts));      } catch(e){} }
 
-// ── View toggle ──────────────────────────────────────────────
-function setView(view) {
-  currentView = view;
-  document.body.className = view === 'missy' ? 'missy-mode' : 'guest-mode';
-  document.getElementById('btn-missy').classList.toggle('active', view === 'missy');
-  document.getElementById('btn-guest').classList.toggle('active', view === 'guest');
-  document.getElementById('reset-btn').style.display = view === 'missy' ? 'inline-block' : 'none';
-  document.getElementById('header-sub').textContent = view === 'missy'
-    ? 'Check off items as you get them, and see what friends have already purchased for you.'
-    : 'See something you\'d like to gift? Click "I got this!" on any item.';
-  updateProgress();
-  buildRooms(document.querySelector('.search-input').value);
-}
+// Detect role from session — no toggle needed
+const currentView = sessionStorage.getItem('ms_auth') === 'missy' ? 'missy' : 'guest';
+document.body.className = currentView === 'missy' ? 'missy-mode' : 'guest-mode';
+document.getElementById('header-sub').textContent = currentView === 'missy'
+  ? 'Check off items as you get them, and see what friends have already purchased for you.'
+  : 'See something you\'d like to gift? Click "I got this!" on any item.';
 
 // ── Progress bar ─────────────────────────────────────────────
 function updateProgress() {
@@ -523,6 +491,7 @@ function logout() {
 
 // ── Init ─────────────────────────────────────────────────────
 loadState();
+document.getElementById('reset-btn').style.display = currentView === 'missy' ? 'inline-block' : 'none';
 buildRooms('');
 updateProgress();
 </script>
