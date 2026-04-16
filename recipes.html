@@ -68,63 +68,131 @@
   .construction-banner {
     background: var(--parchment);
     border: 1px dashed var(--warm-tan);
-    border-radius: 10px;
-    padding: 14px 20px;
+    border-radius: 10px; padding: 14px 20px;
     margin-bottom: 2.5rem;
     display: flex; align-items: center; gap: 12px;
     font-size: 0.85rem; color: var(--bark); font-style: italic; line-height: 1.5;
   }
-  .construction-banner strong {
-    font-style: normal; font-weight: 500; color: var(--earth);
-  }
+  .construction-banner strong { font-style: normal; font-weight: 500; color: var(--earth); }
 
   /* ── Page header ── */
   .page-header {
-    margin-bottom: 2.5rem;
-    padding-bottom: 1.5rem;
+    margin-bottom: 2rem; padding-bottom: 1.5rem;
     border-bottom: 1px solid var(--fog);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1rem;
   }
   .page-header h1 {
     font-family: 'Playfair Display', Georgia, serif;
     font-size: clamp(2rem, 5vw, 3rem); font-weight: 400;
-    color: var(--earth); margin-bottom: 0.4rem;
+    color: var(--earth); margin-bottom: 0.3rem;
   }
   .page-header p { font-size: 0.9rem; color: var(--bark); font-style: italic; }
 
-  /* ── Category grid ── */
-  .category-grid {
+  /* ── Add recipe button (Missy only) ── */
+  .add-btn {
+    background: var(--earth); color: var(--cream); border: none;
+    font-family: 'Lora', serif; font-size: 0.78rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 9px 20px; border-radius: 20px; cursor: pointer;
+    transition: background 0.2s, transform 0.15s; flex-shrink: 0;
+  }
+  .add-btn:hover { background: var(--deep); transform: translateY(-1px); }
+
+  /* ── Recipe grid ── */
+  .recipe-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 1rem;
   }
-  .category-card {
-    background: #fff;
-    border: 1px solid var(--fog);
-    border-radius: 12px;
-    padding: 1.5rem;
-    opacity: 0.6;
-    position: relative;
-    overflow: hidden;
+
+  /* ── Recipe card ── */
+  .recipe-card {
+    background: #fff; border: 1px solid var(--fog);
+    border-radius: 12px; overflow: hidden;
+    transition: box-shadow 0.2s;
+    display: flex; flex-direction: column;
   }
-  .category-card::after {
-    content: 'Coming soon';
-    position: absolute; bottom: 12px; right: 14px;
-    font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--warm-tan); font-family: 'Lora', serif;
+  .recipe-card:hover { box-shadow: 0 2px 12px rgba(90,60,30,0.08); }
+
+  .recipe-card a {
+    display: block; text-decoration: none; padding: 1.25rem 1.25rem 0.75rem;
+    flex: 1;
   }
-  .category-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem; font-weight: 400; color: var(--earth);
-    margin-bottom: 0.4rem;
+  .recipe-source {
+    font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--warm-tan); margin-bottom: 0.4rem;
   }
-  .category-desc {
-    font-size: 0.8rem; color: var(--bark); font-style: italic; line-height: 1.5;
+  .recipe-title {
+    font-family: 'Playfair Display', serif; font-size: 1rem;
+    font-weight: 400; color: var(--earth); line-height: 1.35;
   }
-  .category-count {
-    margin-top: 1rem;
-    font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--fog);
+  .recipe-footer {
+    padding: 0.6rem 1.25rem 1rem;
+    display: flex; align-items: center; justify-content: space-between;
   }
+  .recipe-tag {
+    font-size: 0.68rem; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--fog); font-family: 'Lora', serif;
+  }
+  .delete-btn {
+    background: none; border: none; cursor: pointer;
+    font-size: 0.68rem; color: var(--fog); font-family: 'Lora', serif;
+    text-decoration: underline; transition: color 0.15s; padding: 0;
+  }
+  .delete-btn:hover { color: var(--rust); }
+
+  /* ── Empty state ── */
+  .empty-state {
+    text-align: center; padding: 4rem 1rem;
+    font-size: 0.9rem; color: var(--warm-tan); font-style: italic;
+  }
+
+  /* ── Modal ── */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 500;
+    background: rgba(46,31,18,0.35); backdrop-filter: blur(4px);
+    align-items: center; justify-content: center;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--cream); border: 1px solid var(--fog);
+    border-radius: 16px; padding: 2rem;
+    width: 100%; max-width: 400px;
+    box-shadow: 0 8px 40px rgba(46,31,18,0.15);
+    animation: fadeUp 0.25s ease both;
+  }
+  .modal h2 {
+    font-family: 'Playfair Display', serif; font-size: 1.3rem;
+    font-weight: 400; color: var(--earth); margin-bottom: 1.25rem;
+  }
+  .modal label {
+    display: block; font-size: 0.72rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--bark); margin-bottom: 0.4rem;
+  }
+  .modal input {
+    width: 100%; padding: 10px 14px; margin-bottom: 1rem;
+    border: 1px solid var(--fog); border-radius: 8px;
+    background: #fff; font-family: 'Lora', serif; font-size: 0.9rem;
+    color: var(--deep); outline: none; transition: border-color 0.2s;
+  }
+  .modal input:focus { border-color: var(--warm-tan); }
+  .modal input::placeholder { color: var(--warm-tan); font-style: italic; }
+  .modal-btns { display: flex; gap: 0.6rem; justify-content: flex-end; margin-top: 0.5rem; }
+  .modal-confirm {
+    background: var(--earth); color: var(--cream); border: none;
+    font-family: 'Lora', serif; font-size: 0.78rem; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 9px 22px; border-radius: 8px;
+    cursor: pointer; transition: background 0.2s;
+  }
+  .modal-confirm:hover { background: var(--deep); }
+  .modal-cancel {
+    background: none; border: 1px solid var(--fog); color: var(--bark);
+    font-family: 'Lora', serif; font-size: 0.78rem;
+    padding: 9px 16px; border-radius: 8px; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .modal-cancel:hover { background: var(--parchment); }
 
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(16px); }
@@ -144,6 +212,22 @@
   }
 </script>
 
+<!-- Add recipe modal (Missy only) -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <h2>Add a Recipe</h2>
+    <label for="recipe-url">Recipe URL</label>
+    <input type="url" id="recipe-url" placeholder="https://..." />
+    <label for="recipe-name">Name (optional)</label>
+    <input type="text" id="recipe-name" placeholder="e.g. Grandma's banana bread"
+           onkeydown="if(event.key==='Enter')saveRecipe()" />
+    <div class="modal-btns">
+      <button class="modal-cancel" onclick="closeModal()">Cancel</button>
+      <button class="modal-confirm" onclick="saveRecipe()">Add</button>
+    </div>
+  </div>
+</div>
+
 <nav>
   <a class="nav-logo" href="home.html">m|b</a>
   <ul class="nav-links">
@@ -157,53 +241,129 @@
 <main>
   <div class="construction-banner">
     <span>&#9998;</span>
-    <span><strong>This page is under construction.</strong> Recipes are coming soon — check back later!</span>
+    <span><strong>This page is under construction.</strong> Recipes are being added — check back soon!</span>
   </div>
 
   <div class="page-header">
-    <h1>Recipes</h1>
-    <p>A collection of Missy's favorite recipes, organized by category.</p>
+    <div>
+      <h1>Recipes</h1>
+      <p>Missy's favorite recipes, all in one place.</p>
+    </div>
+    <button class="add-btn" id="add-btn" onclick="openModal()" style="display:none">+ Add Recipe</button>
   </div>
 
-  <div class="category-grid">
-    <div class="category-card">
-      <p class="category-name">Category One</p>
-      <p class="category-desc">Placeholder — update this with your first category name and a short description.</p>
-      <p class="category-count">0 recipes</p>
-    </div>
-    <div class="category-card">
-      <p class="category-name">Category Two</p>
-      <p class="category-desc">Placeholder — update this with your second category name and a short description.</p>
-      <p class="category-count">0 recipes</p>
-    </div>
-    <div class="category-card">
-      <p class="category-name">Category Three</p>
-      <p class="category-desc">Placeholder — update this with your third category name and a short description.</p>
-      <p class="category-count">0 recipes</p>
-    </div>
-    <div class="category-card">
-      <p class="category-name">Category Four</p>
-      <p class="category-desc">Placeholder — update this with your fourth category name and a short description.</p>
-      <p class="category-count">0 recipes</p>
-    </div>
-    <div class="category-card">
-      <p class="category-name">Category Five</p>
-      <p class="category-desc">Placeholder — update this with your fifth category name and a short description.</p>
-      <p class="category-count">0 recipes</p>
-    </div>
-    <div class="category-card">
-      <p class="category-name">Category Six</p>
-      <p class="category-desc">Placeholder — update this with your sixth category name and a short description.</p>
-      <p class="category-count">0 recipes</p>
-    </div>
-  </div>
+  <div class="recipe-grid" id="recipe-grid"></div>
 </main>
 
 <script>
-  function logout() {
-    sessionStorage.removeItem('ms_auth');
-    window.location.replace('index.html');
+const isMissy = sessionStorage.getItem('ms_auth') === 'missy';
+const STORAGE_KEY = 'missy_recipes';
+
+// Show add button for Missy only
+if(isMissy) document.getElementById('add-btn').style.display = 'inline-block';
+
+function loadRecipes() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch(e) { return []; }
+}
+
+function saveRecipes(recipes) {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(recipes)); } catch(e){}
+}
+
+function getDomain(url) {
+  try { return new URL(url).hostname.replace('www.', ''); } catch(e) { return url; }
+}
+
+function renderRecipes() {
+  const recipes = loadRecipes();
+  const grid = document.getElementById('recipe-grid');
+  grid.innerHTML = '';
+
+  if(recipes.length === 0) {
+    grid.innerHTML = '<div class="empty-state">No recipes yet — check back soon!</div>';
+    return;
   }
+
+  recipes.forEach((r, i) => {
+    const card = document.createElement('div');
+    card.className = 'recipe-card';
+
+    const link = document.createElement('a');
+    link.href = r.url;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.innerHTML = `
+      <p class="recipe-source">${getDomain(r.url)}</p>
+      <p class="recipe-title">${escHtml(r.name || 'Untitled Recipe')}</p>`;
+
+    const footer = document.createElement('div');
+    footer.className = 'recipe-footer';
+
+    const tag = document.createElement('span');
+    tag.className = 'recipe-tag';
+    tag.textContent = 'recipe';
+
+    footer.appendChild(tag);
+
+    // Delete button — Missy only
+    if(isMissy) {
+      const del = document.createElement('button');
+      del.className = 'delete-btn';
+      del.textContent = 'remove';
+      del.addEventListener('click', () => {
+        const recipes = loadRecipes();
+        recipes.splice(i, 1);
+        saveRecipes(recipes);
+        renderRecipes();
+      });
+      footer.appendChild(del);
+    }
+
+    card.appendChild(link);
+    card.appendChild(footer);
+    grid.appendChild(card);
+  });
+}
+
+function escHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── Modal ────────────────────────────────────────────────────
+function openModal() {
+  document.getElementById('recipe-url').value = '';
+  document.getElementById('recipe-name').value = '';
+  document.getElementById('modal').classList.add('open');
+  setTimeout(() => document.getElementById('recipe-url').focus(), 50);
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+}
+
+function saveRecipe() {
+  const url = document.getElementById('recipe-url').value.trim();
+  const name = document.getElementById('recipe-name').value.trim();
+  if(!url) { document.getElementById('recipe-url').focus(); return; }
+
+  const recipes = loadRecipes();
+  recipes.unshift({ url, name: name || getDomain(url) });
+  saveRecipes(recipes);
+  closeModal();
+  renderRecipes();
+}
+
+document.getElementById('modal').addEventListener('click', function(e) {
+  if(e.target === this) closeModal();
+});
+
+function logout() {
+  sessionStorage.removeItem('ms_auth');
+  window.location.replace('index.html');
+}
+
+// ── Init ─────────────────────────────────────────────────────
+renderRecipes();
 </script>
 </body>
 </html>
