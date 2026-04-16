@@ -1,5 +1,5 @@
 const WISHLIST_ROOMS = [
-  { name: "Kitchen", icon: "🍳", items: [
+  { name: "Kitchen", icon: "", items: [
     "Box grater",
     "Microplane",
     "Silicone Tongs",
@@ -11,13 +11,13 @@ const WISHLIST_ROOMS = [
     "Dish towels (6+)",
     "Blendtec blender",
   ]},
-  { name: "Living Room", icon: "🛋️", items: [
+  { name: "Living Room", icon: "", items: [
     "Mesh wifi system",
     "Coasters",
     "Wall art",
     "Clock",
   ]},
-  { name: "Bedroom", icon: "🛏️", items: [
+  { name: "Bedroom", icon: "", items: [
     "Bed frame",
     "Mattress",
     "Mattress protector",
@@ -34,11 +34,11 @@ const WISHLIST_ROOMS = [
     "Full-length mirror",
     "Extension cord with USB ports",
   ]},
-  { name: "Bathroom", icon: "🚿", items: [
+  { name: "Bathroom", icon: "", items: [
     "Bath mat",
     "Waterproof foot stool (for shower)",
   ]},
-  { name: "Home Office / Guest Room", icon: "💻", items: [
+  { name: "Home Office / Guest Room", icon: "", items: [
     "Desk chair (ergonomic)",
     "Cable management clips",
     "Printer (used please)",
@@ -55,7 +55,7 @@ const WISHLIST_ROOMS = [
     "Shredder",
     "Bookends",  
   ]},
-  { name: "Garage / Storage", icon: "🔧", items: [
+  { name: "Garage / Storage", icon: "", items: [
     "Screwdriver set (flathead and Phillips)",
     "Power drill bit set",
     "Level",
@@ -95,7 +95,7 @@ const WISHLIST_ROOMS = [
     "Fire extinguisher",
     "First aid kit"
   ]},
-  { name: "Laundry Room / Utility", icon: "🧺", items: [
+  { name: "Laundry Room / Utility", icon: "", items: [
     "Stain remover stick (OxiClean gel stick only)",
     "Drying rack",
     "Iron",
@@ -103,7 +103,7 @@ const WISHLIST_ROOMS = [
     "Clothespins",
     "Vacuum cleaner (canister vacuum)",
   ]},
-  { name: "Outdoor / Yard", icon: "🌿", items: [
+  { name: "Outdoor / Yard", icon: "", items: [
     "Kiddie pool",
     "Outdoor furniture (table and chairs)",
     "Outdoor umbrella",
@@ -116,7 +116,7 @@ const WISHLIST_ROOMS = [
     "Motion-sensor lights",
     "Outdoor rug",
   ]},
-  { name: "Entryway / Mudroom", icon: "🚪", items: [
+  { name: "Entryway / Mudroom", icon: "", items: [
     "Key hooks or key bowl",
     "Shoe rack and/or mat",
     "Coat hooks or rack",
