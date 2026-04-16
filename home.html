@@ -119,7 +119,8 @@
 </head>
 <body>
 <script>
-  if(sessionStorage.getItem('ms_auth') !== 'yes') {
+  const auth = sessionStorage.getItem('ms_auth');
+  if(auth !== 'missy' && auth !== 'guest') {
     window.location.replace('index.html');
   }
 </script>
