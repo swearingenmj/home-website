@@ -80,20 +80,6 @@
   }
   .page-header p { font-size: 0.9rem; color: var(--bark); font-style: italic; }
 
-  /* ── Progress ── */
-  .progress-wrap {
-    background: var(--parchment); border-radius: 12px;
-    padding: 1.25rem 1.5rem; margin-bottom: 2rem;
-    display: flex; align-items: center; gap: 1.25rem;
-  }
-  .progress-track { flex: 1; height: 6px; background: var(--fog); border-radius: 99px; overflow: hidden; }
-  .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--bark), var(--rust));
-    border-radius: 99px; transition: width 0.4s ease; width: 0%;
-  }
-  .progress-label { font-size: 0.8rem; color: var(--bark); white-space: nowrap; font-style: italic; }
-
   /* ── Search row ── */
   .search-row { display: flex; gap: 0.75rem; margin-bottom: 1.75rem; align-items: center; }
   .search-input {
@@ -167,8 +153,10 @@
   .item-label.my-done { text-decoration: line-through; color: var(--warm-tan); }
 
   /* ── Claimed state ── */
-  .item-row.claimed { opacity: 0.45; }
+  .item-row.claimed { opacity: 0.5; }
   .item-row.claimed .item-label { text-decoration: line-through; color: var(--bark); }
+  /* In Missy mode, her own checked items also get strikethrough via my-done */
+  body.missy-mode .item-row.claimed .item-label { text-decoration: line-through; color: var(--warm-tan); }
 
   /* Purchased badge */
   .purchased-badge {
@@ -189,6 +177,7 @@
     user-select: none;
   }
 
+  /* Purchase button */
   .purchase-btn {
     background: none; border: 1px solid var(--fog);
     color: var(--bark); border-radius: 6px;
@@ -197,8 +186,9 @@
     transition: background 0.2s, border-color 0.2s, color 0.2s;
   }
   .purchase-btn:hover { background: var(--parchment); border-color: var(--warm-tan); color: var(--earth); }
+  body.missy-mode .purchase-btn { display: none; }
 
-  /* Undo — only visible to Missy */
+  /* Undo button — everyone can undo */
   .undo-btn {
     background: none; border: none; cursor: pointer;
     font-size: 0.68rem; color: var(--warm-tan); font-family: 'Lora', serif;
@@ -206,14 +196,11 @@
     transition: color 0.15s;
   }
   .undo-btn:hover { color: var(--bark); }
-  body.guest-mode .undo-btn { display: none; }
 
   /* Guest mode — hide Missy's checkbox */
   body.guest-mode .my-checkbox { display: none; }
   body.guest-mode .item-label.my-done { text-decoration: none; color: var(--deep); }
-
-  /* Missy mode — hide purchase button */
-  body.missy-mode .purchase-btn { display: none; }
+  body.guest-mode .item-row.claimed .item-label { text-decoration: line-through !important; color: var(--bark) !important; }
 
   .no-results { text-align: center; padding: 3rem 1rem; color: var(--warm-tan); font-style: italic; font-size: 0.9rem; }
 
@@ -269,7 +256,6 @@
   @media (max-width: 600px) {
     nav { padding: 0 1rem; }
     main { padding: 2rem 1rem 4rem; }
-    .progress-wrap { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
     .page-header { flex-direction: column; align-items: flex-start; }
   }
 </style>
@@ -306,16 +292,13 @@
 </nav>
 
 <main>
+  <div class="gift-note" id="gift-note"></div>
+
   <div class="page-header">
     <div>
       <h1>New Home Wishlist</h1>
       <p id="header-sub">See something you'd like to gift? Click "I'll get this!" on any item.</p>
     </div>
-  </div>
-
-  <div class="progress-wrap">
-    <div class="progress-track"><div class="progress-fill" id="prog"></div></div>
-    <div class="progress-label" id="prog-label">0 of 0 purchased</div>
   </div>
 
   <div class="search-row">
@@ -351,20 +334,6 @@ function loadState() {
 function saveMyChecks() { try { localStorage.setItem(KEY_MY,   JSON.stringify(myChecked));  } catch(e){} }
 function saveGifts()    { try { localStorage.setItem(KEY_GIFT, JSON.stringify(gifts));      } catch(e){} }
 
-// ── Progress bar ─────────────────────────────────────────────
-function updateProgress() {
-  let total = 0, done = 0;
-  ROOMS.forEach(r => r.items.forEach(it => {
-    total++;
-    if(currentView === 'missy' ? myChecked[it] : gifts[it]) done++;
-  }));
-  const pct = total ? Math.round(done/total*100) : 0;
-  document.getElementById('prog').style.width = pct + '%';
-  document.getElementById('prog-label').textContent = currentView === 'missy'
-    ? done + ' of ' + total + ' checked off'
-    : done + ' of ' + total + ' claimed';
-}
-
 // ── Build room list ──────────────────────────────────────────
 function buildRooms(filter) {
   const container = document.getElementById('rooms');
@@ -377,43 +346,94 @@ function buildRooms(filter) {
     if(!items.length) return;
     any = true;
 
-    const myDone = items.filter(it => myChecked[it]).length;
-    const gifted = items.filter(it => gifts[it]).length;
-    const countTxt = currentView === 'missy'
-      ? myDone + '/' + items.length
-      : gifted + '/' + items.length + ' claimed';
-
     const open = q || ri === 0;
+
+    // Build room container
     const sec = document.createElement('div');
     sec.className = 'room';
 
-    const rowsHtml = items.map(it => {
+    // Room header
+    const header = document.createElement('div');
+    header.className = 'room-header';
+    header.innerHTML = `
+      <div class="room-left">
+        <span class="room-icon">${room.icon}</span>
+        <span class="room-name">${room.name}</span>
+      </div>
+      <span class="room-chevron ${open ? 'open' : ''}">&#9660;</span>`;
+    header.addEventListener('click', () => {
+      header.querySelector('.room-chevron').classList.toggle('open');
+      body.classList.toggle('open');
+    });
+
+    // Room body
+    const body = document.createElement('div');
+    body.className = 'room-body' + (open ? ' open' : '');
+
+    // Item rows
+    items.forEach(it => {
       const isMine   = !!myChecked[it];
       const giftedBy = gifts[it] || null;
       const claimed  = !!giftedBy;
-      return `
-        <div class="item-row ${claimed ? 'claimed' : ''}">
-          <input type="checkbox" class="my-checkbox" ${isMine ? 'checked' : ''}
-            onchange="toggleMyCheck(this, ${JSON.stringify(it)})" />
-          <span class="item-label ${isMine ? 'my-done' : ''}">${it}</span>
-          ${claimed
-            ? `<span class="purchased-badge">Claimed by <span class="by">${escHtml(giftedBy)}</span></span>
-               <button class="undo-btn" onclick="undoPurchase(${JSON.stringify(it)})">undo</button>`
-            : `<button class="purchase-btn" onclick="openModal(${JSON.stringify(it)})">I'll get this!</button>`
-          }
-        </div>`;
-    }).join('');
 
-    sec.innerHTML = `
-      <div class="room-header" onclick="toggleRoom(this)">
-        <div class="room-left">
-          <span class="room-icon">${room.icon}</span>
-          <span class="room-name">${room.name}</span>
-          <span class="room-count">${countTxt}</span>
-        </div>
-        <span class="room-chevron ${open ? 'open' : ''}">▼</span>
-      </div>
-      <div class="room-body ${open ? 'open' : ''}">${rowsHtml}</div>`;
+      const row = document.createElement('div');
+      row.className = 'item-row' + (claimed ? ' claimed' : '');
+
+      // Missy checkbox
+      const cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.className = 'my-checkbox';
+      cb.checked = isMine;
+      cb.addEventListener('change', () => toggleMyCheck(cb, it));
+
+      // Item label
+      const label = document.createElement('span');
+      label.className = 'item-label' + (isMine ? ' my-done' : '');
+      label.textContent = it;
+
+      // Claim button or badge
+      if(claimed) {
+        const badge = document.createElement('span');
+        badge.className = 'purchased-badge';
+        badge.innerHTML = `Claimed by <span class="by">${escHtml(giftedBy)}</span>`;
+
+        const undoBtn = document.createElement('button');
+        undoBtn.className = 'undo-btn';
+        undoBtn.textContent = 'undo';
+        // In Missy mode, hide undo on items she checked off herself (use checkbox instead)
+        if(currentView === 'missy' && giftedBy === 'Missy') {
+          undoBtn.style.display = 'none';
+        }
+        undoBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          delete gifts[it];
+          saveGifts();
+          buildRooms(document.querySelector('.search-input').value);
+        });
+
+        row.appendChild(cb);
+        row.appendChild(label);
+        row.appendChild(badge);
+        row.appendChild(undoBtn);
+      } else {
+        const btn = document.createElement('button');
+        btn.className = 'purchase-btn';
+        btn.textContent = "I'll get this!";
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          openModal(it);
+        });
+
+        row.appendChild(cb);
+        row.appendChild(label);
+        row.appendChild(btn);
+      }
+
+      body.appendChild(row);
+    });
+
+    sec.appendChild(header);
+    sec.appendChild(body);
     container.appendChild(sec);
   });
 
@@ -428,16 +448,24 @@ function escHtml(str) {
 function toggleMyCheck(cb, item) {
   myChecked[item] = cb.checked;
   saveMyChecks();
-  cb.nextElementSibling.classList.toggle('my-done', cb.checked);
-  refreshCounts();
-  updateProgress();
+  // Also update gifts so guests see Missy's checked items as claimed
+  if(cb.checked) {
+    gifts[item] = 'Missy';
+  } else {
+    delete gifts[item];
+  }
+  saveGifts();
+  buildRooms(document.querySelector('.search-input').value);
 }
 
 function resetMyChecks() {
   if(!confirm('Reset all your personal checkmarks?')) return;
-  myChecked = {}; saveMyChecks();
+  // Remove any Missy-claimed gifts too
+  Object.keys(myChecked).forEach(item => { delete gifts[item]; });
+  myChecked = {};
+  saveMyChecks();
+  saveGifts();
   buildRooms(document.querySelector('.search-input').value);
-  updateProgress();
 }
 
 // ── Gift modal ───────────────────────────────────────────────
@@ -460,34 +488,18 @@ function confirmPurchase() {
   saveGifts();
   closeModal();
   buildRooms(document.querySelector('.search-input').value);
-  updateProgress();
 }
 
 function undoPurchase(item) {
-  if(!confirm('Remove the claim on "' + item + '"?')) return;
   delete gifts[item];
   saveGifts();
   buildRooms(document.querySelector('.search-input').value);
-  updateProgress();
 }
 
 // ── Helpers ──────────────────────────────────────────────────
 function toggleRoom(header) {
   header.querySelector('.room-chevron').classList.toggle('open');
   header.nextElementSibling.classList.toggle('open');
-}
-
-function refreshCounts() {
-  document.querySelectorAll('.room').forEach(sec => {
-    const rows   = sec.querySelectorAll('.item-row');
-    const total  = rows.length;
-    const myDone = [...sec.querySelectorAll('.my-checkbox:checked')].length;
-    const gifted = [...sec.querySelectorAll('.purchased-badge')].length;
-    const count  = sec.querySelector('.room-count');
-    if(count) count.textContent = currentView === 'missy'
-      ? myDone + '/' + total
-      : gifted + '/' + total + ' claimed';
-  });
 }
 
 document.getElementById('modal').addEventListener('click', function(e) {
@@ -501,9 +513,11 @@ function logout() {
 
 // ── Init ─────────────────────────────────────────────────────
 loadState();
+if(typeof GIFT_NOTE !== 'undefined') {
+  document.getElementById('gift-note').textContent = GIFT_NOTE;
+}
 document.getElementById('reset-btn').style.display = currentView === 'missy' ? 'inline-block' : 'none';
 buildRooms('');
-updateProgress();
 </script>
 </body>
 </html>
