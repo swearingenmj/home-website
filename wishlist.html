@@ -6,13 +6,13 @@
 <title>Wishlist — Missy & Barley</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.383.0/dist/umd/lucide.min.js"></script>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
     --cream: #F7F2EA; --parchment: #EDE5D6; --warm-tan: #C9AA82;
     --bark: #8B6C4A; --earth: #5C4230; --deep: #2E1F12;
     --moss: #7A8C6A; --rust: #A65C3A; --fog: #D4C9B8;
-    --gift-bg: #F0EDE5; --gift-border: #C9AA82; --gift-text: #7A5C38;
   }
   body {
     background-color: var(--cream); color: var(--deep);
@@ -24,8 +24,6 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
     pointer-events: none; z-index: 0;
   }
-
-  /* ── Nav ── */
   nav {
     position: sticky; top: 0; z-index: 100;
     background: rgba(247,242,234,0.88);
@@ -56,22 +54,33 @@
     transition: color 0.2s, background 0.2s;
   }
   .nav-logout:hover { color: var(--bark); background: var(--parchment); }
-
-  /* ── Main layout ── */
+  .loading-bar {
+    height: 2px; background: var(--warm-tan);
+    position: fixed; top: 60px; left: 0; right: 0; z-index: 200;
+    transform-origin: left; display: none;
+    animation: loadingAnim 1.2s ease infinite;
+  }
+  .loading-bar.show { display: block; }
+  @keyframes loadingAnim {
+    0%   { transform: scaleX(0); opacity: 1; }
+    70%  { transform: scaleX(0.85); opacity: 1; }
+    100% { transform: scaleX(1); opacity: 0; }
+  }
   main {
     position: relative; z-index: 1;
-    max-width: 900px; margin: 0 auto;
-    padding: 3rem 2rem 5rem;
+    max-width: 960px; margin: 0 auto;
+    padding: 3rem 2rem 6rem;
     animation: fadeUp 0.5s ease both;
   }
-
-  /* ── Page header ── */
+  .gift-note {
+    background: var(--parchment); border-left: 3px solid var(--warm-tan);
+    border-radius: 0 8px 8px 0; padding: 10px 16px;
+    margin-bottom: 1.75rem;
+    font-size: 0.82rem; color: var(--bark); font-style: italic; line-height: 1.6;
+  }
   .page-header {
-    margin-bottom: 2rem;
-    padding-bottom: 1.5rem;
+    margin-bottom: 2rem; padding-bottom: 1.5rem;
     border-bottom: 1px solid var(--fog);
-    display: flex; align-items: flex-end; justify-content: space-between;
-    flex-wrap: wrap; gap: 1rem;
   }
   .page-header h1 {
     font-family: 'Playfair Display', Georgia, serif;
@@ -79,9 +88,28 @@
     color: var(--earth); margin-bottom: 0.4rem;
   }
   .page-header p { font-size: 0.9rem; color: var(--bark); font-style: italic; }
-
-  /* ── Search row ── */
-  .search-row { display: flex; gap: 0.75rem; margin-bottom: 1.75rem; align-items: center; }
+  .dashboard {
+    display: none;
+    background: var(--parchment); border: 1px solid var(--fog);
+    border-radius: 12px; padding: 1.25rem 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  body.missy-mode .dashboard { display: block; }
+  .dashboard-title {
+    font-family: 'Playfair Display', serif; font-size: 1rem;
+    font-weight: 500; color: var(--earth); margin-bottom: 1rem;
+  }
+  .dashboard-empty { font-size: 0.82rem; color: var(--warm-tan); font-style: italic; }
+  .dashboard-list { list-style: none; }
+  .dashboard-item {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 0.82rem; gap: 1rem;
+    padding: 0.45rem 0; border-bottom: 1px solid var(--fog);
+  }
+  .dashboard-item:last-child { border-bottom: none; }
+  .dashboard-item-name { color: var(--deep); flex: 1; }
+  .dashboard-item-by { color: var(--bark); font-style: italic; white-space: nowrap; }
+  .search-row { display: flex; gap: 0.75rem; margin-bottom: 2.5rem; align-items: center; }
   .search-input {
     flex: 1; padding: 10px 16px;
     border: 1px solid var(--fog); border-radius: 8px;
@@ -97,114 +125,99 @@
     transition: background 0.2s; white-space: nowrap;
   }
   .reset-btn:hover { background: var(--parchment); }
-
-  /* ── Room sections ── */
-  .room {
-    margin-bottom: 1rem; border: 1px solid var(--fog); border-radius: 12px;
-    overflow: hidden; background: #fff; transition: box-shadow 0.2s;
+  .category-section { margin-bottom: 3rem; }
+  .category-heading {
+    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 1.25rem;
   }
-  .room:hover { box-shadow: 0 2px 12px rgba(90,60,30,0.07); }
-  .room-header {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 14px 18px; cursor: pointer;
-    background: var(--parchment); user-select: none; transition: background 0.15s;
-  }
-  .room-header:hover { background: var(--fog); }
-  .room-left { display: flex; align-items: center; gap: 10px; }
-  .room-icon { font-size: 1.1rem; }
-  .room-name { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 500; color: var(--earth); }
-  .room-count { font-size: 0.75rem; color: var(--bark); font-style: italic; font-family: 'Lora', serif; }
-  .room-chevron { font-size: 0.7rem; color: var(--bark); transition: transform 0.25s; }
-  .room-chevron.open { transform: rotate(180deg); }
-  .room-body { display: none; }
-  .room-body.open { display: block; }
-
-  /* ── Item rows ── */
-  .item-row {
+  .category-icon {
+    flex-shrink: 0; color: var(--warm-tan);
     display: flex; align-items: center;
-    padding: 7px 18px; transition: background 0.12s;
-    border-bottom: 1px solid rgba(212,201,184,0.3);
-    gap: 10px;
   }
-  .item-row:last-child { border-bottom: none; }
-  .item-row:hover { background: #FBF8F3; }
-
-  /* Missy's checkbox */
-  .my-checkbox {
+  .category-icon svg { width: 22px; height: 22px; stroke-width: 1.5; }
+  .category-label { display: flex; flex-direction: column; gap: 1px; }
+  .category-room {
+    font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--warm-tan); font-family: 'Lora', serif;
+  }
+  .category-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.3rem; font-weight: 400; color: var(--earth);
+    white-space: nowrap; line-height: 1.1;
+  }
+  .category-line { flex: 1; height: 1px; background: var(--fog); }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  .item-card {
+    background: #fff; border: 1px solid var(--fog);
+    border-radius: 12px; padding: 1.1rem 1.1rem 0.85rem;
+    display: flex; flex-direction: column;
+    transition: box-shadow 0.2s, opacity 0.2s;
+    position: relative;
+  }
+  .item-card:hover { box-shadow: 0 2px 12px rgba(90,60,30,0.08); }
+  .card-checkbox {
+    position: absolute; top: 10px; right: 10px;
     appearance: none; -webkit-appearance: none;
-    width: 16px; height: 16px; flex-shrink: 0;
-    border: 1.5px solid var(--warm-tan); border-radius: 4px;
-    background: #fff; cursor: pointer; position: relative;
+    width: 15px; height: 15px;
+    border: 1.5px solid var(--warm-tan); border-radius: 3px;
+    background: #fff; cursor: pointer; display: none;
     transition: background 0.15s, border-color 0.15s;
   }
-  .my-checkbox:checked { background: var(--bark); border-color: var(--bark); }
-  .my-checkbox:checked::after {
+  body.missy-mode .card-checkbox { display: block; }
+  .card-checkbox:checked { background: var(--bark); border-color: var(--bark); }
+  .card-checkbox:checked::after {
     content: ''; position: absolute;
-    left: 3px; top: 1px; width: 5px; height: 8px;
+    left: 2px; top: 0px; width: 4px; height: 7px;
     border: 2px solid #fff; border-top: none; border-left: none;
     transform: rotate(40deg);
   }
-
-  .item-label {
-    flex: 1; font-size: 0.88rem; color: var(--deep);
-    font-family: 'Lora', serif; transition: color 0.15s;
-    line-height: 1.4;
+  .card-name {
+    font-family: 'Playfair Display', serif; font-size: 0.92rem;
+    font-weight: 400; color: var(--earth); line-height: 1.35;
+    margin-bottom: 0.3rem; padding-right: 1.25rem;
   }
-  .item-label.my-done { text-decoration: line-through; color: var(--warm-tan); }
-
-  /* ── Claimed state ── */
-  .item-row.claimed { opacity: 0.5; }
-  .item-row.claimed .item-label { text-decoration: line-through; color: var(--bark); }
-  /* In Missy mode, her own checked items also get strikethrough via my-done */
-  body.missy-mode .item-row.claimed .item-label { text-decoration: line-through; color: var(--warm-tan); }
-
-  /* Purchased badge */
-  .purchased-badge {
-    display: inline-flex; align-items: center; gap: 5px;
-    background: var(--parchment); border: 1px solid var(--fog);
-    color: var(--bark); border-radius: 6px;
-    font-size: 0.72rem; font-family: 'Lora', serif;
-    padding: 3px 10px; white-space: nowrap; flex-shrink: 0;
-    font-style: italic;
+  .card-note {
+    font-size: 0.75rem; color: var(--warm-tan);
+    font-style: italic; line-height: 1.4; flex: 1;
+    margin-bottom: 0.75rem;
   }
-  .purchased-badge .by {
-    font-weight: 500; font-style: normal;
-    transition: filter 0.2s;
-  }
-  /* Blur the name for guests */
-  body.guest-mode .purchased-badge .by {
-    filter: blur(4px);
-    user-select: none;
-  }
-
-  /* Purchase button */
-  .purchase-btn {
+  .card-claim-btn {
+    align-self: flex-start; margin-top: auto;
     background: none; border: 1px solid var(--fog);
     color: var(--bark); border-radius: 6px;
-    font-size: 0.72rem; font-family: 'Lora', serif;
-    padding: 3px 10px; cursor: pointer; white-space: nowrap; flex-shrink: 0;
+    font-size: 0.7rem; font-family: 'Lora', serif;
+    padding: 3px 10px; cursor: pointer;
     transition: background 0.2s, border-color 0.2s, color 0.2s;
   }
-  .purchase-btn:hover { background: var(--parchment); border-color: var(--warm-tan); color: var(--earth); }
-  body.missy-mode .purchase-btn { display: none; }
-
-  /* Undo button — everyone can undo */
-  .undo-btn {
-    background: none; border: none; cursor: pointer;
-    font-size: 0.68rem; color: var(--warm-tan); font-family: 'Lora', serif;
-    text-decoration: underline; padding: 0 2px; flex-shrink: 0;
-    transition: color 0.15s;
+  .card-claim-btn:hover { background: var(--parchment); border-color: var(--warm-tan); color: var(--earth); }
+  body.missy-mode .card-claim-btn { display: none; }
+  .item-card.claimed { opacity: 0.5; }
+  .item-card.claimed .card-name { text-decoration: line-through; }
+  body.missy-mode .item-card.claimed .card-name { text-decoration: line-through; color: var(--warm-tan); }
+  .item-card.my-done .card-name { text-decoration: line-through; color: var(--warm-tan); }
+  .claimed-badge {
+    display: inline-flex; align-items: center; gap: 3px;
+    background: var(--parchment); border: 1px solid var(--fog);
+    color: var(--bark); border-radius: 6px;
+    font-size: 0.68rem; font-family: 'Lora', serif;
+    padding: 3px 8px; font-style: italic;
+    margin-top: auto; align-self: flex-start;
   }
-  .undo-btn:hover { color: var(--bark); }
-
-  /* Guest mode — hide Missy's checkbox */
-  body.guest-mode .my-checkbox { display: none; }
-  body.guest-mode .item-label.my-done { text-decoration: none; color: var(--deep); }
-  body.guest-mode .item-row.claimed .item-label { text-decoration: line-through !important; color: var(--bark) !important; }
-
+  .claimed-badge .by { font-weight: 500; font-style: normal; }
+  body.guest-mode .claimed-badge .by { filter: blur(4px); user-select: none; }
+  .card-undo-btn {
+    background: none; border: none; cursor: pointer;
+    font-size: 0.65rem; color: var(--warm-tan); font-family: 'Lora', serif;
+    text-decoration: underline; padding: 0; margin-top: 4px;
+    align-self: flex-start; transition: color 0.15s;
+  }
+  .card-undo-btn:hover { color: var(--bark); }
+  body.guest-mode .card-undo-btn { display: none; }
   .no-results { text-align: center; padding: 3rem 1rem; color: var(--warm-tan); font-style: italic; font-size: 0.9rem; }
-
-  /* ── Name modal ── */
   .modal-overlay {
     display: none; position: fixed; inset: 0; z-index: 500;
     background: rgba(46,31,18,0.35); backdrop-filter: blur(4px);
@@ -216,8 +229,7 @@
     border-radius: 16px; padding: 2rem 2rem 1.75rem;
     width: 100%; max-width: 360px;
     box-shadow: 0 8px 40px rgba(46,31,18,0.15);
-    animation: fadeUp 0.25s ease both;
-    text-align: center;
+    animation: fadeUp 0.25s ease both; text-align: center;
   }
   .modal h2 {
     font-family: 'Playfair Display', serif; font-size: 1.3rem;
@@ -225,11 +237,10 @@
   }
   .modal p { font-size: 0.82rem; color: var(--bark); font-style: italic; margin-bottom: 1.25rem; }
   .modal input {
-    width: 100%; padding: 10px 14px;
+    width: 100%; padding: 10px 14px; margin-bottom: 1rem;
     border: 1px solid var(--fog); border-radius: 8px;
     background: #fff; font-family: 'Lora', serif; font-size: 0.9rem;
     color: var(--deep); outline: none; transition: border-color 0.2s;
-    margin-bottom: 1rem;
   }
   .modal input:focus { border-color: var(--warm-tan); }
   .modal input::placeholder { color: var(--warm-tan); font-style: italic; }
@@ -248,30 +259,29 @@
     transition: background 0.2s;
   }
   .modal-cancel:hover { background: var(--parchment); }
-
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(16px); }
     to   { opacity: 1; transform: translateY(0); }
   }
-  @media (max-width: 600px) {
+  @media (max-width: 700px) { .card-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) {
     nav { padding: 0 1rem; }
     main { padding: 2rem 1rem 4rem; }
-    .page-header { flex-direction: column; align-items: flex-start; }
+    .card-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body class="guest-mode">
 <script>
   const auth = sessionStorage.getItem('ms_auth');
-  if(auth !== 'missy' && auth !== 'guest') {
-    window.location.replace('index.html');
-  }
+  if(auth !== 'missy' && auth !== 'guest') window.location.replace('index.html');
 </script>
 
-<!-- Name modal -->
+<div class="loading-bar" id="loading-bar"></div>
+
 <div class="modal-overlay" id="modal">
   <div class="modal">
-    <h2>Mark as purchased</h2>
+    <h2>I'll get this!</h2>
     <p>Let Missy know who got it for her!</p>
     <input type="text" id="modal-name" placeholder="Your name (e.g. Aunt Carol)" maxlength="60"
            onkeydown="if(event.key==='Enter')confirmPurchase()" />
@@ -296,181 +306,247 @@
   <div class="gift-note" id="gift-note"></div>
 
   <div class="page-header">
-    <div>
-      <h1>New Home Wishlist</h1>
-      <p id="header-sub">See something you'd like to gift? Click "I'll get this!" on any item.</p>
-    </div>
+    <h1>The Wishlist</h1>
+    <p id="header-sub">See something you'd like to gift? Click "I'll get this!" on any item.</p>
+  </div>
+
+  <div class="dashboard">
+    <p class="dashboard-title">What's been claimed</p>
+    <div id="dashboard-content"><p class="dashboard-empty">Loading...</p></div>
   </div>
 
   <div class="search-row">
-    <input class="search-input" type="text" placeholder="Search items…" oninput="buildRooms(this.value)" />
+    <input class="search-input" type="text" placeholder="Search items…" oninput="renderAll(this.value)" />
     <button class="reset-btn" id="reset-btn" onclick="resetMyChecks()" style="display:none">Reset my checks</button>
   </div>
 
-  <div id="rooms"></div>
+  <div id="categories"></div>
 </main>
 
 <script src="wishlist-data.js"></script>
 <script>
-const ROOMS = WISHLIST_ROOMS;
+const CATEGORY_NAMES = {
+  'Kitchen':                    { label: 'Feed me',                              room: 'Kitchen',             icon: 'utensils' },
+  'Living Room':                { label: 'Come sit down',                        room: 'Living Room',         icon: 'sofa' },
+  'Bedroom':                    { label: 'Goodniiiight',                         room: 'Bedroom',             icon: 'moon' },
+  'Bathroom':                   { label: 'Spa day (aspirational)',               room: 'Bathroom',            icon: 'bath' },
+  'Home Office / Guest Room':   { label: 'Productive, probably',                 room: 'Home Office',         icon: 'monitor' },
+  'Garage / Storage':           { label: 'I own a home now apparently',          room: 'Garage',              icon: 'wrench' },
+  'Laundry Room / Utility':     { label: 'The unglamorous necessities',          room: 'Laundry Room',        icon: 'washing-machine' },
+  'Outdoor / Yard':             { label: 'Touch grass',                          room: 'Outdoor',             icon: 'tree-deciduous' },
+  'Entryway / Mudroom':         { label: 'Welcome, wipe your feet',              room: 'Entryway',            icon: 'door-open' },
+  'Safety and Emergency':       { label: 'Just in case',                         room: 'Safety',              icon: 'shield' },
+  'Home Maintenance':           { label: 'This is fine',                         room: 'Maintenance',         icon: 'flame' },
+  'For Barley':                 { label: 'My right paw man',                     room: 'For Barley',          icon: 'dog' },
+  'Personal Care':              { label: 'Treat yourself',                       room: 'Personal Care',       icon: 'sparkles' },
+  'Experiences and Gift Cards': { label: 'Memories over things (but also things)', room: 'Experiences',      icon: 'ticket' },
+};
 
-const KEY_MY   = 'missy_my_checks';
-const KEY_GIFT = 'missy_gifts';
+const ROOMS = WISHLIST_ROOMS;
+const BIN_ID  = '69e63b62856a6821895390c3';
+const API_KEY = '$2a$10$fHHmKLoXfkh2yHGzXZD9M.H0JfBXxm.xp8dMPkgiykYNmanYJxIOS';
+const BIN_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+const KEY_MY  = 'missy_my_checks';
 
 let myChecked  = {};
 let gifts      = {};
 let pendingItem = null;
 
-// Detect role automatically from session
 const currentView = sessionStorage.getItem('ms_auth') === 'missy' ? 'missy' : 'guest';
 document.body.className = currentView === 'missy' ? 'missy-mode' : 'guest-mode';
 document.getElementById('header-sub').textContent = currentView === 'missy'
-  ? 'Check off items as you get them, and see what friends have already purchased for you.'
+  ? 'Check off items as you get them, and see what your friends have already claimed.'
   : 'See something you\'d like to gift? Click "I\'ll get this!" on any item.';
 
-function loadState() {
-  try { const s = localStorage.getItem(KEY_MY);   if(s) myChecked = JSON.parse(s); } catch(e){}
-  try { const s = localStorage.getItem(KEY_GIFT); if(s) gifts     = JSON.parse(s); } catch(e){}
+function setLoading(on) {
+  document.getElementById('loading-bar').classList.toggle('show', on);
 }
-function saveMyChecks() { try { localStorage.setItem(KEY_MY,   JSON.stringify(myChecked));  } catch(e){} }
-function saveGifts()    { try { localStorage.setItem(KEY_GIFT, JSON.stringify(gifts));      } catch(e){} }
 
+async function fetchGifts() {
+  setLoading(true);
+  try {
+    const res = await fetch(BIN_URL + '/latest', { headers: { 'X-Access-Key': API_KEY } });
+    const data = await res.json();
+    gifts = data.record.gifts || {};
+  } catch(e) { gifts = {}; }
+  setLoading(false);
+}
 
-// ── Build room list ──────────────────────────────────────────
-function buildRooms(filter) {
-  const container = document.getElementById('rooms');
+async function pushGifts() {
+  setLoading(true);
+  try {
+    await fetch(BIN_URL, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', 'X-Access-Key': API_KEY },
+      body: JSON.stringify({ gifts })
+    });
+  } catch(e) { console.error('Failed to save:', e); }
+  setLoading(false);
+}
+
+function loadMyChecks() {
+  try { const s = localStorage.getItem(KEY_MY); if(s) myChecked = JSON.parse(s); } catch(e){}
+}
+function saveMyChecks() {
+  try { localStorage.setItem(KEY_MY, JSON.stringify(myChecked)); } catch(e){}
+}
+
+function renderDashboard() {
+  const el = document.getElementById('dashboard-content');
+  const claimed = Object.entries(gifts);
+  if(!claimed.length) {
+    el.innerHTML = '<p class="dashboard-empty">Nothing claimed yet.</p>';
+    return;
+  }
+  const ul = document.createElement('ul');
+  ul.className = 'dashboard-list';
+  claimed.forEach(([item, by]) => {
+    const li = document.createElement('li');
+    li.className = 'dashboard-item';
+    li.innerHTML = `<span class="dashboard-item-name">${escHtml(item)}</span>
+                    <span class="dashboard-item-by">${escHtml(by)}</span>`;
+    ul.appendChild(li);
+  });
+  el.innerHTML = '';
+  el.appendChild(ul);
+}
+
+function renderAll(filter) {
+  const container = document.getElementById('categories');
   container.innerHTML = '';
-  const q = (filter||'').toLowerCase().trim();
+  const q = (filter || '').toLowerCase().trim();
   let any = false;
 
-  ROOMS.forEach((room, ri) => {
+  ROOMS.forEach(room => {
     const items = q ? room.items.filter(it => it.toLowerCase().includes(q)) : room.items;
     if(!items.length) return;
     any = true;
 
-    const open = q || ri === 0;
+    const cat = CATEGORY_NAMES[room.name] || { label: room.name, room: room.name, icon: 'circle' };
+    const section = document.createElement('div');
+    section.className = 'category-section';
 
-    // Build room container
-    const sec = document.createElement('div');
-    sec.className = 'room';
+    const heading = document.createElement('div');
+    heading.className = 'category-heading';
 
-    // Room header
-    const header = document.createElement('div');
-    header.className = 'room-header';
-    header.innerHTML = `
-      <div class="room-left">
-        <span class="room-icon">${room.icon}</span>
-        <span class="room-name">${room.name}</span>
-      </div>
-      <span class="room-chevron ${open ? 'open' : ''}">&#9660;</span>`;
-    header.addEventListener('click', () => {
-      header.querySelector('.room-chevron').classList.toggle('open');
-      body.classList.toggle('open');
-    });
+    // Icon
+    const iconWrap = document.createElement('div');
+    iconWrap.className = 'category-icon';
+    iconWrap.innerHTML = `<i data-lucide="${cat.icon}"></i>`;
 
-    // Room body
-    const body = document.createElement('div');
-    body.className = 'room-body' + (open ? ' open' : '');
+    // Two-line label
+    const labelWrap = document.createElement('div');
+    labelWrap.className = 'category-label';
+    const roomLabel = document.createElement('span');
+    roomLabel.className = 'category-room';
+    roomLabel.textContent = cat.room;
+    const title = document.createElement('h2');
+    title.className = 'category-title';
+    title.textContent = cat.label;
+    labelWrap.appendChild(roomLabel);
+    labelWrap.appendChild(title);
 
-    // Item rows
+    const line = document.createElement('div');
+    line.className = 'category-line';
+
+    heading.appendChild(iconWrap);
+    heading.appendChild(labelWrap);
+    heading.appendChild(line);
+
+    const grid = document.createElement('div');
+    grid.className = 'card-grid';
+
     items.forEach(it => {
+      const note     = (room.notes && room.notes[it]) || '';
       const isMine   = !!myChecked[it];
       const giftedBy = gifts[it] || null;
       const claimed  = !!giftedBy;
 
-      const row = document.createElement('div');
-      row.className = 'item-row' + (claimed ? ' claimed' : '');
+      const card = document.createElement('div');
+      card.className = 'item-card' + (claimed ? ' claimed' : '') + (isMine ? ' my-done' : '');
 
-      // Missy checkbox
       const cb = document.createElement('input');
       cb.type = 'checkbox';
-      cb.className = 'my-checkbox';
+      cb.className = 'card-checkbox';
       cb.checked = isMine;
       cb.addEventListener('change', () => toggleMyCheck(cb, it));
 
-      // Item label
-      const label = document.createElement('span');
-      label.className = 'item-label' + (isMine ? ' my-done' : '');
-      label.textContent = it;
+      const name = document.createElement('p');
+      name.className = 'card-name';
+      name.textContent = it;
 
-      // Claim button or badge
-      if(claimed) {
-        const badge = document.createElement('span');
-        badge.className = 'purchased-badge';
-        badge.innerHTML = `Claimed by <span class="by">${escHtml(giftedBy)}</span>`;
+      card.appendChild(cb);
+      card.appendChild(name);
 
-        const undoBtn = document.createElement('button');
-        undoBtn.className = 'undo-btn';
-        undoBtn.textContent = 'undo';
-        // In Missy mode, hide undo on items she checked off herself (use checkbox instead)
-        if(currentView === 'missy' && giftedBy === 'Missy') {
-          undoBtn.style.display = 'none';
-        }
-        undoBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          delete gifts[it];
-          saveGifts();
-          buildRooms(document.querySelector('.search-input').value);
-        });
-
-        row.appendChild(cb);
-        row.appendChild(label);
-        row.appendChild(badge);
-        row.appendChild(undoBtn);
-      } else {
-        const btn = document.createElement('button');
-        btn.className = 'purchase-btn';
-        btn.textContent = "I'll get this!";
-        btn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          openModal(it);
-        });
-
-        row.appendChild(cb);
-        row.appendChild(label);
-        row.appendChild(btn);
+      if(note) {
+        const noteEl = document.createElement('p');
+        noteEl.className = 'card-note';
+        noteEl.textContent = note;
+        card.appendChild(noteEl);
       }
 
-      body.appendChild(row);
+      if(claimed) {
+        const badge = document.createElement('span');
+        badge.className = 'claimed-badge';
+        badge.innerHTML = `Claimed by <span class="by">${escHtml(giftedBy)}</span>`;
+        card.appendChild(badge);
+
+        const undo = document.createElement('button');
+        undo.className = 'card-undo-btn';
+        undo.textContent = 'undo';
+        if(currentView === 'missy' && giftedBy === 'Missy') undo.style.display = 'none';
+        undo.addEventListener('click', async () => {
+          delete gifts[it];
+          await pushGifts();
+          renderAll(document.querySelector('.search-input').value);
+          renderDashboard();
+        });
+        card.appendChild(undo);
+      } else {
+        const btn = document.createElement('button');
+        btn.className = 'card-claim-btn';
+        btn.textContent = "I'll get this!";
+        btn.addEventListener('click', () => openModal(it));
+        card.appendChild(btn);
+      }
+
+      grid.appendChild(card);
     });
 
-    sec.appendChild(header);
-    sec.appendChild(body);
-    container.appendChild(sec);
+    section.appendChild(heading);
+    section.appendChild(grid);
+    container.appendChild(section);
   });
 
-  if(!any) container.innerHTML = '<div class="no-results">No items match your search.</div>';
+  if(!any) container.innerHTML = '<p class="no-results">No items match your search.</p>';
+
+  // Render Lucide icons after DOM is populated
+  if(typeof lucide !== 'undefined') lucide.createIcons();
 }
 
 function escHtml(str) {
   return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-// ── Missy checkbox ───────────────────────────────────────────
-function toggleMyCheck(cb, item) {
+async function toggleMyCheck(cb, item) {
   myChecked[item] = cb.checked;
   saveMyChecks();
-  // Also update gifts so guests see Missy's checked items as claimed
-  if(cb.checked) {
-    gifts[item] = 'Missy';
-  } else {
-    delete gifts[item];
-  }
-  saveGifts();
-  buildRooms(document.querySelector('.search-input').value);
+  if(cb.checked) { gifts[item] = 'Missy'; } else { delete gifts[item]; }
+  await pushGifts();
+  renderAll(document.querySelector('.search-input').value);
+  renderDashboard();
 }
 
-function resetMyChecks() {
+async function resetMyChecks() {
   if(!confirm('Reset all your personal checkmarks?')) return;
-  // Remove any Missy-claimed gifts too
   Object.keys(myChecked).forEach(item => { delete gifts[item]; });
   myChecked = {};
   saveMyChecks();
-  saveGifts();
-  buildRooms(document.querySelector('.search-input').value);
+  await pushGifts();
+  renderAll(document.querySelector('.search-input').value);
+  renderDashboard();
 }
 
-// ── Gift modal ───────────────────────────────────────────────
 function openModal(item) {
   pendingItem = item;
   document.getElementById('modal-name').value = '';
@@ -483,25 +559,14 @@ function closeModal() {
   document.getElementById('modal').classList.remove('open');
 }
 
-function confirmPurchase() {
+async function confirmPurchase() {
   const name = document.getElementById('modal-name').value.trim();
   if(!name) { document.getElementById('modal-name').focus(); return; }
   gifts[pendingItem] = name;
-  saveGifts();
+  await pushGifts();
   closeModal();
-  buildRooms(document.querySelector('.search-input').value);
-}
-
-function undoPurchase(item) {
-  delete gifts[item];
-  saveGifts();
-  buildRooms(document.querySelector('.search-input').value);
-}
-
-// ── Helpers ──────────────────────────────────────────────────
-function toggleRoom(header) {
-  header.querySelector('.room-chevron').classList.toggle('open');
-  header.nextElementSibling.classList.toggle('open');
+  renderAll(document.querySelector('.search-input').value);
+  renderDashboard();
 }
 
 document.getElementById('modal').addEventListener('click', function(e) {
@@ -513,13 +578,12 @@ function logout() {
   window.location.replace('index.html');
 }
 
-// ── Init ─────────────────────────────────────────────────────
-loadState();
+loadMyChecks();
 if(typeof GIFT_NOTE !== 'undefined') {
   document.getElementById('gift-note').textContent = GIFT_NOTE;
 }
 document.getElementById('reset-btn').style.display = currentView === 'missy' ? 'inline-block' : 'none';
-buildRooms('');
+fetchGifts().then(() => { renderAll(''); renderDashboard(); });
 </script>
 </body>
 </html>
