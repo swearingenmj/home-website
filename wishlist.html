@@ -175,6 +175,16 @@
     border: 2px solid #fff; border-top: none; border-left: none;
     transform: rotate(40deg);
   }
+  /* ── Card icon ── */
+  .card-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: var(--parchment);
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 0.75rem; flex-shrink: 0;
+    color: var(--bark);
+  }
+  .card-icon svg { width: 18px; height: 18px; stroke-width: 1.5; }
+
   .card-name {
     font-family: 'Playfair Display', serif; font-size: 0.92rem;
     font-weight: 400; color: var(--earth); line-height: 1.35;
@@ -328,7 +338,7 @@
 const CATEGORY_NAMES = {
   'Kitchen':                    { label: 'Feed me',                              room: 'Kitchen',             icon: 'utensils' },
   'Living Room':                { label: 'Come sit down',                        room: 'Living Room',         icon: 'sofa' },
-  'Bedroom':                    { label: 'Goodniiiight',                         room: 'Bedroom',             icon: 'moon' },
+  'Bedroom':                    { label: 'Do not disturb',                       room: 'Bedroom',             icon: 'moon' },
   'Bathroom':                   { label: 'Spa day (aspirational)',               room: 'Bathroom',            icon: 'bath' },
   'Home Office / Guest Room':   { label: 'Productive, probably',                 room: 'Home Office',         icon: 'monitor' },
   'Garage / Storage':           { label: 'I own a home now apparently',          room: 'Garage',              icon: 'wrench' },
@@ -337,7 +347,7 @@ const CATEGORY_NAMES = {
   'Entryway / Mudroom':         { label: 'Welcome, wipe your feet',              room: 'Entryway',            icon: 'door-open' },
   'Safety and Emergency':       { label: 'Just in case',                         room: 'Safety',              icon: 'shield' },
   'Home Maintenance':           { label: 'This is fine',                         room: 'Maintenance',         icon: 'flame' },
-  'For Barley':                 { label: 'My right paw man',                     room: 'For Barley',          icon: 'dog' },
+  'For Barley':                 { label: 'The real owner of this house',         room: 'For Barley',          icon: 'dog' },
   'Personal Care':              { label: 'Treat yourself',                       room: 'Personal Care',       icon: 'sparkles' },
   'Experiences and Gift Cards': { label: 'Memories over things (but also things)', room: 'Experiences',      icon: 'ticket' },
 };
@@ -380,6 +390,7 @@ async function pushGifts() {
       headers: { 'Content-Type': 'application/json', 'X-Access-Key': API_KEY },
       body: JSON.stringify({ gifts })
     });
+    try { localStorage.setItem('ms_gifts_cache', JSON.stringify(gifts)); } catch(e) {}
   } catch(e) { console.error('Failed to save:', e); }
   setLoading(false);
 }
@@ -416,9 +427,15 @@ function renderAll(filter) {
   container.innerHTML = '';
   const q = (filter || '').toLowerCase().trim();
   let any = false;
+  console.log('[renderAll] called, ROOMS length:', ROOMS?.length, 'filter:', q || '(none)');
 
   ROOMS.forEach(room => {
-    const items = q ? room.items.filter(it => it.toLowerCase().includes(q)) : room.items;
+    const items = q
+      ? room.items.filter(it => {
+          const n = typeof it === 'object' ? it.name : it;
+          return n.toLowerCase().includes(q);
+        })
+      : room.items;
     if(!items.length) return;
     any = true;
 
@@ -457,25 +474,46 @@ function renderAll(filter) {
     grid.className = 'card-grid';
 
     items.forEach(it => {
-      const note     = (room.notes && room.notes[it]) || '';
-      const isMine   = !!myChecked[it];
-      const giftedBy = gifts[it] || null;
+      const itemName = typeof it === 'object' ? it.name : it;
+      const itemIcon = typeof it === 'object' ? (it.icon || 'circle') : 'circle';
+      const itemUrl  = typeof it === 'object' ? it.url  : '';
+
+      const note     = (room.notes && room.notes[itemName]) || '';
+      const isMine   = !!myChecked[itemName];
+      const giftedBy = gifts[itemName] || null;
       const claimed  = !!giftedBy;
 
       const card = document.createElement('div');
       card.className = 'item-card' + (claimed ? ' claimed' : '') + (isMine ? ' my-done' : '');
 
+      // Icon
+      const iconWrap = document.createElement('div');
+      iconWrap.className = 'card-icon';
+      iconWrap.innerHTML = `<i data-lucide="${itemIcon}"></i>`;
+      card.appendChild(iconWrap);
+
+      // Missy checkbox
       const cb = document.createElement('input');
       cb.type = 'checkbox';
       cb.className = 'card-checkbox';
       cb.checked = isMine;
-      cb.addEventListener('change', () => toggleMyCheck(cb, it));
+      cb.addEventListener('change', () => toggleMyCheck(cb, itemName));
+      card.appendChild(cb);
 
+      // Name — link if URL present
       const name = document.createElement('p');
       name.className = 'card-name';
-      name.textContent = it;
-
-      card.appendChild(cb);
+      if(itemUrl) {
+        const link = document.createElement('a');
+        link.href = itemUrl;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.textContent = itemName;
+        link.style.cssText = 'color:inherit;text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--fog);';
+        name.appendChild(link);
+      } else {
+        name.textContent = itemName;
+      }
       card.appendChild(name);
 
       if(note) {
@@ -496,7 +534,7 @@ function renderAll(filter) {
         undo.textContent = 'undo';
         if(currentView === 'missy' && giftedBy === 'Missy') undo.style.display = 'none';
         undo.addEventListener('click', async () => {
-          delete gifts[it];
+          delete gifts[itemName];
           await pushGifts();
           renderAll(document.querySelector('.search-input').value);
           renderDashboard();
@@ -506,7 +544,7 @@ function renderAll(filter) {
         const btn = document.createElement('button');
         btn.className = 'card-claim-btn';
         btn.textContent = "I'll get this!";
-        btn.addEventListener('click', () => openModal(it));
+        btn.addEventListener('click', () => openModal(itemName));
         card.appendChild(btn);
       }
 
@@ -522,6 +560,8 @@ function renderAll(filter) {
 
   // Render Lucide icons after DOM is populated
   if(typeof lucide !== 'undefined') lucide.createIcons();
+  else console.warn('[renderAll] lucide not loaded yet');
+  console.log('[renderAll] complete, any sections rendered:', any);
 }
 
 function escHtml(str) {
@@ -579,11 +619,32 @@ function logout() {
 }
 
 loadMyChecks();
+console.log('[init] myChecked loaded:', Object.keys(myChecked).length, 'items');
+console.log('[init] ROOMS available:', typeof WISHLIST_ROOMS, Array.isArray(WISHLIST_ROOMS) ? WISHLIST_ROOMS.length + ' rooms' : 'NOT AN ARRAY');
+console.log('[init] ROOMS sample:', ROOMS?.[0]?.name, '— items:', ROOMS?.[0]?.items?.length);
+
 if(typeof GIFT_NOTE !== 'undefined') {
   document.getElementById('gift-note').textContent = GIFT_NOTE;
 }
 document.getElementById('reset-btn').style.display = currentView === 'missy' ? 'inline-block' : 'none';
-fetchGifts().then(() => { renderAll(''); renderDashboard(); });
+
+// ── Stale-while-revalidate init ───────────────────────────────
+const cachedGifts = localStorage.getItem('ms_gifts_cache');
+if(cachedGifts) {
+  try { gifts = JSON.parse(cachedGifts); console.log('[init] cached gifts loaded:', Object.keys(gifts).length); } catch(e) { gifts = {}; }
+}
+console.log('[init] calling renderAll...');
+renderAll('');
+console.log('[init] renderAll done, calling renderDashboard...');
+renderDashboard();
+console.log('[init] initial render complete. Fetching JSONBin in background...');
+
+fetchGifts().then(() => {
+  console.log('[jsonbin] fetch complete, gifts:', Object.keys(gifts).length);
+  try { localStorage.setItem('ms_gifts_cache', JSON.stringify(gifts)); } catch(e) {}
+  renderAll('');
+  renderDashboard();
+}).catch(e => console.error('[jsonbin] fetch failed:', e));
 </script>
 </body>
 </html>
