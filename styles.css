@@ -31,3 +31,50 @@ h1 {
   0%, 100% { opacity:1; }
   50% { opacity: 0; }
 }
+
+#scene a {
+  cursor: grabbing;
+}
+
+.menu {
+  margin-top: 2rem;
+  text-align: left;
+}
+
+.menu-item {
+  display: flex;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 2px solid #333;
+  align-items: center;
+}
+
+.cursor {
+  color: #c8a86b;
+}
+
+.item-name {
+  flex: 1;
+  font-size: 0.6rem;
+}
+
+.item-stars {
+  color: #c8a86b;
+  font-size: 0.6rem;
+}
+
+#search {
+  background: black;
+  border: 2px solid white;
+  color: white;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.5rem;
+  padding: 0.75rem;
+  width: 100%;
+  margin-top: 1.5rem;
+  outline: none;
+}
+
+#search::placeholder {
+  color: #555;
+}

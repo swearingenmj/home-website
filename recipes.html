@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipes — Missy & Barley</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <div class="box">
+        <h1>Recipes</h1>
+
+        <input type="text" id="search" placeholder="SEARCH RECIPES..." />
+
+        <div class="menu" id="menu">
+            <div class="menu-item">
+                <span class="cursor">&#9658;</span>
+                <span class="item-name">Banana Bread</span>
+                <span class="item-stars">★★☆</span>
+            </div>
+            <div class="menu-item">
+                <span class="cursor">&#9658;</span>
+                <span class="item-name">Roasted Chicken</span>
+                <span class="item-stars">★★★</span>
+            </div>
+            <div class="menu-item">
+                <span class="cursor">&#9658;</span>
+                <span class="item-name">Chocolate Cake</span>
+                <span class="item-stars">★☆☆</span>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.getElementById('search').addEventListener('input', function () {
+            const query = this.value.toLowerCase();
+            const items = document.querySelectorAll('.menu-item');
+
+            items.forEach(function (item) {
+                const name = item.querySelector('.item-name').textContent.toLowerCase();
+                if (name.includes(query)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
