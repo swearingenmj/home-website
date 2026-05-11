@@ -1,0 +1,147 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- ── SKY ── -->
+  <rect x="0" y="0" width="800" height="500" fill="#0d1b2a"/>
+
+  <!-- sunset glow -->
+  <rect x="0" y="300" width="800" height="20" fill="#E8956D" opacity="0.3"/>
+  <rect x="0" y="310" width="800" height="15" fill="#E8A0A0" opacity="0.2"/>
+
+  <!-- stars -->
+  <rect x="20"  y="15"  width="3" height="3" fill="white"   class="star"      style="animation-delay:0s"/>
+  <rect x="60"  y="35"  width="2" height="2" fill="#E8C97A" class="star"      style="animation-delay:0.7s"/>
+  <rect x="110" y="10"  width="3" height="3" fill="white"   class="star-slow" style="animation-delay:1.3s"/>
+  <rect x="170" y="28"  width="2" height="2" fill="#E8A0A0" class="star"      style="animation-delay:0.4s"/>
+  <rect x="220" y="8"   width="3" height="3" fill="white"   class="star-slow" style="animation-delay:1.8s"/>
+  <rect x="280" y="22"  width="2" height="2" fill="#E8C97A" class="star"      style="animation-delay:0.9s"/>
+  <rect x="340" y="14"  width="3" height="3" fill="white"   class="star"      style="animation-delay:1.1s"/>
+  <rect x="400" y="30"  width="2" height="2" fill="#E8A0A0" class="star-slow" style="animation-delay:0.3s"/>
+  <rect x="460" y="10"  width="3" height="3" fill="white"   class="star"      style="animation-delay:1.6s"/>
+  <rect x="520" y="24"  width="2" height="2" fill="#E8C97A" class="star"      style="animation-delay:0.5s"/>
+  <rect x="580" y="16"  width="3" height="3" fill="white"   class="star-slow" style="animation-delay:1.2s"/>
+  <rect x="640" y="32"  width="2" height="2" fill="#E8A0A0" class="star"      style="animation-delay:0.8s"/>
+  <rect x="700" y="12"  width="3" height="3" fill="white"   class="star"      style="animation-delay:1.4s"/>
+  <rect x="760" y="28"  width="2" height="2" fill="#E8C97A" class="star-slow" style="animation-delay:0.2s"/>
+  <rect x="45"  y="55"  width="2" height="2" fill="white"   class="star"      style="animation-delay:1.0s"/>
+  <rect x="145" y="50"  width="2" height="2" fill="white"   class="star-slow" style="animation-delay:0.6s"/>
+  <rect x="260" y="48"  width="2" height="2" fill="#E8C97A" class="star"      style="animation-delay:1.7s"/>
+  <rect x="490" y="52"  width="2" height="2" fill="white"   class="star-slow" style="animation-delay:0.1s"/>
+  <rect x="620" y="46"  width="2" height="2" fill="#E8A0A0" class="star"      style="animation-delay:1.5s"/>
+  <rect x="740" y="54"  width="2" height="2" fill="white"   class="star-slow" style="animation-delay:0.4s"/>
+
+  <!-- ── GROUND ── -->
+  <rect x="0"   y="360" width="800" height="140" fill="#1a3a1a"/>
+  <rect x="0"   y="360" width="800" height="6"   fill="#2a5a2a"/>
+
+  <!-- ── MAIN ROAD ── -->
+  <rect x="0"   y="410" width="800" height="90"  fill="#2a2a2a"/>
+  <rect x="0"   y="410" width="800" height="4"   fill="#3a3a3a"/>
+  <rect x="40"  y="450" width="50" height="5" fill="#E8C97A" opacity="0.5"/>
+  <rect x="160" y="450" width="50" height="5" fill="#E8C97A" opacity="0.5"/>
+  <rect x="280" y="450" width="50" height="5" fill="#E8C97A" opacity="0.5"/>
+  <rect x="400" y="450" width="50" height="5" fill="#E8C97A" opacity="0.5"/>
+  <rect x="520" y="450" width="50" height="5" fill="#E8C97A" opacity="0.5"/>
+  <rect x="640" y="450" width="50" height="5" fill="#E8C97A" opacity="0.5"/>
+
+  <!-- ── DRIVEWAY ── -->
+  <rect x="330" y="360" width="100" height="90" fill="#555"/>
+  <rect x="330" y="360" width="3"   height="90" fill="#666"/>
+  <rect x="427" y="360" width="3"   height="90" fill="#666"/>
+
+  <!-- ── NEIGHBOR HOUSE LEFT ── -->
+  <rect x="20"  y="250" width="130" height="115" fill="white" opacity="0.9"/>
+  <polygon points="5,250 85,180 175,250" fill="#E8956D" opacity="0.9"/>
+  <rect x="34"  y="268" width="30" height="26"  fill="#7AB8D4" opacity="0.7"/>
+  <rect x="34"  y="278" width="30" height="4"   fill="white" opacity="0.5"/>
+  <rect x="46"  y="268" width="4"  height="26"  fill="white" opacity="0.5"/>
+  <rect x="90"  y="268" width="30" height="26"  fill="#7AB8D4" opacity="0.7"/>
+  <rect x="90"  y="278" width="30" height="4"   fill="white" opacity="0.5"/>
+  <rect x="102" y="268" width="4"  height="26"  fill="white" opacity="0.5"/>
+  <rect x="62"  y="308" width="28" height="36"  fill="#8B6C4A"/>
+  <rect x="168" y="300" width="8"  height="65"  fill="#3d2a10"/>
+  <rect x="158" y="256" width="28" height="48"  fill="#2a5a2a"/>
+  <rect x="162" y="236" width="20" height="28"  fill="#3a7a3a"/>
+
+  <!-- ── YOUR HOUSE (center) ── -->
+  <rect x="280" y="210" width="240" height="155" fill="white"/>
+  <polygon points="258,210 400,108 522,210" fill="#9D74A1"/>
+  <rect x="450" y="128" width="20" height="50"  fill="#7a5a8a"/>
+  <rect x="298" y="228" width="40" height="36"  fill="#7AB8D4"/>
+  <rect x="298" y="244" width="40" height="4"   fill="white"/>
+  <rect x="315" y="228" width="4"  height="36"  fill="white"/>
+  <rect x="462" y="228" width="40" height="36"  fill="#7AB8D4"/>
+  <rect x="462" y="244" width="40" height="4"   fill="white"/>
+  <rect x="479" y="228" width="4"  height="36"  fill="white"/>
+  <rect x="360" y="264" width="60" height="74"  fill="#cc0000"/>
+  <rect x="370" y="272" width="20" height="16"  fill="#dd2222"/>
+  <rect x="396" y="272" width="20" height="16"  fill="#dd2222"/>
+  <!-- right garage -->
+  <rect x="522" y="268" width="90" height="100" fill="#e0ddd8"/>
+  <polygon points="512,268 567,216 622,268" fill="#7a5a8a"/>
+  <rect x="530" y="292" width="74" height="64"  fill="#c8c5c0"/>
+  <rect x="530" y="304" width="74" height="4"   fill="#aaa"/>
+  <rect x="530" y="316" width="74" height="4"   fill="#aaa"/>
+  <rect x="530" y="328" width="74" height="4"   fill="#aaa"/>
+  <!-- house left trees -->
+  <rect x="254" y="285" width="10" height="80"  fill="#3d2a10"/>
+  <rect x="242" y="234" width="34" height="58"  fill="#2a5a2a"/>
+  <rect x="246" y="210" width="26" height="30"  fill="#3a7a3a"/>
+
+  <!-- ── RIGHT SIDE TREES (replacing neighbor house) ── -->
+  <!-- large tree 1 -->
+  <rect x="640" y="270" width="14" height="95"  fill="#3d2a10"/>
+  <rect x="618" y="196" width="58" height="80"  fill="#1a4a1a"/>
+  <rect x="624" y="168" width="46" height="36"  fill="#2a5a2a"/>
+  <rect x="630" y="146" width="34" height="28"  fill="#3a7a3a"/>
+  <rect x="636" y="128" width="22" height="24"  fill="#2a5a2a"/>
+
+  <!-- large tree 2 -->
+  <rect x="710" y="285" width="12" height="80"  fill="#3d2a10"/>
+  <rect x="692" y="214" width="48" height="74"  fill="#2a5a2a"/>
+  <rect x="698" y="190" width="36" height="30"  fill="#1a4a1a"/>
+  <rect x="703" y="170" width="26" height="26"  fill="#3a7a3a"/>
+  <rect x="707" y="152" width="18" height="22"  fill="#2a5a2a"/>
+
+  <!-- large tree 3 (behind) -->
+  <rect x="760" y="295" width="10" height="70"  fill="#3d2a10"/>
+  <rect x="746" y="228" width="38" height="70"  fill="#1a4a1a"/>
+  <rect x="750" y="208" width="30" height="26"  fill="#2a5a2a"/>
+  <rect x="754" y="190" width="22" height="22"  fill="#3a7a3a"/>
+
+  <!-- smaller foreground bush/shrub -->
+  <rect x="620" y="320" width="60" height="44"  fill="#2a5a2a"/>
+  <rect x="626" y="308" width="48" height="18"  fill="#3a7a3a"/>
+  <rect x="700" y="328" width="50" height="36"  fill="#1a4a1a"/>
+  <rect x="706" y="316" width="38" height="18"  fill="#2a5a2a"/>
+
+  <!-- ── FISH MAILBOX ── -->
+  <rect x="416" y="346" width="6"  height="30"  fill="#888"/>
+  <polygon points="436,344 450,336 450,356 436,350" fill="#5a90b4">
+    <animateTransform attributeName="transform" type="rotate"
+      values="-12 436 347; 12 436 347; -12 436 347"
+      dur="1.2s" repeatCount="indefinite" additive="sum"/>
+  </polygon>
+  <rect x="396" y="340" width="42" height="18"  fill="#7AB8D4"/>
+  <rect x="400" y="344" width="5"  height="5"   fill="#0d1b2a"/>
+  <rect x="401" y="345" width="2"  height="2"   fill="white"/>
+  <rect x="394" y="346" width="5"  height="4"   fill="#0d1b2a"/>
+  <rect x="410" y="342" width="6"  height="5"   fill="#5a90b4"/>
+  <rect x="420" y="342" width="6"  height="5"   fill="#5a90b4"/>
+
+  <!-- ── PARKED CAR ── -->
+  <rect x="100" y="368" width="100" height="38" fill="#E8956D" opacity="0.9"/>
+  <rect x="118" y="352" width="64"  height="20" fill="#d07840" opacity="0.9"/>
+  <rect x="108" y="398" width="20"  height="10" fill="#222"/>
+  <rect x="172" y="398" width="20"  height="10" fill="#222"/>
+  <rect x="120" y="354" width="26"  height="16" fill="#7AB8D4" opacity="0.5"/>
+  <rect x="150" y="354" width="26"  height="16" fill="#7AB8D4" opacity="0.5"/>
+  <rect x="196" y="376" width="6"   height="8"  fill="#E8C97A" opacity="0.8"/>
+  <rect x="100" y="376" width="6"   height="8"  fill="#cc0000" opacity="0.8"/>
+
+  <!-- ── BACK ARROW ── -->
+  <a onclick="goTo('exterior')" style="cursor:pointer">
+    <rect x="16" y="450" width="44" height="36" fill="#0d1b2a" opacity="0.7" rx="4"/>
+    <text x="38" y="473" text-anchor="middle" font-family="monospace" font-size="18" fill="#E8C97A">&#8592;</text>
+  </a>
+
+</svg>

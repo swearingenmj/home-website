@@ -1,0 +1,171 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- ── FLOOR ── -->
+  <rect x="0" y="380" width="800" height="120" fill="#888"/>
+  <rect x="0"   y="390" width="800" height="2" fill="#777" opacity="0.4"/>
+  <rect x="0"   y="420" width="800" height="2" fill="#777" opacity="0.4"/>
+  <rect x="0"   y="450" width="800" height="2" fill="#777" opacity="0.4"/>
+  <rect x="200" y="380" width="2" height="120" fill="#777" opacity="0.3"/>
+  <rect x="400" y="380" width="2" height="120" fill="#777" opacity="0.3"/>
+  <rect x="600" y="380" width="2" height="120" fill="#777" opacity="0.3"/>
+
+  <!-- ── BACK WALL ── -->
+  <rect x="0" y="100" width="800" height="280" fill="#c8c5c0"/>
+
+  <!-- ── CEILING ── -->
+  <rect x="0" y="0" width="800" height="100" fill="#b8b5b0"/>
+  <rect x="0"   y="80" width="800" height="10" fill="#a8a5a0"/>
+  <rect x="100" y="0"  width="10" height="90" fill="#a8a5a0" opacity="0.5"/>
+  <rect x="250" y="0"  width="10" height="90" fill="#a8a5a0" opacity="0.5"/>
+  <rect x="400" y="0"  width="10" height="90" fill="#a8a5a0" opacity="0.5"/>
+  <rect x="550" y="0"  width="10" height="90" fill="#a8a5a0" opacity="0.5"/>
+  <rect x="700" y="0"  width="10" height="90" fill="#a8a5a0" opacity="0.5"/>
+
+  <!-- ── WINDOW (large, open view) ── -->
+  <!-- window frame outer -->
+  <rect x="290" y="110" width="220" height="160" fill="#5a90b4"/>
+  <!-- sky outside -->
+  <rect x="298" y="118" width="204" height="80" fill="#0d1b2a"/>
+  <!-- sunset glow on horizon -->
+  <rect x="298" y="178" width="204" height="14" fill="#E8956D" opacity="0.4"/>
+  <rect x="298" y="186" width="204" height="10" fill="#E8A0A0" opacity="0.3"/>
+  <!-- ground outside -->
+  <rect x="298" y="192" width="204" height="72" fill="#1a3a1a"/>
+  <rect x="298" y="192" width="204" height="5"  fill="#2a5a2a"/>
+  <!-- outside trees -->
+  <rect x="302" y="148" width="8"  height="50" fill="#3d2a10"/>
+  <rect x="294" y="118" width="26" height="38" fill="#2a5a2a"/>
+  <rect x="298" y="108" width="18" height="16" fill="#3a7a3a"/>
+  <rect x="322" y="154" width="6"  height="44" fill="#3d2a10"/>
+  <rect x="316" y="128" width="20" height="32" fill="#1a4a1a"/>
+  <rect x="319" y="118" width="14" height="16" fill="#2a5a2a"/>
+  <rect x="360" y="150" width="8"  height="48" fill="#3d2a10"/>
+  <rect x="352" y="122" width="26" height="36" fill="#2a5a2a"/>
+  <rect x="356" y="112" width="18" height="16" fill="#3a7a3a"/>
+  <rect x="400" y="155" width="6"  height="43" fill="#3d2a10"/>
+  <rect x="392" y="130" width="22" height="32" fill="#1a4a1a"/>
+  <rect x="395" y="118" width="16" height="16" fill="#2a5a2a"/>
+  <rect x="434" y="148" width="8"  height="50" fill="#3d2a10"/>
+  <rect x="426" y="120" width="26" height="36" fill="#2a5a2a"/>
+  <rect x="430" y="110" width="18" height="16" fill="#3a7a3a"/>
+  <rect x="462" y="154" width="6"  height="44" fill="#3d2a10"/>
+  <rect x="454" y="128" width="22" height="32" fill="#1a4a1a"/>
+  <rect x="457" y="118" width="16" height="16" fill="#2a5a2a"/>
+  <rect x="488" y="150" width="8"  height="48" fill="#3d2a10"/>
+  <rect x="480" y="124" width="24" height="34" fill="#2a5a2a"/>
+  <rect x="484" y="114" width="16" height="16" fill="#3a7a3a"/>
+  <!-- window stars -->
+  <rect x="310" y="124" width="2" height="2" fill="white" class="star" style="animation-delay:0.4s"/>
+  <rect x="340" y="130" width="2" height="2" fill="#E8C97A" class="star" style="animation-delay:1.1s"/>
+  <rect x="420" y="122" width="2" height="2" fill="white" class="star-slow" style="animation-delay:0.7s"/>
+  <rect x="460" y="128" width="2" height="2" fill="white" class="star" style="animation-delay:1.5s"/>
+  <rect x="490" y="120" width="2" height="2" fill="#E8A0A0" class="star" style="animation-delay:0.2s"/>
+  <!-- window cross bar -->
+  <rect x="290" y="188" width="220" height="6" fill="#5a90b4"/>
+  <rect x="396" y="110" width="8"  height="160" fill="#5a90b4"/>
+  <!-- window sill -->
+  <rect x="284" y="266" width="232" height="12" fill="#aaa"/>
+  <rect x="284" y="106" width="232" height="10" fill="#aaa"/>
+  <rect x="284" y="106" width="10" height="172" fill="#aaa"/>
+  <rect x="506" y="106" width="10" height="172" fill="#aaa"/>
+
+  <!-- ── LEFT WALL TOOL PEGBOARD ── -->
+  <rect x="20" y="110" width="180" height="220" fill="#b0a898"/>
+  <rect x="30"  y="120" width="4" height="4" fill="#888" opacity="0.5"/>
+  <rect x="44"  y="120" width="4" height="4" fill="#888" opacity="0.5"/>
+  <rect x="58"  y="120" width="4" height="4" fill="#888" opacity="0.5"/>
+  <rect x="72"  y="120" width="4" height="4" fill="#888" opacity="0.5"/>
+  <rect x="86"  y="120" width="4" height="4" fill="#888" opacity="0.5"/>
+  <rect x="100" y="120" width="4" height="4" fill="#888" opacity="0.5"/>
+  <rect x="114" y="120" width="4" height="4" fill="#888" opacity="0.5"/>
+  <rect x="128" y="120" width="4" height="4" fill="#888" opacity="0.5"/>
+  <rect x="142" y="120" width="4" height="4" fill="#888" opacity="0.5"/>
+  <rect x="156" y="120" width="4" height="4" fill="#888" opacity="0.5"/>
+  <rect x="170" y="120" width="4" height="4" fill="#888" opacity="0.5"/>
+  <rect x="184" y="120" width="4" height="4" fill="#888" opacity="0.5"/>
+  <rect x="30"  y="136" width="4" height="4" fill="#888" opacity="0.5"/>
+  <rect x="44"  y="136" width="4" height="4" fill="#888" opacity="0.5"/>
+  <rect x="58"  y="136" width="4" height="4" fill="#888" opacity="0.5"/>
+  <rect x="72"  y="136" width="4" height="4" fill="#888" opacity="0.5"/>
+  <rect x="86"  y="136" width="4" height="4" fill="#888" opacity="0.5"/>
+  <rect x="100" y="136" width="4" height="4" fill="#888" opacity="0.5"/>
+  <rect x="114" y="136" width="4" height="4" fill="#888" opacity="0.5"/>
+  <rect x="128" y="136" width="4" height="4" fill="#888" opacity="0.5"/>
+  <rect x="142" y="136" width="4" height="4" fill="#888" opacity="0.5"/>
+  <rect x="156" y="136" width="4" height="4" fill="#888" opacity="0.5"/>
+  <rect x="170" y="136" width="4" height="4" fill="#888" opacity="0.5"/>
+  <rect x="184" y="136" width="4" height="4" fill="#888" opacity="0.5"/>
+  <!-- hammer -->
+  <rect x="38"  y="148" width="6"  height="30" fill="#8B6C4A"/>
+  <rect x="30"  y="144" width="22" height="10" fill="#555"/>
+  <!-- screwdriver -->
+  <rect x="68"  y="148" width="5"  height="35" fill="#E8956D"/>
+  <rect x="67"  y="183" width="7"  height="8"  fill="#888"/>
+  <!-- wrench -->
+  <rect x="98"  y="146" width="5"  height="38" fill="#777"/>
+  <rect x="94"  y="146" width="13" height="8"  fill="#777"/>
+  <rect x="94"  y="176" width="13" height="8"  fill="#777"/>
+
+  <!-- ── LADDER ── -->
+  <rect x="210" y="130" width="8"  height="250" fill="#8B6C4A"/>
+  <rect x="248" y="130" width="8"  height="250" fill="#8B6C4A"/>
+  <rect x="210" y="150" width="46" height="6"  fill="#c8a86b"/>
+  <rect x="210" y="176" width="46" height="6"  fill="#c8a86b"/>
+  <rect x="210" y="202" width="46" height="6"  fill="#c8a86b"/>
+  <rect x="210" y="228" width="46" height="6"  fill="#c8a86b"/>
+  <rect x="210" y="254" width="46" height="6"  fill="#c8a86b"/>
+  <rect x="210" y="280" width="46" height="6"  fill="#c8a86b"/>
+  <rect x="210" y="306" width="46" height="6"  fill="#c8a86b"/>
+  <rect x="210" y="332" width="46" height="6"  fill="#c8a86b"/>
+
+  <!-- ── WORKBENCH ── -->
+  <rect x="530" y="280" width="250" height="100" fill="#8B6C4A"/>
+  <rect x="530" y="276" width="250" height="12"  fill="#a07840"/>
+  <rect x="536" y="368" width="14" height="30"  fill="#7a5a30"/>
+  <rect x="760" y="368" width="14" height="30"  fill="#7a5a30"/>
+  <!-- bench stuff -->
+  <rect x="540" y="248" width="30" height="30"  fill="#E8956D" opacity="0.8"/>
+  <rect x="580" y="255" width="20" height="22"  fill="#7AB8D4" opacity="0.8"/>
+  <rect x="610" y="260" width="40" height="18"  fill="#888"/>
+  <rect x="660" y="250" width="16" height="28"  fill="#c8a86b"/>
+  <rect x="686" y="258" width="50" height="20"  fill="#9D74A1" opacity="0.7"/>
+
+  <!-- ── SHELVING (left of workbench on right wall) ── -->
+  <rect x="530" y="130" width="10" height="150" fill="#7a5a30"/>
+  <rect x="770" y="130" width="10" height="150" fill="#7a5a30"/>
+  <rect x="650" y="130" width="10" height="150" fill="#7a5a30"/>
+  <rect x="524" y="130" width="256" height="12" fill="#8B6C4A"/>
+  <rect x="524" y="200" width="256" height="12" fill="#8B6C4A"/>
+  <!-- shelf items top -->
+  <rect x="534" y="110" width="24" height="22" fill="#E8956D" opacity="0.8"/>
+  <rect x="564" y="112" width="20" height="20" fill="#E8A0A0" opacity="0.8"/>
+  <rect x="590" y="108" width="28" height="24" fill="#9D74A1" opacity="0.8"/>
+  <rect x="624" y="114" width="18" height="18" fill="#7AB8D4" opacity="0.8"/>
+  <rect x="660" y="110" width="22" height="22" fill="#E8C97A" opacity="0.8"/>
+  <rect x="692" y="112" width="26" height="20" fill="#E8956D" opacity="0.8"/>
+  <rect x="726" y="108" width="20" height="24" fill="#9D74A1" opacity="0.8"/>
+  <!-- shelf items middle -->
+  <rect x="534" y="180" width="30" height="22" fill="#888"/>
+  <rect x="570" y="183" width="24" height="19" fill="#888"/>
+  <rect x="600" y="178" width="34" height="24" fill="#777"/>
+  <rect x="640" y="182" width="26" height="20" fill="#888"/>
+  <rect x="672" y="180" width="28" height="22" fill="#777"/>
+  <rect x="706" y="183" width="22" height="19" fill="#888"/>
+
+  <!-- ── TREASURE CHEST (wishlist) ── -->
+  <rect x="56"  y="344" width="80" height="50"  fill="#8B6C4A"/>
+  <rect x="56"  y="340" width="80" height="16"  fill="#a07840"/>
+  <rect x="56"  y="340" width="80" height="4"   fill="#E8C97A"/>
+  <rect x="56"  y="388" width="80" height="4"   fill="#E8C97A"/>
+  <rect x="56"  y="352" width="80" height="4"   fill="#E8C97A"/>
+  <rect x="90"  y="352" width="12" height="10"  fill="#E8C97A"/>
+  <rect x="60"  y="390" width="10" height="8"   fill="#7a5a30"/>
+  <rect x="122" y="390" width="10" height="8"   fill="#7a5a30"/>
+
+  <!-- ── BACK ARROW ── -->
+  <a onclick="goTo('exterior')" style="cursor:pointer">
+    <rect x="16" y="450" width="44" height="36" fill="#0d1b2a" opacity="0.7" rx="4"/>
+    <text x="38" y="473" text-anchor="middle" font-family="monospace" font-size="18" fill="#E8C97A">&#8592;</text>
+  </a>
+
+</svg>
