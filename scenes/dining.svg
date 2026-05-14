@@ -1,0 +1,135 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- ── FLOOR ── -->
+  <rect x="0" y="390" width="800" height="110" fill="#c8a86b"/>
+  <rect x="100" y="390" width="2" height="110" fill="#b89050" opacity="0.3"/>
+  <rect x="250" y="390" width="2" height="110" fill="#b89050" opacity="0.3"/>
+  <rect x="400" y="390" width="2" height="110" fill="#b89050" opacity="0.3"/>
+  <rect x="550" y="390" width="2" height="110" fill="#b89050" opacity="0.3"/>
+  <rect x="700" y="390" width="2" height="110" fill="#b89050" opacity="0.3"/>
+
+  <!-- ── BACK WALL ── -->
+  <rect x="0" y="80" width="800" height="310" fill="#f5e8d0"/>
+
+  <!-- ── CEILING ── -->
+  <rect x="0" y="0" width="800" height="80" fill="#e8e4dc"/>
+  <rect x="0" y="76" width="800" height="6"  fill="#d8d4cc"/>
+
+  <!-- ── SIDE WALLS ── -->
+  <rect x="0"   y="0" width="50"  height="500" fill="#e0dcd4"/>
+  <rect x="750" y="0" width="50"  height="500" fill="#e0dcd4"/>
+
+  <!-- ── WAINSCOTING ── -->
+  <rect x="50" y="305" width="700" height="85" fill="#e8e4de"/>
+  <rect x="50" y="303" width="700" height="5"  fill="#d8d4ce"/>
+  <rect x="66"  y="316" width="96" height="62" fill="none" stroke="#d0ccc4" stroke-width="2"/>
+  <rect x="178" y="316" width="96" height="62" fill="none" stroke="#d0ccc4" stroke-width="2"/>
+  <rect x="290" y="316" width="96" height="62" fill="none" stroke="#d0ccc4" stroke-width="2"/>
+  <rect x="402" y="316" width="96" height="62" fill="none" stroke="#d0ccc4" stroke-width="2"/>
+  <rect x="514" y="316" width="96" height="62" fill="none" stroke="#d0ccc4" stroke-width="2"/>
+  <rect x="626" y="316" width="96" height="62" fill="none" stroke="#d0ccc4" stroke-width="2"/>
+
+  <!-- ── PAINTING ON WALL ── -->
+  <rect x="290" y="110" width="140" height="100" fill="#e8d8b8" stroke="#c8a86b" stroke-width="4"/>
+  <rect x="298" y="118" width="124" height="84"  fill="#7AB8D4" opacity="0.3"/>
+  <rect x="298" y="118" width="124" height="40"  fill="#E8956D" opacity="0.2"/>
+
+  <!-- ══ LONG DINING TABLE ══ -->
+  <rect x="130" y="292" width="440" height="18"  fill="#8B6C4A"/>
+  <rect x="130" y="286" width="440" height="10"  fill="#a07840"/>
+  <!-- table legs -->
+  <rect x="140" y="310" width="12"  height="60"  fill="#7a5a30"/>
+  <rect x="548" y="310" width="12"  height="60"  fill="#7a5a30"/>
+  <rect x="180" y="310" width="10"  height="60"  fill="#7a5a30" opacity="0.5"/>
+  <rect x="510" y="310" width="10"  height="60"  fill="#7a5a30" opacity="0.5"/>
+
+  <!-- candelabra centerpiece -->
+  <rect x="392" y="268" width="6"   height="24"  fill="#888"/>
+  <rect x="374" y="264" width="42"  height="6"   fill="#888"/>
+  <rect x="374" y="258" width="6"   height="8"   fill="#fff" opacity="0.9"/>
+  <rect x="374" y="252" width="3"   height="7"   fill="#E8C97A" opacity="0.9"/>
+  <rect x="392" y="258" width="6"   height="8"   fill="#fff" opacity="0.9"/>
+  <rect x="392" y="252" width="3"   height="7"   fill="#E8C97A" opacity="0.9"/>
+  <rect x="410" y="258" width="6"   height="8"   fill="#fff" opacity="0.9"/>
+  <rect x="410" y="252" width="3"   height="7"   fill="#E8C97A" opacity="0.9"/>
+
+  <!-- chairs: far side (backs visible above table) -->
+  <rect x="148" y="262" width="36"  height="28"  fill="#8B6C4A"/>
+  <rect x="152" y="266" width="28"  height="20"  fill="#a07840" opacity="0.4"/>
+  <rect x="210" y="262" width="36"  height="28"  fill="#8B6C4A"/>
+  <rect x="214" y="266" width="28"  height="20"  fill="#a07840" opacity="0.4"/>
+  <rect x="272" y="262" width="36"  height="28"  fill="#8B6C4A"/>
+  <rect x="276" y="266" width="28"  height="20"  fill="#a07840" opacity="0.4"/>
+  <rect x="334" y="262" width="36"  height="28"  fill="#8B6C4A"/>
+  <rect x="338" y="266" width="28"  height="20"  fill="#a07840" opacity="0.4"/>
+  <rect x="458" y="262" width="36"  height="28"  fill="#8B6C4A"/>
+  <rect x="462" y="266" width="28"  height="20"  fill="#a07840" opacity="0.4"/>
+  <rect x="520" y="262" width="36"  height="28"  fill="#8B6C4A"/>
+  <rect x="524" y="266" width="28"  height="20"  fill="#a07840" opacity="0.4"/>
+
+  <!-- chairs: near side (seat + back + legs) -->
+  <!-- chair 1 -->
+  <rect x="148" y="300" width="36"  height="14"  fill="#7a5a30"/>
+  <rect x="148" y="274" width="36"  height="28"  fill="#8B6C4A"/>
+  <rect x="150" y="314" width="8"   height="36"  fill="#7a5a30"/>
+  <rect x="174" y="314" width="8"   height="36"  fill="#7a5a30"/>
+  <!-- chair 2 -->
+  <rect x="210" y="300" width="36"  height="14"  fill="#7a5a30"/>
+  <rect x="210" y="274" width="36"  height="28"  fill="#8B6C4A"/>
+  <rect x="212" y="314" width="8"   height="36"  fill="#7a5a30"/>
+  <rect x="236" y="314" width="8"   height="36"  fill="#7a5a30"/>
+  <!-- chair 3 -->
+  <rect x="272" y="300" width="36"  height="14"  fill="#7a5a30"/>
+  <rect x="272" y="274" width="36"  height="28"  fill="#8B6C4A"/>
+  <rect x="274" y="314" width="8"   height="36"  fill="#7a5a30"/>
+  <rect x="298" y="314" width="8"   height="36"  fill="#7a5a30"/>
+  <!-- chair 4 -->
+  <rect x="334" y="300" width="36"  height="14"  fill="#7a5a30"/>
+  <rect x="334" y="274" width="36"  height="28"  fill="#8B6C4A"/>
+  <rect x="336" y="314" width="8"   height="36"  fill="#7a5a30"/>
+  <rect x="360" y="314" width="8"   height="36"  fill="#7a5a30"/>
+  <!-- chair 5 -->
+  <rect x="458" y="300" width="36"  height="14"  fill="#7a5a30"/>
+  <rect x="458" y="274" width="36"  height="28"  fill="#8B6C4A"/>
+  <rect x="460" y="314" width="8"   height="36"  fill="#7a5a30"/>
+  <rect x="484" y="314" width="8"   height="36"  fill="#7a5a30"/>
+  <!-- chair 6 -->
+  <rect x="520" y="300" width="36"  height="14"  fill="#7a5a30"/>
+  <rect x="520" y="274" width="36"  height="28"  fill="#8B6C4A"/>
+  <rect x="522" y="314" width="8"   height="36"  fill="#7a5a30"/>
+  <rect x="546" y="314" width="8"   height="36"  fill="#7a5a30"/>
+
+  <!-- ══ CABINET (right wall) ══ -->
+  <rect x="620" y="160" width="100" height="200" fill="#c8b88a"/>
+  <rect x="620" y="160" width="100" height="8"   fill="#a09060"/>
+  <rect x="620" y="356" width="100" height="6"   fill="#a09060"/>
+  <!-- cabinet doors -->
+  <rect x="626" y="172" width="40"  height="80"  fill="#b8a87a"/>
+  <rect x="674" y="172" width="40"  height="80"  fill="#b8a87a"/>
+  <rect x="626" y="262" width="40"  height="80"  fill="#b8a87a"/>
+  <rect x="674" y="262" width="40"  height="80"  fill="#b8a87a"/>
+  <!-- cabinet door panels -->
+  <rect x="630" y="178" width="32"  height="34"  fill="none" stroke="#a09060" stroke-width="1"/>
+  <rect x="630" y="216" width="32"  height="30"  fill="none" stroke="#a09060" stroke-width="1"/>
+  <rect x="678" y="178" width="32"  height="34"  fill="none" stroke="#a09060" stroke-width="1"/>
+  <rect x="678" y="216" width="32"  height="30"  fill="none" stroke="#a09060" stroke-width="1"/>
+  <rect x="630" y="268" width="32"  height="34"  fill="none" stroke="#a09060" stroke-width="1"/>
+  <rect x="630" y="306" width="32"  height="30"  fill="none" stroke="#a09060" stroke-width="1"/>
+  <rect x="678" y="268" width="32"  height="34"  fill="none" stroke="#a09060" stroke-width="1"/>
+  <rect x="678" y="306" width="32"  height="30"  fill="none" stroke="#a09060" stroke-width="1"/>
+  <!-- knobs -->
+  <rect x="660" y="210" width="6"   height="6"   fill="#E8C97A"/>
+  <rect x="660" y="300" width="6"   height="6"   fill="#E8C97A"/>
+  <rect x="708" y="210" width="6"   height="6"   fill="#E8C97A"/>
+  <rect x="708" y="300" width="6"   height="6"   fill="#E8C97A"/>
+  <!-- cabinet legs -->
+  <rect x="626" y="356" width="12"  height="20"  fill="#a09060"/>
+  <rect x="702" y="356" width="12"  height="20"  fill="#a09060"/>
+
+  <!-- ── EXIT BUTTON ── -->
+  <a onclick="goTo('foyer-left')" style="cursor:pointer">
+    <rect x="16" y="452" width="72" height="26" fill="#0d1b2a" stroke="#E8C97A" stroke-width="2" rx="2"/>
+    <text x="52" y="470" text-anchor="middle" font-family="monospace" font-size="11" fill="#E8C97A">[ EXIT ]</text>
+  </a>
+
+</svg>
