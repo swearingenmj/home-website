@@ -126,6 +126,18 @@
   <rect x="626" y="356" width="12"  height="20"  fill="#a09060"/>
   <rect x="702" y="356" width="12"  height="20"  fill="#a09060"/>
 
+  <!-- nav to kitchen-left -->
+<a onclick="goTo('kitchen-left')" style="cursor:pointer">
+  <rect x="748" y="210" width="36" height="60" fill="#0d1b2a" stroke="#E8C97A" stroke-width="2" rx="2"/>
+  <text x="766" y="246" text-anchor="middle" font-family="monospace" font-size="20" fill="#E8C97A">&#8594;</text>
+</a>
+
+<!-- exit back to foyer-left -->
+<a onclick="goTo('foyer-left')" style="cursor:pointer">
+  <rect x="16" y="452" width="72" height="26" fill="#0d1b2a" stroke="#E8C97A" stroke-width="2" rx="2"/>
+  <text x="52" y="470" text-anchor="middle" font-family="monospace" font-size="11" fill="#E8C97A">[ EXIT ]</text>
+</a>
+
   <!-- ── EXIT BUTTON ── -->
   <a onclick="goTo('foyer-left')" style="cursor:pointer">
     <rect x="16" y="452" width="72" height="26" fill="#0d1b2a" stroke="#E8C97A" stroke-width="2" rx="2"/>

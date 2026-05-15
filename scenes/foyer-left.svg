@@ -117,6 +117,9 @@
     <rect x="748" y="220" width="36" height="60" fill="#0d1b2a" stroke="#E8C97A" stroke-width="2" rx="2"/>
     <text x="766" y="256" text-anchor="middle" font-family="monospace" font-size="20" fill="#E8C97A">&#8594;</text>
   </a>
+  <a onclick="goTo('dining')" style="cursor:pointer">
+  <rect x="100" y="160" width="300" height="220" fill="transparent"/>
+</a>
 
   <!-- ── EXIT BUTTON ── -->
   <a onclick="goTo('exterior')" style="cursor:pointer">

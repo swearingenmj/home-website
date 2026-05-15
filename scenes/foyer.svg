@@ -104,6 +104,9 @@
     <rect x="748" y="210" width="36" height="60" fill="#0d1b2a" stroke="#E8C97A" stroke-width="2" rx="2"/>
     <text x="766" y="246" text-anchor="middle" font-family="monospace" font-size="20" fill="#E8C97A">&#8594;</text>
   </a>
+  <a onclick="goTo('kitchen-left')" style="cursor:pointer">
+  <rect x="520" y="90" width="140" height="302" fill="transparent"/>
+</a>
 
   <!-- ── EXIT BUTTON ── -->
   <a onclick="goTo('exterior')" style="cursor:pointer">

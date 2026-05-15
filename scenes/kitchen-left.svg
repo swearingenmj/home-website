@@ -188,6 +188,9 @@
     <rect x="748" y="210" width="36" height="60" fill="#0d1b2a" stroke="#E8C97A" stroke-width="2" rx="2"/>
     <text x="766" y="246" text-anchor="middle" font-family="monospace" font-size="20" fill="#E8C97A">&#8594;</text>
   </a>
+  <a onclick="goTo('dining')" style="cursor:pointer">
+  <rect x="68" y="192" width="108" height="192" fill="transparent"/>
+</a>
 
   <!-- ── EXIT BUTTON ── -->
   <a onclick="goTo('foyer')" style="cursor:pointer">
