@@ -105,26 +105,32 @@
   <rect x="502" y="202" width="86"  height="176" fill="#a07840"/>
   <rect x="510" y="212" width="70"  height="66"  fill="#b89050"/>
   <rect x="510" y="290" width="70"  height="66"  fill="#b89050"/>
-  <rect x="572" y="342" width="10"  height="10"  fill="#E8C97A"/>
+  <rect x="572" y="284" width="10"  height="10"  fill="#E8C97A"/>
   <rect x="496" y="194" width="100" height="10"  fill="#d0ccc4"/>
   <rect x="496" y="194" width="10"  height="190" fill="#d0ccc4"/>
   <rect x="586" y="194" width="10"  height="190" fill="#d0ccc4"/>
 
   <text x="546" y="430" text-anchor="middle" font-family="monospace" font-size="11" fill="#8B6C4A">BASEMENT</text>
 
-  <!-- ── NAV BUTTON ── -->
-  <a onclick="goTo('foyer')" style="cursor:pointer">
-    <rect x="748" y="220" width="36" height="60" fill="#0d1b2a" stroke="#E8C97A" stroke-width="2" rx="2"/>
-    <text x="766" y="256" text-anchor="middle" font-family="monospace" font-size="20" fill="#E8C97A">&#8594;</text>
-  </a>
-  <a onclick="goTo('dining')" style="cursor:pointer">
-  <rect x="100" y="160" width="300" height="220" fill="transparent"/>
+ <!-- ── NAV BUTTONS ── -->
+ <!-- DOWN -->
+<a onclick="goTo('exterior')" style="cursor:pointer">
+  <rect x="370" y="445" width="60" height="36" fill="#c0b080" stroke="#a09060" stroke-width="2" rx="2"/>
+  <rect x="409" y="455" width="6" height="6" fill="#a09060"/>
+  <rect x="403" y="461" width="6" height="6" fill="#a09060"/>
+  <rect x="397" y="467" width="6" height="6" fill="#a09060"/>
+  <rect x="391" y="461" width="6" height="6" fill="#a09060"/>
+  <rect x="385" y="455" width="6" height="6" fill="#a09060"/>
 </a>
 
-  <!-- ── EXIT BUTTON ── -->
-  <a onclick="goTo('exterior')" style="cursor:pointer">
-    <rect x="16" y="452" width="72" height="26" fill="#0d1b2a" stroke="#E8C97A" stroke-width="2" rx="2"/>
-    <text x="52" y="470" text-anchor="middle" font-family="monospace" font-size="11" fill="#E8C97A">[ EXIT ]</text>
-  </a>
+<!-- RIGHT -->
+<a onclick="goTo('foyer-right')" style="cursor:pointer">
+  <rect x="748" y="210" width="36" height="60" fill="#c0b080" stroke="#a09060" stroke-width="2" rx="2"/>
+  <rect x="758" y="228" width="6" height="6" fill="#a09060"/>
+  <rect x="764" y="234" width="6" height="6" fill="#a09060"/>
+  <rect x="770" y="240" width="6" height="6" fill="#a09060"/>
+  <rect x="764" y="246" width="6" height="6" fill="#a09060"/>
+  <rect x="758" y="252" width="6" height="6" fill="#a09060"/>
+</a>
 
 </svg>

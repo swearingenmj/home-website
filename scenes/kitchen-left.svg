@@ -59,7 +59,6 @@
   <rect x="142" y="286" width="8"   height="8"   fill="#c8a86b"/>
   <!-- shadow left hinge side -->
   <rect x="78"  y="202" width="5"   height="180" fill="#b0aca6" opacity="0.3"/>
-  <text x="117" y="468" text-anchor="middle" font-family="monospace" font-size="9" fill="#8B6C4A">DINING</text>
 
   <!-- ══ MUDROOM ARCH ══ -->
   <!-- room beyond -->
@@ -91,8 +90,6 @@
   <rect x="200" y="138" width="110" height="14"  fill="#ede5d6"/>
   <rect x="210" y="126" width="90"  height="14"  fill="#ede5d6"/>
   <rect x="222" y="118" width="66"  height="10"  fill="#ede5d6"/>
-  <text x="255" y="468" text-anchor="middle" font-family="monospace" font-size="9" fill="#8B6C4A">MUDROOM</text>
-
 
 
   <!-- ══ FRENCH DOOR FRIDGE ══ -->
@@ -151,51 +148,33 @@
 <rect x="542" y="233" width="64"  height="27"  fill="#1a3a1a"/>
 <!-- trees -->
 <rect x="546" y="202" width="5"   height="34"  fill="#3d2a10"/>
-<rect x="542" y="168" width="16"  height="16"  fill="#2a5a2a"/>
-<rect x="544" y="160" width="12"  height="12"  fill="#3a7a3a"/>
-<rect x="568" y="180" width="5"   height="32"  fill="#3d2a10"/>
-<rect x="564" y="168" width="14"  height="16"  fill="#1a4a1a"/>
-<rect x="590" y="178" width="5"   height="34"  fill="#3d2a10"/>
-<rect x="586" y="166" width="14"  height="16"  fill="#2a5a2a"/>
+<rect x="542" y="195" width="16"  height="16"  fill="#2a5a2a"/>
+<rect x="544" y="187" width="12"  height="12"  fill="#3a7a3a"/>
+<rect x="568" y="212" width="5"   height="32"  fill="#3d2a10"/>
+<rect x="564" y="202" width="14"  height="16"  fill="#1a4a1a"/>
+<rect x="590" y="207" width="5"   height="34"  fill="#3d2a10"/>
+<rect x="586" y="197" width="14"  height="16"  fill="#2a5a2a"/>
 <!-- window cross bars (white) -->
 <rect x="536" y="216" width="76"  height="4"   fill="white"/>
 <rect x="572" y="178" width="4"   height="84"  fill="white"/>
 <!-- window sill (white) -->
 <rect x="534" y="255" width="80"  height="6"   fill="white"/>
 
-<!-- upper cupboards left of window -->
-<rect x="436" y="170" width="98"  height="70"  fill="#c8b88a"/>
-<rect x="436" y="170" width="98"  height="5"   fill="#a09060"/>
-<rect x="436" y="238" width="98"  height="5"   fill="#a09060"/>
-<rect x="436" y="170" width="4"   height="70"  fill="#a09060"/>
-<rect x="516" y="170" width="4"   height="70"  fill="#a09060"/>
-<rect x="472" y="170" width="4"   height="70"  fill="#a09060"/>
-<rect x="450" y="200" width="6"   height="6"   fill="#E8C97A"/>
-<rect x="490" y="200" width="6"   height="6"   fill="#E8C97A"/>
+<!-- Text -->
+  <text x="117" y="468" text-anchor="middle" font-family="monospace" font-size="9" fill="#8B6C4A">DINING</text>
+  <text x="255" y="468" text-anchor="middle" font-family="monospace" font-size="9" fill="#8B6C4A">MUDROOM</text>
+  <text x="665" y="468" text-anchor="middle" font-family="monospace" font-size="9" fill="#8B6C4A">NOOK</text>
 
-<!-- upper cupboards right of window -->
-<rect x="614" y="170" width="126" height="70"  fill="#c8b88a"/>
-<rect x="614" y="170" width="126" height="5"   fill="#a09060"/>
-<rect x="614" y="238" width="126" height="5"   fill="#a09060"/>
-<rect x="614" y="170" width="4"   height="70"  fill="#a09060"/>
-<rect x="678" y="170" width="4"   height="70"  fill="#a09060"/>
-<rect x="736" y="170" width="4"   height="70"  fill="#a09060"/>
-<rect x="642" y="200" width="6"   height="6"   fill="#E8C97A"/>
-<rect x="704" y="200" width="6"   height="6"   fill="#E8C97A"/>
 
-  <!-- ── NAV BUTTON ── -->
-  <a onclick="goTo('kitchen-right')" style="cursor:pointer">
-    <rect x="748" y="210" width="36" height="60" fill="#0d1b2a" stroke="#E8C97A" stroke-width="2" rx="2"/>
-    <text x="766" y="246" text-anchor="middle" font-family="monospace" font-size="20" fill="#E8C97A">&#8594;</text>
-  </a>
-  <a onclick="goTo('dining')" style="cursor:pointer">
-  <rect x="68" y="192" width="108" height="192" fill="transparent"/>
+ <!-- ── NAV BUTTONS ── -->
+<!-- RIGHT -->
+<a onclick="goTo('foyer-right')" style="cursor:pointer">
+  <rect x="748" y="210" width="36" height="60" fill="#c0b080" stroke="#a09060" stroke-width="2" rx="2"/>
+  <rect x="758" y="228" width="6" height="6" fill="#a09060"/>
+  <rect x="764" y="234" width="6" height="6" fill="#a09060"/>
+  <rect x="770" y="240" width="6" height="6" fill="#a09060"/>
+  <rect x="764" y="246" width="6" height="6" fill="#a09060"/>
+  <rect x="758" y="252" width="6" height="6" fill="#a09060"/>
 </a>
-
-  <!-- ── EXIT BUTTON ── -->
-  <a onclick="goTo('foyer')" style="cursor:pointer">
-    <rect x="16" y="452" width="72" height="26" fill="#0d1b2a" stroke="#E8C97A" stroke-width="2" rx="2"/>
-    <text x="52" y="470" text-anchor="middle" font-family="monospace" font-size="11" fill="#E8C97A">[ EXIT ]</text>
-  </a>
 
 </svg>
