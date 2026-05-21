@@ -251,7 +251,7 @@
 
   <!-- ── NAV BUTTONS ── -->
 <!-- DOWN -->
-<a onclick="goTo('exterior')" style="cursor:pointer">
+<a onclick="goTo('foyer-left')" style="cursor:pointer">
   <rect x="370" y="445" width="60" height="36" fill="#c0b080" stroke="#a09060" stroke-width="2" rx="2"/>
   <rect x="409" y="455" width="6" height="6" fill="#a09060"/>
   <rect x="403" y="461" width="6" height="6" fill="#a09060"/>

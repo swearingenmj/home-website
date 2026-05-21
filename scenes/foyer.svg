@@ -92,6 +92,10 @@
   <rect x="568" y="240" width="6"   height="6"   fill="#a08040"/>
   <!-- door edge shadow (depth, right side hinged) -->
   <rect x="656" y="102" width="6"   height="290" fill="#c8c4be" opacity="0.6"/>
+<!-- clickable door overlay -->
+<a onclick="goTo('kitchen-right')" style="cursor:pointer">
+  <rect x="512" y="90" width="148" height="302" fill="transparent"/>
+</a>
 
   <text x="575" y="470" text-anchor="middle" font-family="monospace" font-size="11" fill="#8B6C4A">KITCHEN</text>
 

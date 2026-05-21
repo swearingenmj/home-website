@@ -126,7 +126,6 @@
 
 
   <!-- ══ TABLE ══ -->
-  <!-- ══ TABLE — ellipse pedestal ══ -->
   <!-- base foot depth -->
 <ellipse cx="590" cy="440" rx="38" ry="8" fill="#5a3e20"/>
   <!-- center pedestal column -->
@@ -135,21 +134,24 @@
 <ellipse cx="590" cy="365" rx="100" ry="18" fill="#a07840"/>
   
   <!-- ── NAV BUTTONS ── -->
-  <a onclick="goTo('kitchen-left')" style="cursor:pointer">
-    <rect x="16" y="210" width="36" height="60" fill="#c0b080" stroke="#a09060" stroke-width="2" rx="2"/>
-    <rect x="36" y="228" width="6" height="6" fill="#a09060"/>
-    <rect x="30" y="234" width="6" height="6" fill="#a09060"/>
-    <rect x="24" y="240" width="6" height="6" fill="#a09060"/>
-    <rect x="30" y="246" width="6" height="6" fill="#a09060"/>
-    <rect x="36" y="252" width="6" height="6" fill="#a09060"/>
-  </a>
-  <a onclick="goTo('foyer')" style="cursor:pointer">
-    <rect x="370" y="445" width="60" height="36" fill="#c0b080" stroke="#a09060" stroke-width="2" rx="2"/>
-    <rect x="409" y="455" width="6" height="6" fill="#a09060"/>
-    <rect x="403" y="461" width="6" height="6" fill="#a09060"/>
-    <rect x="397" y="467" width="6" height="6" fill="#a09060"/>
-    <rect x="391" y="461" width="6" height="6" fill="#a09060"/>
-    <rect x="385" y="455" width="6" height="6" fill="#a09060"/>
-  </a>
+  <!-- LEFT -->
+<a onclick="goTo('kitchen-left')" style="cursor:pointer">
+  <rect x="16" y="210" width="36" height="60" fill="#c0b080" stroke="#a09060" stroke-width="2" rx="2"/>
+  <rect x="36" y="228" width="6" height="6" fill="#a09060"/>
+  <rect x="30" y="234" width="6" height="6" fill="#a09060"/>
+  <rect x="24" y="240" width="6" height="6" fill="#a09060"/>
+  <rect x="30" y="246" width="6" height="6" fill="#a09060"/>
+  <rect x="36" y="252" width="6" height="6" fill="#a09060"/>
+</a>
+
+<!-- DOWN -->
+<a onclick="goTo('foyer')" style="cursor:pointer">
+  <rect x="370" y="445" width="60" height="36" fill="#c0b080" stroke="#a09060" stroke-width="2" rx="2"/>
+  <rect x="409" y="455" width="6" height="6" fill="#a09060"/>
+  <rect x="403" y="461" width="6" height="6" fill="#a09060"/>
+  <rect x="397" y="467" width="6" height="6" fill="#a09060"/>
+  <rect x="391" y="461" width="6" height="6" fill="#a09060"/>
+  <rect x="385" y="455" width="6" height="6" fill="#a09060"/>
+</a>
 
 </svg>
